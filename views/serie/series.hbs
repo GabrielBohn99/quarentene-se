@@ -1,0 +1,10 @@
+<h1>Series</h1>
+{{#each series}}
+<div>
+    <h2>{{name}}</h2>
+    <p>{{genre}}</p>
+    <h3>{{rating}}</h3>
+    <a href="/serie/{{_id}}">Saiba mais</a>
+</div>
+{{/each}}
+<a href="/add-serie">Adicionar serie</a>
