@@ -1,0 +1,18 @@
+<h1>Lives</h1>
+<form action="/filter">
+    <select name="filter-genre" id="">
+        <option value=""></option>
+    </select>
+</form>
+{{#each lives}}
+<div>
+    {{#if imgPath}}
+    <img src="{{imgPath}}" alt="{{imgName}}">
+    {{/if}}
+    <h2>{{name}}</h2>
+    <p>{{genre}}</p>
+    <h3>{{data}}</h3>
+    <a href="/live/{{_id}}">Saiba mais</a>
+</div>
+{{/each}}
+<a href="/add-live">Adicionar uma live</a>

@@ -1,4 +1,12 @@
 <h1>Receitas</h1>
+<form action="/filter-recipes" method="POST">
+    <select name="level" id="">
+        <option value="Fácil">Fácil</option>
+        <option value="Médio">Médio</option>
+        <option value="Avançado">Avançado</option>
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
 {{#each receitas}}
 <div>
     {{#if imgPath}}
