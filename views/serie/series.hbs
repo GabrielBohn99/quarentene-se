@@ -1,6 +1,9 @@
 <h1>Series</h1>
 {{#each series}}
 <div>
+    {{#if imgPath}}
+    <img src="{{imgPath}}" alt="{{imgName}}">
+    {{/if}}
     <h2>{{name}}</h2>
     <p>{{genre}}</p>
     <h3>{{rating}}</h3>
