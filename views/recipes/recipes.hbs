@@ -1,0 +1,13 @@
+<h1>Receitas</h1>
+{{#each receitas}}
+<div>
+    {{#if imgPath}}
+    <img src="{{imgPath}}" alt="{{imgName}}">
+    {{/if}}
+    <h2>{{name}}</h2>
+    <p>{{level}} - {{duration}}</p>
+    <h3>{{category}}</h3>
+    <a href="/receita/{{_id}}">Saiba mais</a>
+</div>
+{{/each}}
+<a href="/add-receita">Adicionar receita</a>

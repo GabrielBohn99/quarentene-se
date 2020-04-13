@@ -1,0 +1,22 @@
+<h1>Adicione uma receita</h1>
+<form action="/add-recipe" method="POST">
+    <label for="name">Nome: </label>
+    <input type="text" name="name">
+    <label for="category">Categoria: </label>
+    <input type="text" name="category">
+    <label for="level">Dificuldade: </label>
+    <select name="level" id="">
+        <option value="Fácil">Fácil</option>
+        <option value="Médio">Médio</option>
+        <option value="Avançado">Avançado</option>
+    </select>
+    <label for="prepare">Modo de preparo: </label>
+    <input type="text" name="prepare">
+    <label for="duration">Duração: </label>
+    <select name="duration" id="">
+        <option value="10min - 30min">10min - 30min</option>
+        <option value="30min - 60min">30min - 60min</option>
+        <option value="+60min">+60min</option>
+    </select>
+    <button type="submit">Adicionar receita</button>
+</form>
