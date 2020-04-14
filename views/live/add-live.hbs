@@ -3,29 +3,6 @@
     <label for="name">Artista: </label>
     <input type="text" name="name">
     <label for="genre">Estilo musical: </label>
-    {{!-- <select name="genre">
-        <option value="Sertanejo">Sertanejo</option>
-        <option value="Blues">Blues</option>
-        <option value="Axé">Axé</option>
-        <option value="Rock">Rock</option>
-        <option value="Country">Country</option>
-        <option value="MPB">MPB</option>
-        <option value="Forró">Forró</option>
-        <option value="Funk">Funk</option>
-        <option value="Pop">Pop</option>
-        <option value="Eletrônico">Eletrônico</option>
-        <option value="Hip Hop">Hip Hop</option>
-        <option value="Gospel">Gospel</option>
-        <option value="Indie">Indie</option>
-        <option value="Folk">Folk</option>
-        <option value="Pagode">Pagode</option>
-        <option value="Rap">Rap</option>
-        <option value="Jazz">Jazz</option>
-        <option value="Música Clássica">Música Clássica</option>
-        <option value="Metal">Metal</option>
-        <option value="Samba">Samba</option>
-        <option value="Reggae">Reggae</option>
-    </select> --}}
     {{#each genreArr}}
     <input type="checkbox" value="{{this}}" name="genre">
     <label for="{{this}}">{{this}}</label>
