@@ -69,7 +69,9 @@ router.post("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 router.get("/receitas", (req, res, next) => {
   Recipe.find()
     .then((receitas) => {
-      res.render("recipes/recipes", { receitas, user: req.user });
+      let levelArr = ["Fácil", "Médio", "Avançado"];
+      let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
+      res.render("recipes/recipes", { receitas, user: req.user, levelArr, durationArr });
     })
     .catch((error) => console.log(error));
 });
@@ -123,12 +125,26 @@ router.post("/add-recipe", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 router.post("/receitas/search", (req, res, next) => {
   let { level, search, duration } = req.body;
 
-  console.log(level, search, duration)
-  Recipe.find({ level: { $regex: level}, duration: { $regex: duration}, name: { $regex: search, $options: "i" } })
+  let levelArr = ["Fácil", "Médio", "Avançado"];
+  levelArr.splice(levelArr.indexOf(level), 1);
+
+  let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
+  durationArr.splice(durationArr.indexOf(duration), 1);
+
+  console.log(level, search, duration);
+  Recipe.find({
+    level: { $regex: level },
+    duration: { $regex: duration },
+    name: { $regex: search, $options: "i" },
+  })
     .then((receitas) => {
       let buscado = "Buscado";
       res.render("recipes/recipes", {
         receitas,
+        levelArr,
+        level,
+        durationArr,
+        duration,
         user: req.user,
         buscado,
         search,

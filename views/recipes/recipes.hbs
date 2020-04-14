@@ -8,16 +8,24 @@
     <input type="text" name="search" placeholder="Coloque o nome da receita">
     {{/if}}
     <select name="level">
+        {{#if level}}
+        <option value={{level}}>{{level}}</option>
+        {{else}}
         <option value=""></option>
-        <option value="Fácil">Fácil</option>
-        <option value="Médio">Médio</option>
-        <option value="Avançado">Avançado</option>
+        {{/if}} 
+        {{#each levelArr}}
+        <option value={{this}}>{{this}}</option>
+        {{/each}}
     </select>
     <select name="duration">
+        {{#if duration}}
+        <option value="{{duration}}">{{duration}}</option>
+        {{else}}
         <option value=""></option>
-        <option value="10min - 30min">10min - 30min</option>
-        <option value="30min - 60min">30min - 60min</option>
-        <option value="+60min">+60min</option>
+        {{/if}} 
+        {{#each durationArr}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
     </select>
     <button type="submit">Buscar</button>
     {{#if buscado}}
