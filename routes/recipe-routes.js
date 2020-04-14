@@ -80,7 +80,7 @@ router.post("/receitas/search", (req, res, next) => {
   let categoryArr = ["Salgado", "Doce"];
   categoryArr.splice(categoryArr.indexOf(category), 1);
 
-  console.log(level, search, duration);
+  // console.log(level, search, duration);
   Recipe.find({
     level: { $regex: level },
     duration: { $regex: duration },
