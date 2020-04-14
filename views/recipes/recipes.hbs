@@ -8,6 +8,16 @@
     <label for="search">Pesquisar: </label>
     <input type="text" name="search" placeholder="Coloque o nome da receita">
     {{/if}}
+    <select name="category">
+        {{#if category}}
+        <option value="{{category}}">{{category}}</option>
+        {{else}}
+        <option value=""></option>
+        {{/if}} 
+        {{#each categoryArr}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+    </select>
     <select name="level">
         {{#if level}}
         <option value={{level}}>{{level}}</option>
