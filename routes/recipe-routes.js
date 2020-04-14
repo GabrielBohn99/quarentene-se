@@ -91,7 +91,7 @@ router.post("/receitas/search", (req, res, next) => {
     level: { $regex: level },
     duration: { $regex: duration },
     name: { $regex: search, $options: "i" },
-    category,
+    category: { $regex: category },
   })
     .then((receitas) => {
       let buscado = "Buscado";
