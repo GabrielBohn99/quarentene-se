@@ -1,4 +1,5 @@
 <h1>Receitas</h1>
+<button><a href="/add-receita">Adicionar receita</a></button> <br><br>
 <form action="/receitas/search" method="post">
     {{#if search}}
     <label for="search">Pesquisar: </label>
@@ -38,9 +39,10 @@
     <img src="{{imgPath}}" alt="{{imgName}}">
     {{/if}}
     <h2>{{name}}</h2>
-    <p>{{level}} - {{duration}}</p>
-    <h3>{{category}}</h3>
+    <p>Nível: {{level}} </p>
+    <p>Tempo de preparo: {{duration}}</p>
+    <p>Categoria: {{category}}</p>
     <a href="/receita/{{_id}}">Saiba mais</a>
+    <hr>
 </div>
 {{/each}}
-<a href="/add-receita">Adicionar receita</a>

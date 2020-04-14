@@ -1,13 +1,14 @@
 <h1>Series</h1>
+<button><a href="/add-serie">Adicionar serie</a></button> <br><br>
 {{#each series}}
 <div>
     {{#if imgPath}}
     <img src="{{imgPath}}" alt="{{imgName}}">
     {{/if}}
     <h2>{{name}}</h2>
-    <p>{{genre}}</p>
-    <h3>{{rating}}</h3>
+    <p>Gênero: {{genre}}</p>
+    <p>Nota: {{rating}}</p>
     <a href="/serie/{{_id}}">Saiba mais</a>
+    <hr>
 </div>
 {{/each}}
-<a href="/add-serie">Adicionar serie</a>
