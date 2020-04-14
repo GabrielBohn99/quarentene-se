@@ -3,7 +3,10 @@
     <label for="name">Titulo: </label>
     <input type="text" name="name">
     <label for="genre">Genero: </label>
-    <input type="text" name="genre">
+        {{#each genreArr}}
+        <input type="checkbox" value="{{this}}" name="genre">
+        <label for="{{this}}">{{this}}</label>
+        {{/each}}
     <label for="rating">Cotação: </label>
     <input type="number" name="rating">
     <label for="resume">Sinopse: </label>
