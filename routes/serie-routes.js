@@ -149,6 +149,7 @@ router.post("/series/search", (req, res, next) => {
         });
     })
         .catch((error) => console.log(error));
+    return;
     }
 
     Serie.find({
