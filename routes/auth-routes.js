@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const ensureLogin = require("connect-ensure-login");
 
 const User = require("../models/user");
-const Serie = require("../models/serie");
 
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
