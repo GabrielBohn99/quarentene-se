@@ -4,13 +4,13 @@ const Recipe = require("../models/recipe");
 const ensureLogin = require("connect-ensure-login");
 
 // RECIPES ROUTES
+
 router.get("/receitas", (req, res, next) => {
   Recipe.find()
     .then((receitas) => {
       let levelArr = ["Fácil", "Médio", "Avançado"];
       let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
       let categoryArr = ["Salgado", "Doce"];
-
       res.render("recipes/recipes", {
         receitas,
         user: req.user,
@@ -72,13 +72,19 @@ router.post("/receitas/search", (req, res, next) => {
   let { level, search, duration, category } = req.body;
 
   let levelArr = ["Fácil", "Médio", "Avançado"];
-  levelArr.splice(levelArr.indexOf(level), 1);
+  if (level != "") {
+    levelArr.splice(levelArr.indexOf(level), 1);
+  }
 
   let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
-  durationArr.splice(durationArr.indexOf(duration), 1);
+  if (duration != "") {
+    durationArr.splice(durationArr.indexOf(duration), 1);
+  }
 
   let categoryArr = ["Salgado", "Doce"];
-  categoryArr.splice(categoryArr.indexOf(category), 1);
+  if (category != "") {
+    categoryArr.splice(categoryArr.indexOf(category), 1);
+  }
 
   console.log(level, search, duration);
   Recipe.find({
@@ -94,9 +100,9 @@ router.post("/receitas/search", (req, res, next) => {
         levelArr,
         level,
         durationArr,
-        category,
-        categoryArr,
         duration,
+        categoryArr,
+        category,
         user: req.user,
         buscado,
         search,
