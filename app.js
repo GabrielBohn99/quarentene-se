@@ -110,7 +110,13 @@ app.locals.title = "Quarentene-se";
 // Getting routes
 const index = require("./routes/index");
 const auth = require("./routes/auth-routes");
+const recipe = require("./routes/recipe-routes");
+const lives = require("./routes/live-routes");
+const series = require("./routes/serie-routes");
 app.use("/", auth);
+app.use("/", recipe);
+app.use("/", lives);
+app.use("/", series);
 app.use("/", index);
 
 module.exports = app;
