@@ -74,24 +74,27 @@ router.post("/receitas/search", (req, res, next) => {
   let levelArr = ["Fácil", "Médio", "Avançado"];
   if (level != "") {
     levelArr.splice(levelArr.indexOf(level), 1);
+    return;
   }
 
   let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
   if (duration != "") {
     durationArr.splice(durationArr.indexOf(duration), 1);
+    return;
   }
 
   let categoryArr = ["Salgado", "Doce"];
   if (category != "") {
     categoryArr.splice(categoryArr.indexOf(category), 1);
+    return;
   }
 
-  console.log(level, search, duration);
+  // console.log(level, search, duration);
   Recipe.find({
     level: { $regex: level },
     duration: { $regex: duration },
     name: { $regex: search, $options: "i" },
-    category,
+    category: { $regex: category } ,
   })
     .then((receitas) => {
       let buscado = "Buscado";

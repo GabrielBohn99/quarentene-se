@@ -98,6 +98,7 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let { link, data, time } = req.body;
   if (!link.includes("http://")) {
     link = "http://" + link;
+    return;
   }
   Live.create({ name, data, genre, link, time })
     .then((response) => {
@@ -153,6 +154,7 @@ router.post("/lives/search", (req, res, next) => {
           });
         })
         .catch((error) => console.log(error));
+      return;
     }
 
     Live.find({
