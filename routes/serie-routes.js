@@ -3,62 +3,170 @@ const router = express.Router();
 const Serie = require("../models/serie");
 const ensureLogin = require("connect-ensure-login");
 
-
 // Series routes
 router.get("/series", (req, res, next) => {
     Serie.find()
-        .then((series) => {
-        //   console.log(series);
-        res.render("serie/series", { series, user: req.user });
-        })
-        .catch((error) => console.log(error));
-});   
+    .sort({ rating: -1 })
+    .then((series) => {
+        let genreArr = [
+        "Ação",
+        "Animação",
+        "Aventura",
+        "Comédia",
+        "Comédia romantica",
+        "Cult",
+        "Documentário",
+        "Drama",
+        "Espionagem",
+        "Erótico",
+        "Fansatia",
+        "Faroeste",
+        "Ficção científica",
+        "Série",
+        "Guerra",
+        "Musical",
+        "Policial",
+        "Romance",
+        "Suspense",
+        "Terror",
+        "Trash",
+    ];
+    res.render("serie/series", { series, user: req.user, genreArr });
+    })
+    .catch((error) => console.log(error));
+});
 
-  // SERIE INFO
+// SERIE INFO
 router.get("/serie/:id", (req, res, next) => {
     const { id } = req.params;
 
     Serie.findById(id)
-        .then((serie) => {
+    .then((serie) => {
         res.render("serie/serie-detail", { serie, user: req.user });
-        }) 
-        .catch((error) => console.log(error));
-});   
+    })
+    .catch((error) => console.log(error));
+});
 
 router.post(
     "/serie-review/:id",
     ensureLogin.ensureLoggedIn(),
     (req, res, next) => {
     const { id } = req.params;
-    const { comment } = req.body; 
+    const { comment } = req.body;
     Serie.findByIdAndUpdate(
         id,
         { $push: { review: { user: req.user.username, comment } } },
         { new: true }
     )
         .then((response) => {
-            console.log(response);
-            res.redirect(`/serie/${id}`);
+        console.log(response);
+        res.redirect(`/serie/${id}`);
         })
         .catch((error) => console.log(error));
     }
 );
 
-  // ADD SERIE
+// ADD SERIE
 router.get("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-    res.render("serie/add-serie", { user: req.user });
+  let genreArr = [
+    "Ação",
+    "Animação",
+    "Aventura",
+    "Comédia",
+    "Comédia romantica",
+    "Cult",
+    "Documentário",
+    "Drama",
+    "Espionagem",
+    "Erótico",
+    "Fansatia",
+    "Faroeste",
+    "Ficção científica",
+    "Série",
+    "Guerra",
+    "Musical",
+    "Policial",
+    "Romance",
+    "Suspense",
+    "Terror",
+    "Trash",
+    ];
+    res.render("serie/add-serie", { user: req.user, genreArr });
 });
 
 router.post("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     const { name, resume, rating, genre } = req.body;
 
     Serie.create({ name, resume, rating, genre })
-        .then((response) => {
+    .then((response) => {
         console.log(response);
         res.redirect("/series");
-        })
-        .catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
 });
 
+// filter routes
+
+router.post("/series/search", (req, res, next) => {
+    let { search, genre } = req.body;
+
+    let genreArr = [
+    "Ação",
+    "Animação",
+    "Aventura",
+    "Comédia",
+    "Comédia romantica",
+    "Cult",
+    "Documentário",
+    "Drama",
+    "Espionagem",
+    "Erótico",
+    "Fansatia",
+    "Faroeste",
+    "Ficção científica",
+    "Série",
+    "Guerra",
+    "Musical",
+    "Policial",
+    "Romance",
+    "Suspense",
+    "Terror",
+    "Trash",
+    ];
+    if (!genre) {
+    Serie.find({
+        name: { $regex: search, $options: "i" },
+    })
+        .sort({ rating: -1 })
+        .then((series) => {
+        let buscado = "Buscado";
+        res.render("serie/series", {
+            series,
+            genreArr,
+            user: req.user,
+            buscado,
+            search,
+        });
+    })
+        .catch((error) => console.log(error));
+    }
+
+    Serie.find({
+    genre,
+    name: { $regex: search, $options: "i" },
+    })
+    .sort({ rating: -1 })
+    .then((series) => {
+        let buscado = "Buscado";
+        res.render("serie/series", {
+            series,
+            genreArr,
+            user: req.user,
+            buscado,
+            search,
+        });
+    })
+    .catch((error) => console.log(error));
+});
 
 module.exports = router;

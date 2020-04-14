@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const serieSchema = new Schema({
   name: { type: String, required: true },
   rating: { type: [Number], required: true },
-  genre: { type: String, required: true },
+  genre: { type: [String], required: true },
   resume: { type: String, required: true },
   imgPath: String,
   imgName: String,
