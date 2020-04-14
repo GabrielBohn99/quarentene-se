@@ -1,11 +1,28 @@
 <h1>Receitas</h1>
-<form action="/filter-recipes" method="POST">
-    <select name="level" id="">
+<form action="/receitas/search" method="post">
+    {{#if search}}
+    <label for="search">Pesquisar: </label>
+    <input type="text" name="search" value="{{search}}">
+    {{else}}
+    <label for="search">Pesquisar: </label>
+    <input type="text" name="search" placeholder="Coloque o nome da receita">
+    {{/if}}
+    <select name="level">
+        <option value=""></option>
         <option value="Fácil">Fácil</option>
         <option value="Médio">Médio</option>
         <option value="Avançado">Avançado</option>
     </select>
-    <button type="submit">Filtrar</button>
+    <select name="duration">
+        <option value=""></option>
+        <option value="10min - 30min">10min - 30min</option>
+        <option value="30min - 60min">30min - 60min</option>
+        <option value="+60min">+60min</option>
+    </select>
+    <button type="submit">Buscar</button>
+    {{#if buscado}}
+    <a href="/receitas">Limpar filtros</a>
+    {{/if}}
 </form>
 {{#each receitas}}
 <div>
