@@ -5,7 +5,7 @@ const liveSchema = new Schema({
   name: { type: String, required: true },
   data: { type: String, required: true },
   time: { type: String, required: true },
-  genre: { type: String, required: true },
+  genre: { type: [String] },
   link: { type: String, required: true },
   imgPath: String,
   imgName: String,
