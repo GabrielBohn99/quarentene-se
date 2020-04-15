@@ -105,6 +105,80 @@ router.post("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     .catch((error) => console.log(error));
 });
 
+
+// EDIT LIVE ROUTES
+router.get("/editar-serie/:serieId", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+    const { serieId } = req.params;
+    let genreArr = [
+        "Ação",
+        "Animação",
+        "Aventura",
+        "Comédia",
+        "Comédia romantica",
+        "Cult",
+        "Documentário",
+        "Drama",
+        "Espionagem",
+        "Erótico",
+        "Fansatia",
+        "Faroeste",
+        "Ficção científica",
+        "Série",
+        "Guerra",
+        "Musical",
+        "Policial",
+        "Romance",
+        "Suspense",
+        "Terror",
+        "Trash",
+        ];
+
+    Serie
+      .findById(serieId)
+      .then(serie => {
+        res.render("serie/edit-serie", { serie, user: req.user, genreArr });
+      })
+      .catch(error => console.log(error))
+  });
+  
+  router.post('/editar-serie/:serieId', (req, res, next) => {
+    const {
+      name,
+      rating,
+      resume,
+      genre
+    } = req.body;
+  
+    const {
+      serieId
+    } = req.params;
+  
+    Serie.findByIdAndUpdate(serieId, {
+      $set: {
+        name,
+        rating,
+        resume,
+        genre
+      }
+    }, { new: true }
+    )
+    .then(response => {
+      console.log(response);
+      res.redirect(`/serie/${serieId}`)
+    })
+    .catch(error => console.log(error))
+  });
+  
+  // DELETE ROUTES
+  router.get('/delete-serie/:serieId', (req, res, next) => {
+    const { serieId } = req.params;
+    Serie.findByIdAndDelete(serieId)
+      .then(response => {
+        res.redirect('/series')
+      })
+      .catch(error => console.log(error))
+  })
+
 // filter routes
 
 router.post("/series/search", (req, res, next) => {

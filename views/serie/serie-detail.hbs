@@ -5,6 +5,9 @@
 <p>{{resume}}</p>
 <p>{{genre}}</p>
 
+<button><a href="/editar-serie/{{_id}}">Editar serie</a></button>
+<button><a href="/delete-serie/{{_id}}">Deletar serie</a></button>
+
 <h3>Qual a sua opinião?</h3>
 <form action="/serie-review/{{_id}}" method="POST">
     <label for="review"></label>
