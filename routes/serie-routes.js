@@ -84,28 +84,28 @@ router.post(
 
 // ADD SERIE
 router.get("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  let genreArr = [
-    "Ação",
-    "Animação",
-    "Aventura",
-    "Comédia",
-    "Comédia romantica",
-    "Cult",
-    "Documentário",
-    "Drama",
-    "Espionagem",
-    "Erótico",
-    "Fansatia",
-    "Faroeste",
-    "Ficção científica",
-    "Série",
-    "Guerra",
-    "Musical",
-    "Policial",
-    "Romance",
-    "Suspense",
-    "Terror",
-    "Trash",
+    let genreArr = [
+        "Ação",
+        "Animação",
+        "Aventura",
+        "Comédia",
+        "Comédia romantica",
+        "Cult",
+        "Documentário",
+        "Drama",
+        "Espionagem",
+        "Erótico",
+        "Fansatia",
+        "Faroeste",
+        "Ficção científica",
+        "Série",
+        "Guerra",
+        "Musical",
+        "Policial",
+        "Romance",
+        "Suspense",
+        "Terror",
+        "Trash",
     ];
     res.render("serie/add-serie", { user: req.user, genreArr });
 });
@@ -190,6 +190,8 @@ router.get("/editar-serie/:serieId", (req, res, next) => {
 
   // DELETE ROUTES
 router.get('/delete-serie/:serieId', (req, res, next) => {
+  // ensureLogin.ensureLoggedIn(), checkAdmin,
+
     const { serieId } = req.params;
     Serie.findByIdAndDelete(serieId)
         .then(response => {
