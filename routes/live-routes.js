@@ -30,7 +30,8 @@ router.get("/lives", (req, res, next) => {
         "Metal",
         "Samba",
         "Reggae",
-      ];
+      ]; 
+      genreArr.sort();
       res.render("live/lives", { lives, user: req.user, genreArr });
     })
     .catch((error) => console.log(error));
@@ -89,6 +90,7 @@ router.get("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     "Samba",
     "Reggae",
   ];
+  genreArr.sort();
 
   res.render("live/add-live", { user: req.user, genreArr });
 });
@@ -108,7 +110,8 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 // EDIT LIVE ROUTES
-router.get("/editar-live/:liveId", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.get("/editar-live/:liveId",  (req, res, next) => {
+  // ensureLogin.ensureLoggedIn(),
   const { liveId } = req.params;
   let genreArr = [
     "Sertanejo",
@@ -133,10 +136,12 @@ router.get("/editar-live/:liveId", ensureLogin.ensureLoggedIn(), (req, res, next
     "Samba",
     "Reggae",
   ];
+  genreArr.sort();
 
   Live
     .findById(liveId)
     .then(live => {
+      genreArr = genreArr.filter(elem => !live.genre.includes(elem))
       res.render("live/edit-live", { live, user: req.user, genreArr });
     })
     .catch(error => console.log(error))
@@ -213,6 +218,7 @@ router.post("/lives/search", (req, res, next) => {
     "Samba",
     "Reggae",
   ];
+  genreArr.sort();
   if (!genre) {
       Live.find({
         data: { $regex: data, $options: "i" },
@@ -234,7 +240,7 @@ router.post("/lives/search", (req, res, next) => {
     }
 
     Live.find({
-      genre,
+      genre: { $in: genre},
       data: { $regex: data, $options: "i" },
       name: { $regex: name, $options: "i" },
     })

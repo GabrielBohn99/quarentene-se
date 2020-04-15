@@ -8,8 +8,14 @@
 {{/with}}
 
     <label for="genre">Estilo musical: </label>
+
+    {{#each live.genre}}
+    <input type="checkbox" value="{{this}}" name="genre" checked>
+    <label for="{{this}}">{{this}}</label>
+    {{/each}}
+
     {{#each genreArr}}
-    <input type="checkbox" value="{{this}}" name="genre" >
+    <input type="checkbox" value="{{this}}" name="genre">
     <label for="{{this}}">{{this}}</label>
     {{/each}}
 

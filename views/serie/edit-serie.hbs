@@ -1,15 +1,21 @@
 <h1>Editar Serie</h1>
 
 {{#with serie}}
-<form action="/editar-serie/{{_id}}" method="post">
+    <form action="/editar-serie/{{_id}}" method="post">
 
     <label for="name">Título: </label>
     <input type="text" name="name" value="{{name}}">
 {{/with}}
 
     <label for="genre">Gênero: </label>
+
+    {{#each serie.genre}}
+    <input type="checkbox" value="{{this}}" name="genre" checked>
+    <label for="{{this}}">{{this}}</label>
+    {{/each}}
+
     {{#each genreArr}}
-    <input type="checkbox" value="{{this}}" name="genre" >
+    <input type="checkbox" value="{{this}}" name="genre">
     <label for="{{this}}">{{this}}</label>
     {{/each}}
 

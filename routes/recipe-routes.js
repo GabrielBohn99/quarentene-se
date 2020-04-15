@@ -84,7 +84,8 @@ router.post("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 // EDIT RECIPE
-router.get("/editar-receita/:receitaId", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.get("/editar-receita/:receitaId", (req, res, next) => {
+  // ensureLogin.ensureLoggedIn(),
   const { receitaId } = req.params;
   let levelArr = ["Fácil", "Médio", "Avançado"];
   let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
