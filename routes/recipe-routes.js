@@ -3,6 +3,23 @@ const router = express.Router();
 const Recipe = require("../models/recipe");
 const ensureLogin = require("connect-ensure-login");
 
+// ROLES control
+
+const checkRoles = (role) => {
+  return (req, res, next) => {
+    if (req.isAuthenticated() && req.user.role === role) {
+      return next();
+    } else {
+      req.logout();
+      res.redirect('/login')
+    }
+  }
+}
+
+const checkGuest = checkRoles('GUEST');
+const checkEditor = checkRoles('EDITOR');
+const checkAdmin = checkRoles('ADMIN');
+
 // RECIPES ROUTES
 
 router.get("/receitas", (req, res, next) => {
@@ -56,7 +73,7 @@ router.get("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render("recipes/add-recipe", { user: req.user });
 });
 
-router.post("/add-recipe", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.post("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const { name, duration, category, prepare, level } = req.body;
 
   Recipe.create({ name, duration, category, prepare, level })
@@ -66,6 +83,59 @@ router.post("/add-recipe", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     .catch((error) => console.log(error));
 });
 
+// EDIT RECIPE
+// router.get("/editar-receita/:receitaId", ensureLogin.ensureLoggedIn(), checkRoles('EDITOR'), (req, res, next) => {
+//   const { receitaId } = req.params;
+//   Recipe
+//     .findById(receitaId)
+//     .then(receita => {
+//       res.render("recipes/edit-recipe", { receita, user: req.user });
+//     })
+//     .catch(error => console.log(error))
+// });
+
+// router.post('/editar-receita', (req, res, next) => {
+//   const {
+//     name,
+//     duration,
+//     category,
+//     prepare,
+//     level
+//   } = req.body;
+
+//   const {
+//     receitaId
+//   } = req.query;
+
+//   Recipe.findByIdAndUpdate(receitaId, {
+//     $set: {
+//       name,
+//       duration,
+//       category,
+//       prepare,
+//       level
+//     }
+//   }, { new: true }
+//   )
+//   .then(response => {
+//     console.log(response);
+//     res.redirect(`recipe-detail/${receitaId}`)
+//   })
+//   .catch(error => console.log(error))
+// });
+
+// router.post("/editar-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+//   const { name, duration, category, prepare, level } = req.body;
+
+//   Recipe.create({ name, duration, category, prepare, level })
+//     .then((response) => {
+//       res.redirect("/receitas");
+//     })
+//     .catch((error) => console.log(error));
+// });
+
+
+
 // Filter routes
 
 router.post("/receitas/search", (req, res, next) => {
@@ -74,19 +144,19 @@ router.post("/receitas/search", (req, res, next) => {
   let levelArr = ["Fácil", "Médio", "Avançado"];
   if (level != "") {
     levelArr.splice(levelArr.indexOf(level), 1);
-    return;
+    // return;
   }
 
   let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
   if (duration != "") {
     durationArr.splice(durationArr.indexOf(duration), 1);
-    return;
+    // return;
   }
 
   let categoryArr = ["Salgado", "Doce"];
   if (category != "") {
     categoryArr.splice(categoryArr.indexOf(category), 1);
-    return;
+    // return;
   }
 
   // console.log(level, search, duration);
