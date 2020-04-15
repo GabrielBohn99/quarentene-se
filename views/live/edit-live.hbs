@@ -1,0 +1,29 @@
+<h1>Editar Live</h1>
+
+{{#with live}}
+<form action="/editar-live/{{_id}}" method="post">
+
+    <label for="name">Artista: </label>
+    <input type="text" name="name" value="{{name}}">
+{{/with}}
+
+    <label for="genre">Estilo musical: </label>
+    {{#each genreArr}}
+    <input type="checkbox" value="{{this}}" name="genre" >
+    <label for="{{this}}">{{this}}</label>
+    {{/each}}
+
+{{#with live}}
+    <label for="data">Data: </label>
+    <input type="date" name="data" min="2020-04-01" value="{{data}}">
+
+    <label for="time">Horario: </label>
+    <input type="time" name="time" value="{{time}}">
+
+    <label for="link">Link para a live: </label>
+    <input type="text" name="link" value="{{link}}">
+{{/with}}
+
+    <button type="submit">Salvar edição</button>
+
+</form>

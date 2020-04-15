@@ -3,15 +3,19 @@
     <label for="name">Artista: </label>
     <input type="text" name="name">
     <label for="genre">Estilo musical: </label>
+    
     {{#each genreArr}}
     <input type="checkbox" value="{{this}}" name="genre">
     <label for="{{this}}">{{this}}</label>
     {{/each}}
     <label for="data">Data: </label>
     <input type="date" name="data" min="2020-04-01">
+
     <label for="time">Horario: </label>
     <input type="time" name="time">
+
     <label for="link">Link para a live: </label>
     <input type="text" name="link">
+
     <button type="submit">Adicionar live</button>
 </form>

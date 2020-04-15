@@ -4,7 +4,11 @@
 <h2>{{genre}}</h2>
 <p>{{data}}</p>
 <p>{{time}}</p>
-<a href="{{link}}">Link para live</a>
+<a href="{{link}}">Link para live</a> <br>
+<hr>
+
+<button><a href="/editar-live/{{_id}}">Editar live</a></button>
+<button><a href="/delete-live/{{_id}}">Deletar live</a></button>
 
 <h3>Está animado?</h3>
 <form action="/live-review/{{_id}}" method="POST">

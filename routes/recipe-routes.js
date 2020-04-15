@@ -84,56 +84,63 @@ router.post("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 // EDIT RECIPE
-// router.get("/editar-receita/:receitaId", ensureLogin.ensureLoggedIn(), checkRoles('EDITOR'), (req, res, next) => {
-//   const { receitaId } = req.params;
-//   Recipe
-//     .findById(receitaId)
-//     .then(receita => {
-//       res.render("recipes/edit-recipe", { receita, user: req.user });
-//     })
-//     .catch(error => console.log(error))
-// });
+router.get("/editar-receita/:receitaId", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  const { receitaId } = req.params;
+  let levelArr = ["Fácil", "Médio", "Avançado"];
+  let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
+  let categoryArr = ["Salgado", "Doce"];
 
-// router.post('/editar-receita', (req, res, next) => {
-//   const {
-//     name,
-//     duration,
-//     category,
-//     prepare,
-//     level
-//   } = req.body;
+  Recipe
+    .findById(receitaId)
+    .then(receita => {
+      console.log(levelArr, durationArr, categoryArr)
+      levelArr.splice(levelArr.indexOf(receita.level), 1);
+      durationArr.splice(durationArr.indexOf(receita.duration), 1);
+      categoryArr.splice(categoryArr.indexOf(receita.category), 1);
+      res.render("recipes/edit-recipe", { receita, user: req.user, durationArr, categoryArr, levelArr });
+    })
+    .catch(error => console.log(error))
+});
 
-//   const {
-//     receitaId
-//   } = req.query;
+router.post('/editar-receita/:receitaId', (req, res, next) => {
+  const {
+    name,
+    duration,
+    category,
+    prepare,
+    level
+  } = req.body;
 
-//   Recipe.findByIdAndUpdate(receitaId, {
-//     $set: {
-//       name,
-//       duration,
-//       category,
-//       prepare,
-//       level
-//     }
-//   }, { new: true }
-//   )
-//   .then(response => {
-//     console.log(response);
-//     res.redirect(`recipe-detail/${receitaId}`)
-//   })
-//   .catch(error => console.log(error))
-// });
+  const {
+    receitaId
+  } = req.params;
 
-// router.post("/editar-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-//   const { name, duration, category, prepare, level } = req.body;
+  Recipe.findByIdAndUpdate(receitaId, {
+    $set: {
+      name,
+      duration,
+      category,
+      prepare,
+      level
+    }
+  }, { new: true }
+  )
+  .then(response => {
+    console.log(response);
+    res.redirect(`/receita/${receitaId}`)
+  })
+  .catch(error => console.log(error))
+});
 
-//   Recipe.create({ name, duration, category, prepare, level })
-//     .then((response) => {
-//       res.redirect("/receitas");
-//     })
-//     .catch((error) => console.log(error));
-// });
-
+// DELETE ROUTES
+router.get('/delete-recipe/:receitaId', (req, res, next) => {
+  const { receitaId } = req.params;
+  Recipe.findByIdAndDelete(receitaId)
+    .then(response => {
+      res.redirect('/receitas')
+    })
+    .catch(error => console.log(error))
+})
 
 
 // Filter routes
