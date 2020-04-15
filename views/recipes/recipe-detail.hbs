@@ -4,12 +4,12 @@
 <img src="{{imgPath}}" alt="{{imgName}}">
 {{/if}}
 <h1>{{name}}</h1>
-<h2>{{category}}</h2>
-<h2>{{level}}</h2>
-<p>{{prepare}}</p>
-<p>{{duration}}</p>
+<p>Categoria: {{category}}</p>
+<p>Nível: {{level}}</p>
+<p>Como fazer: {{prepare}}</p>
+<p>Tempo de preparo: {{duration}}</p>
 
-<h3>Qual a sua opinião?</h3>
+<h4>Deixe a sua opinião:</h4>
 <form action="/recipe-review/{{_id}}" method="POST">
     <label for="review"></label>
     <input type="text" name='comment'>
