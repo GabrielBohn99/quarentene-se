@@ -107,6 +107,82 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     .catch((error) => console.log(error));
 });
 
+// EDIT LIVE ROUTES
+router.get("/editar-live/:liveId", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  const { liveId } = req.params;
+  let genreArr = [
+    "Sertanejo",
+    "Blues",
+    "Axé",
+    "Rock",
+    "Country",
+    "MPB",
+    "Forró",
+    "Funk",
+    "Pop",
+    "Eletrônico",
+    "Hip Hop",
+    "Gospel",
+    "Indie",
+    "Folk",
+    "Pagode",
+    "Rap",
+    "Jazz",
+    "Música Clássica",
+    "Metal",
+    "Samba",
+    "Reggae",
+  ];
+
+  Live
+    .findById(liveId)
+    .then(live => {
+      res.render("live/edit-live", { live, user: req.user, genreArr });
+    })
+    .catch(error => console.log(error))
+});
+
+router.post('/editar-live/:liveId', (req, res, next) => {
+  const {
+    name,
+    data,
+    time,
+    link,
+    genre
+  } = req.body;
+
+  const {
+    liveId
+  } = req.params;
+
+  Live.findByIdAndUpdate(liveId, {
+    $set: {
+      name,
+      data,
+      time,
+      link,
+      genre
+    }
+  }, { new: true }
+  )
+  .then(response => {
+    console.log(response);
+    res.redirect(`/live/${liveId}`)
+  })
+  .catch(error => console.log(error))
+});
+
+// DELETE ROUTES
+router.get('/delete-live/:liveId', (req, res, next) => {
+  const { liveId } = req.params;
+  Live.findByIdAndDelete(liveId)
+    .then(response => {
+      res.redirect('/lives')
+    })
+    .catch(error => console.log(error))
+})
+
+
 // Filter routes
 
 router.post("/lives/search", (req, res, next) => {

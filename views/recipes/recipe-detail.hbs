@@ -9,6 +9,10 @@
 <p>Como fazer: {{prepare}}</p>
 <p>Tempo de preparo: {{duration}}</p>
 
+<button><a href="/editar-receita/{{_id}}">Editar receita</a></button>
+<button><a href="/delete-recipe/{{_id}}">Deletar receita</a></button>
+
+
 <h4>Deixe a sua opinião:</h4>
 <form action="/recipe-review/{{_id}}" method="POST">
     <label for="review"></label>
