@@ -3,6 +3,22 @@ const router = express.Router();
 const Live = require("../models/live");
 const ensureLogin = require("connect-ensure-login");
 
+// ROLES control
+
+const checkRoles = (role) => {
+  return (req, res, next) => {
+  if (req.isAuthenticated() && req.user.role === role) {
+      return next();
+  } else {
+      req.logout();
+      res.redirect('/login')
+  }
+  }
+}
+
+const checkGuest = checkRoles('GUEST');
+const checkAdmin = checkRoles('ADMIN');
+
 // LIVE ROUTES
 router.get("/lives", (req, res, next) => {
   Live.find()
@@ -100,7 +116,7 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let { link, data, time } = req.body;
   if (!link.includes("http://")) {
     link = "http://" + link;
-    return;
+    // return;
   }
   Live.create({ name, data, genre, link, time })
     .then((response) => {
@@ -111,7 +127,8 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 // EDIT LIVE ROUTES
 router.get("/editar-live/:liveId",  (req, res, next) => {
-  // ensureLogin.ensureLoggedIn(),
+  // ensureLogin.ensureLoggedIn(), checkAdmin,
+
   const { liveId } = req.params;
   let genreArr = [
     "Sertanejo",
@@ -179,6 +196,8 @@ router.post('/editar-live/:liveId', (req, res, next) => {
 
 // DELETE ROUTES
 router.get('/delete-live/:liveId', (req, res, next) => {
+  // ensureLogin.ensureLoggedIn(), checkAdmin,
+
   const { liveId } = req.params;
   Live.findByIdAndDelete(liveId)
     .then(response => {
@@ -236,7 +255,7 @@ router.post("/lives/search", (req, res, next) => {
           });
         })
         .catch((error) => console.log(error));
-      return;
+      // return;
     }
 
     Live.find({

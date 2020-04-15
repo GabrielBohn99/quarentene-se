@@ -17,7 +17,6 @@ const checkRoles = (role) => {
 }
 
 const checkGuest = checkRoles('GUEST');
-const checkEditor = checkRoles('EDITOR');
 const checkAdmin = checkRoles('ADMIN');
 
 // RECIPES ROUTES
@@ -85,7 +84,7 @@ router.post("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 // EDIT RECIPE
 router.get("/editar-receita/:receitaId", (req, res, next) => {
-  // ensureLogin.ensureLoggedIn(),
+  // ensureLogin.ensureLoggedIn(), checkAdmin,
   const { receitaId } = req.params;
   let levelArr = ["Fácil", "Médio", "Avançado"];
   let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
@@ -135,6 +134,8 @@ router.post('/editar-receita/:receitaId', (req, res, next) => {
 
 // DELETE ROUTES
 router.get('/delete-recipe/:receitaId', (req, res, next) => {
+  // ensureLogin.ensureLoggedIn(), checkAdmin,
+
   const { receitaId } = req.params;
   Recipe.findByIdAndDelete(receitaId)
     .then(response => {
