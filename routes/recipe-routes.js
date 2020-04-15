@@ -25,8 +25,8 @@ router.get("/receitas", (req, res, next) => {
   Recipe.find()
     .then((receitas) => {
       let levelArr = ["Fácil", "Médio", "Avançado"];
-      let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
-      let categoryArr = ["Salgado", "Doce"];
+      let durationArr = ["10min - 30min", "30min - 60min", "mais de 60min"];
+      let categoryArr = ["Salgado", "Doce", "Bebida"];
       res.render("recipes/recipes", {
         receitas,
         user: req.user,
@@ -87,8 +87,8 @@ router.get("/editar-receita/:receitaId", (req, res, next) => {
   // ensureLogin.ensureLoggedIn(), checkAdmin,
   const { receitaId } = req.params;
   let levelArr = ["Fácil", "Médio", "Avançado"];
-  let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
-  let categoryArr = ["Salgado", "Doce"];
+  let durationArr = ["10min - 30min", "30min - 60min", "mais de 60min"];
+  let categoryArr = ["Salgado", "Doce", "Bebida"];
 
   Recipe
     .findById(receitaId)
@@ -156,13 +156,13 @@ router.post("/receitas/search", (req, res, next) => {
     // return;
   }
 
-  let durationArr = ["10min - 30min", "30min - 60min", "+60min"];
+  let durationArr = ["10min - 30min", "30min - 60min", "mais de 60min"];
   if (duration != "") {
     durationArr.splice(durationArr.indexOf(duration), 1);
     // return;
   }
 
-  let categoryArr = ["Salgado", "Doce"];
+  let categoryArr = ["Salgado", "Doce", "Bebida"];
   if (category != "") {
     categoryArr.splice(categoryArr.indexOf(category), 1);
     // return;
@@ -173,7 +173,7 @@ router.post("/receitas/search", (req, res, next) => {
     level: { $regex: level },
     duration: { $regex: duration },
     name: { $regex: search, $options: "i" },
-    category: { $regex: category } ,
+    category: { $regex: category }
   })
     .then((receitas) => {
       let buscado = "Buscado";
