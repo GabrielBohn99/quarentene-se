@@ -1,6 +1,7 @@
 <h1>Editar Serie</h1>
 
 {{#with serie}}
+    <button><a href="/serie/{{_id}}">Voltar</a></button>
     <form action="/editar-serie/{{_id}}" method="post">
 
     <label for="name">Título: </label>
@@ -29,4 +30,6 @@
 
     <button type="submit">Salvar edição</button>
 
+
 </form>
+

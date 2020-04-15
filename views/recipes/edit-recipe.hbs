@@ -1,7 +1,9 @@
 <h1>Edite a receita</h1>
 
     {{#with receita}}
-<form action="/editar-receita/{{_id}}" method="POST">
+    <button><a href="/receita/{{_id}}">Voltar</a></button>
+
+    <form action="/editar-receita/{{_id}}" method="POST">
     <label for="name">Nome: </label>
     <input type="text" name="name" value="{{name}}">
     <label for="category">Categoria: </label>

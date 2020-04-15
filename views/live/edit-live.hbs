@@ -1,7 +1,9 @@
 <h1>Editar Live</h1>
 
 {{#with live}}
-<form action="/editar-live/{{_id}}" method="post">
+    <button><a href="/live/{{_id}}">Voltar</a></button>
+
+    <form action="/editar-live/{{_id}}" method="post">
 
     <label for="name">Artista: </label>
     <input type="text" name="name" value="{{name}}">
