@@ -1,0 +1,26 @@
+<h1>Editar Serie</h1>
+
+{{#with serie}}
+<form action="/editar-serie/{{_id}}" method="post">
+
+    <label for="name">Título: </label>
+    <input type="text" name="name" value="{{name}}">
+{{/with}}
+
+    <label for="genre">Gênero: </label>
+    {{#each genreArr}}
+    <input type="checkbox" value="{{this}}" name="genre" >
+    <label for="{{this}}">{{this}}</label>
+    {{/each}}
+
+{{#with serie}}
+    <label for="resume">Sinopse: </label>
+    <input type="text" name="resume" value="{{resume}}">
+
+    <label for="rating">Cotação: </label>
+    <input type="number" name="rating" value="{{rating}}">
+{{/with}}
+
+    <button type="submit">Salvar edição</button>
+
+</form>
