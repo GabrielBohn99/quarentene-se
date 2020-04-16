@@ -1,37 +1,39 @@
-<h1>Editar Live</h1>
+<div class="main-box">
 
-{{#with live}}
-    <button><a href="/live/{{_id}}">Voltar</a></button>
+    <h1>Editar Live</h1>
 
-    <form action="/editar-live/{{_id}}" method="post">
+    {{#with live}}
+        <button><a href="/live/{{_id}}">Voltar</a></button>
 
-    <label for="name">Artista: </label>
-    <input type="text" name="name" value="{{name}}">
-{{/with}}
+        <form action="/editar-live/{{_id}}" method="post">
 
-    <label for="genre">Estilo musical: </label>
+        <label for="name">Artista: </label>
+        <input type="text" name="name" value="{{name}}">
+    {{/with}}
 
-    {{#each live.genre}}
-    <input type="checkbox" value="{{this}}" name="genre" checked>
-    <label for="{{this}}">{{this}}</label>
-    {{/each}}
+        <label for="genre">Estilo musical: </label>
 
-    {{#each genreArr}}
-    <input type="checkbox" value="{{this}}" name="genre">
-    <label for="{{this}}">{{this}}</label>
-    {{/each}}
+        {{#each live.genre}}
+        <input type="checkbox" value="{{this}}" name="genre" checked>
+        <label for="{{this}}">{{this}}</label>
+        {{/each}}
 
-{{#with live}}
-    <label for="data">Data: </label>
-    <input type="date" name="data" min="2020-04-01" value="{{data}}">
+        {{#each genreArr}}
+        <input type="checkbox" value="{{this}}" name="genre">
+        <label for="{{this}}">{{this}}</label>
+        {{/each}}
 
-    <label for="time">Horario: </label>
-    <input type="time" name="time" value="{{time}}">
+    {{#with live}}
+        <label for="data">Data: </label>
+        <input type="date" name="data" min="2020-04-01" value="{{data}}">
 
-    <label for="link">Link para a live: </label>
-    <input type="text" name="link" value="{{link}}">
-{{/with}}
+        <label for="time">Horario: </label>
+        <input type="time" name="time" value="{{time}}">
 
-    <button type="submit">Salvar edição</button>
+        <label for="link">Link para a live: </label>
+        <input type="text" name="link" value="{{link}}">
 
-</form>
+    {{/with}}
+        <button type="submit">Salvar edição</button>
+    </form>
+</div>

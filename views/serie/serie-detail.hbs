@@ -1,14 +1,16 @@
+<div class="main-box">
+    {{#with serie}}
+    <h1>{{name}}</h1>
+    <h2>{{rating}}</h2>
+    <p>{{resume}}</p>
+    <p>{{genre}}</p>
 
-{{#with serie}}
-<h1>{{name}}</h1>
-<h2>{{rating}}</h2>
-<p>{{resume}}</p>
-<p>{{genre}}</p>
+    {{#if isOwner}}
+    <button><a href="/editar-serie/{{_id}}">Editar serie</a></button>
+    <button><a href="/delete-serie/{{_id}}">Deletar serie</a></button>
+    {{/if}}
 
-{{#if isOwner}}
-<button><a href="/editar-serie/{{serie._id}}">Editar serie</a></button>
-<button><a href="/delete-serie/{{serie._id}}">Deletar serie</a></button>
-{{/if}}
+    <button><a href="/series">Voltar</a></button>
 
 <button><a href="/series">Voltar</a></button>
 

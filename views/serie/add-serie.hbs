@@ -1,15 +1,20 @@
-<h1>Adicione uma serie</h1>
-<form action="/add-serie" method="POST">
-    <label for="name">Titulo: </label>
-    <input type="text" name="name">
-    <label for="genre">Genero: </label>
-        {{#each genreArr}}
-        <input type="checkbox" value="{{this}}" name="genre">
-        <label for="{{this}}">{{this}}</label>
-        {{/each}}
-    <label for="rating">Cotação: </label>
-    <input type="number" name="rating" max="10" min="0">
-    <label for="resume">Sinopse: </label>
-    <input type="text" name="resume">
-    <button type="submit">Adicionar</button>
-</form>
+<div class="main-box">
+
+    <h1>Adicione uma serie</h1>
+    <form action="/add-serie" method="POST">
+        <label for="name">Titulo: </label>
+        <input type="text" name="name">
+        <label for="genre">Genero: </label>
+            {{#each genreArr}}
+            <input type="checkbox" value="{{this}}" name="genre">
+            <label for="{{this}}">{{this}}</label>
+            {{/each}}
+        <label for="rating">Cotação: </label>
+        <input type="number" name="rating">
+        <label for="resume">Sinopse: </label>
+        <input type="text" name="resume">
+        <button type="submit">Adicionar</button>
+        <button><a href="/series">Voltar</a></button>
+
+    </form>
+</div>
