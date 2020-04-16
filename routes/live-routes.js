@@ -212,8 +212,6 @@ router.get('/delete-live/:liveId', (req, res, next) => {
 router.post("/lives/search", (req, res, next) => {
   let { genre, name, data } = req.body;
 
-  console.log(genre);
-
   let genreArr = [
     "Sertanejo",
     "Blues",

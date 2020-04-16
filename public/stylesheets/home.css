@@ -1,0 +1,33 @@
+
+.main-box {
+    background-image: url('../images/home9.png');
+    background-color: rgb(253,97,76);
+    background-size: cover;
+    background-position: 50% 35%;
+    background-repeat: no-repeat;
+    
+    opacity: 0.6;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-img {
+    position: center;
+    width: 300px;
+    z-index: 10;
+}
+
+#title {
+    color: white;
+    font-size: 8vw;
+    font-family: 'Cuprum', sans-serif;
+    /* background-color: rgb(153,153,153); */
+    text-shadow: 5px 5px 4px rgb(117, 117, 117);
+    position: relative;
+    top: 10vh;
+    text-align: center;
+} 

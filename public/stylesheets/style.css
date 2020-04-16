@@ -1,4 +1,10 @@
-body {
+* {
     padding: 0;
     margin: 0;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Cuprum', sans-serif;
+    letter-spacing: .08rem;
 }
