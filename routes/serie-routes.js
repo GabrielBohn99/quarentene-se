@@ -110,7 +110,8 @@ router.get("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     res.render("serie/add-serie", { user: req.user, genreArr });
 });
 
-router.post("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.post("/add-serie", (req, res, next) => {
+    // ensureLogin.ensureLoggedIn(), 
     const { name, resume, rating, genre } = req.body;
 
     Serie.create({ name, resume, rating, genre })
