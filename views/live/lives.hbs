@@ -1,34 +1,37 @@
-<h1>Lives</h1>
-<button><a href="/add-live">Adicionar uma live</a></button> <br><br>
-<form action="/lives/search" method="post">
-    {{#if name}}
-    <label for="name">Pesquisar: </label>
-    <input type="text" name="name" value="{{name}}">
-    {{else}}
-    <label for="name">Pesquisar: </label>
-    <input type="text" name="name" placeholder="Coloque o nome do artista">
-    {{/if}}
-    <label for="data">Data: </label>
-    <input type="date" name="data">
-    <label for="genre">Estilo musical: </label>
-    {{#each genreArr}}
-    <input type="checkbox" value="{{this}}" name="genre">
-    <label for="{{this}}">{{this}}</label>
+<div class="main-box">
+
+    <h1>Lives</h1>
+    <button><a href="/add-live">Adicionar uma live</a></button> <br><br>
+    <form action="/lives/search" method="post">
+        {{#if name}}
+        <label for="name">Pesquisar: </label>
+        <input type="text" name="name" value="{{name}}">
+        {{else}}
+        <label for="name">Pesquisar: </label>
+        <input type="text" name="name" placeholder="Coloque o nome do artista">
+        {{/if}}
+        <label for="data">Data: </label>
+        <input type="date" name="data">
+        <label for="genre">Estilo musical: </label>
+        {{#each genreArr}}
+        <input type="checkbox" value="{{this}}" name="genre">
+        <label for="{{this}}">{{this}}</label>
+        {{/each}}
+        <button type="submit">Buscar</button>
+        {{#if buscado}}
+        <a href="/lives">Limpar filtros</a>
+        {{/if}}
+    </form>
+    {{#each lives}}
+    <div>
+        {{#if imgPath}}
+        <img src="{{imgPath}}" alt="{{imgName}}">
+        {{/if}}
+        <h2>{{name}}</h2>
+        <p>{{genre}}</p>
+        <h3>{{data}}</h3>
+        <a href="/live/{{_id}}">Saiba mais</a>
+        <hr>
+    </div>
     {{/each}}
-    <button type="submit">Buscar</button>
-    {{#if buscado}}
-    <a href="/lives">Limpar filtros</a>
-    {{/if}}
-</form>
-{{#each lives}}
-<div>
-    {{#if imgPath}}
-    <img src="{{imgPath}}" alt="{{imgName}}">
-    {{/if}}
-    <h2>{{name}}</h2>
-    <p>{{genre}}</p>
-    <h3>{{data}}</h3>
-    <a href="/live/{{_id}}">Saiba mais</a>
-    <hr>
 </div>
-{{/each}}
