@@ -60,9 +60,10 @@ router.get("/serie/:id", (req, res, next) => {
     .populate("owner")
     .then((serie) => {
       if (
-        serie.owner &&
-        req.user &&
-        serie.owner._id.toString() === req.user._id.toString()
+        (serie.owner &&
+          req.user &&
+          serie.owner._id.toString() === req.user._id.toString()) ||
+        (req.isAuthenticated() && req.user.role === "ADMIN")
       ) {
         serie.isOwner = true;
       }

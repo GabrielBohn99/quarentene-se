@@ -15,7 +15,7 @@
 <h3>Qual a sua opinião?</h3>
 <form action="/serie-review/{{_id}}" method="POST">
     <label for="review"></label>
-    <input type="text" name='comment'>
+    <input type="text" name='comment' required>
     <button type="submit">Adicionar review</button>
 </form>
 {{#each review}}

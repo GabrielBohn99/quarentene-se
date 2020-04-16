@@ -48,7 +48,8 @@ router.get("/receita/:id", (req, res, next) => {
     if (
       receita.owner &&
       req.user &&
-      receita.owner._id.toString() === req.user._id.toString()
+      receita.owner._id.toString() === req.user._id.toString() ||
+      req.isAuthenticated() && req.user.role === "ADMIN"
     ) {
       receita.isOwner = true;
     }
