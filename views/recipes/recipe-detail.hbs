@@ -20,7 +20,7 @@
 <h4>Deixe a sua opinião:</h4>
 <form action="/recipe-review/{{_id}}" method="POST">
     <label for="review"></label>
-    <input type="text" name='comment'>
+    <input type="text" name='comment' required>
     <button type="submit">Adicionar um review</button>
 </form>
 {{#each review}}

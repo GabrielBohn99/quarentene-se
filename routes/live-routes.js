@@ -63,7 +63,8 @@ router.get("/live/:id", (req, res, next) => {
       if (
         live.owner &&
         req.user &&
-        live.owner._id.toString() === req.user._id.toString()
+        live.owner._id.toString() === req.user._id.toString() ||
+        req.isAuthenticated() && req.user.role === "ADMIN"
       ) {
         live.isOwner = true;
       }
