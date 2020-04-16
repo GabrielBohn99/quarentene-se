@@ -14,6 +14,10 @@ const serieSchema = new Schema({
       comment: String,
     },
   ],
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
 });
 
 const Serie = mongoose.model("Serie", serieSchema);

@@ -118,7 +118,7 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     link = "http://" + link;
     // return;
   }
-  Live.create({ name, data, genre, link, time })
+  Live.create({ name, data, genre, link, time, owner: req.user._id, })
     .then((response) => {
       res.redirect("/lives");
     })

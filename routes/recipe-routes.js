@@ -75,7 +75,7 @@ router.get("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 router.post("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const { name, duration, category, prepare, level } = req.body;
 
-  Recipe.create({ name, duration, category, prepare, level })
+  Recipe.create({ name, duration, category, prepare, level, owner: req.user._id, })
     .then((response) => {
       res.redirect("/receitas");
     })
