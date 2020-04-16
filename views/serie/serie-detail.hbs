@@ -5,8 +5,11 @@
 <p>{{resume}}</p>
 <p>{{genre}}</p>
 
-<button><a href="/editar-serie/{{_id}}">Editar serie</a></button>
-<button><a href="/delete-serie/{{_id}}">Deletar serie</a></button>
+{{#if isOwner}}
+<button><a href="/editar-serie/{{serie._id}}">Editar serie</a></button>
+<button><a href="/delete-serie/{{serie._id}}">Deletar serie</a></button>
+{{/if}}
+
 <button><a href="/series">Voltar</a></button>
 
 <h3>Qual a sua opinião?</h3>

@@ -15,6 +15,10 @@ const recipeSchema = new Schema({
       comment: String,
     },
   ],
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
 });
 
 const Recipe = mongoose.model("Recipe", recipeSchema);

@@ -15,6 +15,10 @@ const liveSchema = new Schema({
       comment: String,
     },
   ],
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
 });
 
 const Live = mongoose.model("Live", liveSchema);

@@ -10,6 +10,7 @@ const hbs = require("hbs");
 const favicon = require("serve-favicon");
 
 const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -57,6 +58,10 @@ app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 app.use(
   session({
     secret: "quarentene-se",
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60, // 1 day
+    }),
     resave: true,
     saveUninitialized: true,
   })
@@ -100,7 +105,6 @@ passport.use(
     }
   )
 );
-
 
 app.use(passport.initialize());
 app.use(passport.session());
