@@ -6,9 +6,10 @@
 <p>{{time}}</p>
 <a href="{{link}}">Link para live</a> <br>
 <hr>
-
+{{#if isOwner}}
 <button><a href="/editar-live/{{_id}}">Editar live</a></button>
 <button><a href="/delete-live/{{_id}}">Deletar live</a></button>
+{{/if}}
 <button><a href="/lives">Voltar</a></button>
 
 

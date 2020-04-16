@@ -1,5 +1,5 @@
 
-{{#with recipe}}
+{{#with receita}}
 {{#if imgPath}}
 <img src="{{imgPath}}" alt="{{imgName}}">
 {{/if}}
@@ -9,9 +9,11 @@
 <p>Como fazer: {{prepare}}</p>
 <p>Tempo de preparo: {{duration}}</p>
 
+{{#if isOwner}}
 <button><a href="/editar-receita/{{_id}}">Editar receita</a></button>
 <button><a href="/delete-recipe/{{_id}}">Deletar receita</a></button>
-<button><a href="/recipes">Voltar</a></button>
+{{/if}}
+<button><a href="/receitas">Voltar</a></button>
 
 
 

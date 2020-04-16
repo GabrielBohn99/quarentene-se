@@ -7,17 +7,17 @@ const ensureLogin = require("connect-ensure-login");
 
 const checkRoles = (role) => {
   return (req, res, next) => {
-  if (req.isAuthenticated() && req.user.role === role) {
+    if (req.isAuthenticated() && req.user.role === role) {
       return next();
-  } else {
+    } else {
       req.logout();
-      res.redirect('/login')
-  }
-  }
-}
+      res.redirect("/login");
+    }
+  };
+};
 
-const checkGuest = checkRoles('GUEST');
-const checkAdmin = checkRoles('ADMIN');
+const checkGuest = checkRoles("GUEST");
+const checkAdmin = checkRoles("ADMIN");
 
 // LIVE ROUTES
 router.get("/lives", (req, res, next) => {
@@ -46,7 +46,7 @@ router.get("/lives", (req, res, next) => {
         "Metal",
         "Samba",
         "Reggae",
-      ]; 
+      ];
       genreArr.sort();
       res.render("live/lives", { lives, user: req.user, genreArr });
     })
@@ -56,8 +56,17 @@ router.get("/lives", (req, res, next) => {
 // LIVE INFO
 router.get("/live/:id", (req, res, next) => {
   const { id } = req.params;
+
   Live.findById(id)
+    .populate("owner")
     .then((live) => {
+      if (
+        live.owner &&
+        req.user &&
+        live.owner._id.toString() === req.user._id.toString()
+      ) {
+        live.isOwner = true;
+      }
       res.render("live/live-detail", { live, user: req.user });
     })
     .catch((error) => console.log(error));
@@ -118,7 +127,7 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     link = "http://" + link;
     // return;
   }
-  Live.create({ name, data, genre, link, time, owner: req.user._id, })
+  Live.create({ name, data, genre, link, time, owner: req.user._id })
     .then((response) => {
       res.redirect("/lives");
     })
@@ -126,7 +135,7 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 // EDIT LIVE ROUTES
-router.get("/editar-live/:liveId",  (req, res, next) => {
+router.get("/editar-live/:liveId", (req, res, next) => {
   // ensureLogin.ensureLoggedIn(), checkAdmin,
 
   const { liveId } = req.params;
@@ -155,57 +164,50 @@ router.get("/editar-live/:liveId",  (req, res, next) => {
   ];
   genreArr.sort();
 
-  Live
-    .findById(liveId)
-    .then(live => {
-      genreArr = genreArr.filter(elem => !live.genre.includes(elem))
+  Live.findById(liveId)
+    .then((live) => {
+      genreArr = genreArr.filter((elem) => !live.genre.includes(elem));
       res.render("live/edit-live", { live, user: req.user, genreArr });
     })
-    .catch(error => console.log(error))
+    .catch((error) => console.log(error));
 });
 
-router.post('/editar-live/:liveId', (req, res, next) => {
-  const {
-    name,
-    data,
-    time,
-    link,
-    genre
-  } = req.body;
+router.post("/editar-live/:liveId", (req, res, next) => {
+  const { name, data, time, link, genre } = req.body;
 
-  const {
-    liveId
-  } = req.params;
+  const { liveId } = req.params;
 
-  Live.findByIdAndUpdate(liveId, {
-    $set: {
-      name,
-      data,
-      time,
-      link,
-      genre
-    }
-  }, { new: true }
+  Live.findByIdAndUpdate(
+    liveId,
+    {
+      $set: {
+        name,
+        data,
+        time,
+        link,
+        genre,
+      },
+    },
+    { new: true }
   )
-  .then(response => {
-    console.log(response);
-    res.redirect(`/live/${liveId}`)
-  })
-  .catch(error => console.log(error))
+    .then((response) => {
+      console.log(response);
+      res.redirect(`/live/${liveId}`);
+    })
+    .catch((error) => console.log(error));
 });
 
 // DELETE ROUTES
-router.get('/delete-live/:liveId', (req, res, next) => {
+router.get("/delete-live/:liveId", (req, res, next) => {
   // ensureLogin.ensureLoggedIn(), checkAdmin,
 
   const { liveId } = req.params;
   Live.findByIdAndDelete(liveId)
-    .then(response => {
-      res.redirect('/lives')
+    .then((response) => {
+      res.redirect("/lives");
     })
-    .catch(error => console.log(error))
-})
-
+    .catch((error) => console.log(error));
+});
 
 // Filter routes
 
@@ -237,27 +239,7 @@ router.post("/lives/search", (req, res, next) => {
   ];
   genreArr.sort();
   if (!genre) {
-      Live.find({
-        data: { $regex: data, $options: "i" },
-        name: { $regex: name, $options: "i" },
-      })
-        .sort({ data: 1 })
-        .then((lives) => {
-          let buscado = "Buscado";
-          res.render("live/lives", {
-            lives,
-            genreArr,
-            user: req.user,
-            buscado,
-            name,
-          });
-        })
-        .catch((error) => console.log(error));
-      // return;
-    }
-
     Live.find({
-      genre: { $in: genre},
       data: { $regex: data, $options: "i" },
       name: { $regex: name, $options: "i" },
     })
@@ -273,6 +255,26 @@ router.post("/lives/search", (req, res, next) => {
         });
       })
       .catch((error) => console.log(error));
+    // return;
+  }
+
+  Live.find({
+    genre: { $in: genre },
+    data: { $regex: data, $options: "i" },
+    name: { $regex: name, $options: "i" },
+  })
+    .sort({ data: 1 })
+    .then((lives) => {
+      let buscado = "Buscado";
+      res.render("live/lives", {
+        lives,
+        genreArr,
+        user: req.user,
+        buscado,
+        name,
+      });
+    })
+    .catch((error) => console.log(error));
 });
 
 module.exports = router;
