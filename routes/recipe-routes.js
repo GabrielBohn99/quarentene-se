@@ -43,8 +43,16 @@ router.get("/receita/:id", (req, res, next) => {
   const { id } = req.params;
 
   Recipe.findById(id)
-    .then((recipe) => {
-      res.render("recipes/recipe-detail", { recipe, user: req.user });
+  .populate("owner")
+  .then((receita) => {
+    if (
+      receita.owner &&
+      req.user &&
+      receita.owner._id.toString() === req.user._id.toString()
+    ) {
+      receita.isOwner = true;
+    }
+    res.render("recipes/recipe-detail", { receita, user: req.user });
     })
     .catch((error) => console.log(error));
 });
