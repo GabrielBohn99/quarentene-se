@@ -1,40 +1,43 @@
-<h1>Edite a receita</h1>
+<div class="main-box">
+    <h1>Edite a receita</h1>
 
-    {{#with receita}}
-    <button><a href="/receita/{{_id}}">Voltar</a></button>
+        {{#with receita}}
+        <button><a href="/receita/{{_id}}">Voltar</a></button>
 
-    <form action="/editar-receita/{{_id}}" method="POST">
-    <label for="name">Nome: </label>
-    <input type="text" name="name" value="{{name}}">
-    <label for="category">Categoria: </label>
-    <select name="category">
-        <option value="{{category}}">{{category}}</option>
-    {{/with}}
-        {{#each categoryArr}}
-        <option value="{{this}}">{{this}}</option>
-        {{/each}}
-    </select>
-    {{#with receita}}
-    <label for="level">Nível de dificuldade: </label>
-    <select name="level">
-        <option value={{level}}>{{level}}</option>
-    {{/with}}
-        {{#each levelArr}}
-        <option value={{this}}>{{this}}</option>
-        {{/each}}
+        <form action="/editar-receita/{{_id}}" method="POST">
+        <label for="name">Nome: </label>
+        <input type="text" name="name" value="{{name}}">
+        <label for="category">Categoria: </label>
+        <select name="category">
+            <option value="{{category}}">{{category}}</option>
+        {{/with}}
+            {{#each categoryArr}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
         </select>
-    {{#with receita}}
-    <label for="duration">Tempo de preparo: </label>
-    <select name="duration">
-        <option value="{{duration}}">{{duration}}</option>
-    {{/with}}
-        {{#each durationArr}}
-        <option value="{{this}}">{{this}}</option>
-        {{/each}}
-    </select>
-    {{#with receita}}
-    <label for="prepare">Modo de preparo: </label>
-    <input type="text" name="prepare" value="{{prepare}}">
-    {{/with}}
-    <button type="submit">Salvar edição</button>
-</form>
+        {{#with receita}}
+        <label for="level">Nível de dificuldade: </label>
+        <select name="level">
+            <option value={{level}}>{{level}}</option>
+        {{/with}}
+            {{#each levelArr}}
+            <option value={{this}}>{{this}}</option>
+            {{/each}}
+            </select>
+        {{#with receita}}
+        <label for="duration">Tempo de preparo: </label>
+        <select name="duration">
+            <option value="{{duration}}">{{duration}}</option>
+        {{/with}}
+            {{#each durationArr}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+        {{#with receita}}
+        <label for="prepare">Modo de preparo: </label>
+        <input type="text" name="prepare" value="{{prepare}}">
+        {{/with}}
+        <button type="submit">Salvar edição</button>
+    </form>
+
+</div>

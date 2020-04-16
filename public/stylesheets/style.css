@@ -8,3 +8,7 @@ body {
     font-family: 'Cuprum', sans-serif;
     letter-spacing: .08rem;
 }
+
+.main-box {
+    margin: 10vh 3vw;
+}

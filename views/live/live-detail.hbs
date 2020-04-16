@@ -1,27 +1,29 @@
+<div class="main-box">
 
-{{#with live}}
-<h1>{{name}}</h1>
-<h2>{{genre}}</h2>
-<p>{{data}}</p>
-<p>{{time}}</p>
-<a href="{{link}}">Link para live</a> <br>
-<hr>
-{{#if isOwner}}
-<button><a href="/editar-live/{{_id}}">Editar live</a></button>
-<button><a href="/delete-live/{{_id}}">Deletar live</a></button>
-{{/if}}
-<button><a href="/lives">Voltar</a></button>
+    {{#with live}}
+    <h1>{{name}}</h1>
+    <h2>{{genre}}</h2>
+    <p>{{data}}</p>
+    <p>{{time}}</p>
+    <a href="{{link}}">Link para live</a> <br>
+    <hr>
+    {{#if isOwner}}
+    <button><a href="/editar-live/{{_id}}">Editar live</a></button>
+    <button><a href="/delete-live/{{_id}}">Deletar live</a></button>
+    {{/if}}
+    <button><a href="/lives">Voltar</a></button>
 
 
-<h3>Está animado?</h3>
-<form action="/live-review/{{_id}}" method="POST">
-    <label for="review"></label>
-    <input type="text" name='comment'>
-    <button type="submit">Adicionar comentário</button>
-</form>
-{{#each review}}
-    <h3>{{user}}</h3>
-    <p>{{comment}}</p>
-{{/each}}
-{{/with}}
+    <h3>Está animado?</h3>
+    <form action="/live-review/{{_id}}" method="POST">
+        <label for="review"></label>
+        <input type="text" name='comment'>
+        <button type="submit">Adicionar comentário</button>
+    </form>
+    {{#each review}}
+        <h3>{{user}}</h3>
+        <p>{{comment}}</p>
+    {{/each}}
+    {{/with}}
+</div>
 
