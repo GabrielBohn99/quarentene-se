@@ -11,6 +11,12 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  confirmationCode: String,
+  status:{    
+    type: String,    
+    enum: ["Aguardando confirmação", "Conta ativa"],    
+    default: 'Aguardando confirmação'  
+  },
   role: {
     type: String,
     enum: ['GUEST', 'ADMIN'],

@@ -7,6 +7,10 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 const passport = require("passport");
 
+// nodemailer
+const nodemailer = require('nodemailer');
+
+
 // Sign up route
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
@@ -14,6 +18,12 @@ router.get("/signup", (req, res, next) => {
 
 router.post("/signup", (req, res, next) => {
   const { username, email, password } = req.body;
+  const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let token = '';
+  for (let i = 0; i < 25; i++) {
+    token += characters[Math.floor(Math.random() * characters.length )];
+  }
+  const confirmationCode = token;
 
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
@@ -34,20 +44,56 @@ router.post("/signup", (req, res, next) => {
         username,
         password: hashPass,
         email,
+        confirmationCode
       });
 
-      newUser.save((err) => {
-        if (err) {
-          res.render("auth/signup", { message: "Something went wrong" });
-        } else {
+      newUser.save()
+      .then(user => {
+        console.log(user, 'criado');
+
+        let transport = nodemailer.createTransport({
+          service: 'Gmail',
+          secure: true,
+          auth: {
+            user: process.env.GOOGLE_EMAIL,
+            pass: process.env.GOOGLE_SENHA
+          }
+        });
+
+        transport.sendMail({
+          from: `"Quarentene-se " <${process.env.GOOGLE_EMAIL}>`,
+          to: user.email, 
+          subject: 'Testing Nodemailer', 
+          text: `http://localhost:3000/confirm/${user.confirmationCode}`,
+          html: '<b>FUNCIONOU</b>'
+        })
+        .then(info => {
+          console.log(info);
           res.redirect("/login");
-        }
-      });
-    })
-    .catch((error) => {
-      next(error);
+          })  
+        .catch(error => console.log(error))
+        
+      })
+      .catch(err => {
+        console.log(err);
+        res.render("auth/signup", { message: "Something went wrong" });
+      })
     });
-});
+  });
+
+  router.get('/confirm/:confirmCode', (req, res, next) => {
+    const {
+      confirmCode
+    } = req.params
+  
+    User.findOneAndUpdate({confirmationCode: confirmCode}, {$set: {status: 'Active'}}, {new: true})
+        .then(user => {
+          console.log(user);
+          //NEW UPDATES OBJECT - DONT FORGET THIS!
+          res.render('confirmation', {user})
+        })
+        .catch(error => console.log(error))
+  })
 
 // Login routes
 router.get("/login", (req, res, next) => {
