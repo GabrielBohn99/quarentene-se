@@ -198,16 +198,18 @@ router.post("/editar-live/:liveId", (req, res, next) => {
 });
 
 // DELETE ROUTES
-router.get("/delete-live/:liveId", (req, res, next) => {
-  // ensureLogin.ensureLoggedIn(), checkAdmin,
-
-  const { liveId } = req.params;
-  Live.findByIdAndDelete(liveId)
-    .then((response) => {
-      res.redirect("/lives");
-    })
-    .catch((error) => console.log(error));
-});
+router.get(
+  "/delete-live/:liveId",
+  ensureLogin.ensureLoggedIn(),
+  (req, res, next) => {
+    const { liveId } = req.params;
+    Live.findByIdAndDelete(liveId)
+      .then((response) => {
+        res.redirect("/lives");
+      })
+      .catch((error) => console.log(error));
+  }
+);
 
 // Filter routes
 
@@ -237,8 +239,9 @@ router.post("/lives/search", (req, res, next) => {
     "Samba",
     "Reggae",
   ];
+  console.log(genre);
   genreArr.sort();
-  if (!genre) {
+  if (genre.length < 1) {
     Live.find({
       data: { $regex: data, $options: "i" },
       name: { $regex: name, $options: "i" },
@@ -255,7 +258,7 @@ router.post("/lives/search", (req, res, next) => {
         });
       })
       .catch((error) => console.log(error));
-    // return;
+    return;
   }
 
   Live.find({
@@ -265,14 +268,33 @@ router.post("/lives/search", (req, res, next) => {
   })
     .sort({ data: 1 })
     .then((lives) => {
-      let buscado = "Buscado";
-      res.render("live/lives", {
-        lives,
-        genreArr,
-        user: req.user,
-        buscado,
-        name,
-      });
+      console.log("foi removido:", genre)
+      if (!Array.isArray(genre)) {
+        genreArr = genreArr.filter((elem) => !genre.includes(elem));
+        let buscado = "Buscado";
+        res.render("live/lives", {
+          data,
+          genreOne: genre,
+          lives,
+          genreArr,
+          user: req.user,
+          buscado,
+          name,
+        });
+        return;
+      } else {
+        genreArr = genreArr.filter((elem) => !genre.includes(elem));
+        let buscado = "Buscado";
+        res.render("live/lives", {
+          data,
+          genre,
+          lives,
+          genreArr,
+          user: req.user,
+          buscado,
+          name,
+        });
+      }
     })
     .catch((error) => console.log(error));
 });
