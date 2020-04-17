@@ -2,30 +2,40 @@
 
     <h1>Adicione uma live</h1>
     <form action="/add-live" method="POST" enctype="multipart/form-data">
-
-        <label for="name">Artista: </label>
-        <input type="text" name="name">
-
-        <label for="genre">Estilo musical: </label>
-        {{#each genreArr}}
-        <input type="checkbox" value="{{this}}" name="genre">
-        <label for="{{this}}">{{this}}</label>
-        {{/each}}
-
-        <label for="data">Data: </label>
-        <input type="date" name="data" min="2020-04-17">
-
-        <label for="time">Horario: </label>
-        <input type="time" name="time">
-
-        <label for="link">Link para a live: </label>
-        <input type="text" name="link">
-
-        <label for="imgPath">Imagem: </label>
-        <input type="file" name="imgPath">
-
-        <button type="submit">Adicionar live</button>
-
+        <div>
+            <label for="name">Artista: </label>
+            <input type="text" name="name">
+        </div>
+        <div>
+            <label for="genre">Estilo musical: </label>
+            {{#each genreArr}}
+            <input type="checkbox" value="{{this}}" name="genre">
+            <label for="{{this}}">{{this}}</label>
+            {{/each}}
+        </div>
+        <div>
+            <label for="data">Data: </label>
+            <input type="date" name="data" min="2020-04-17">            
+        </div>
+        <div>
+            <label for="time">Horario: </label>
+            <input type="time" name="time">
+        </div>
+        <div>
+            <label for="link">Link para a live: </label>
+            <input type="text" name="link">
+        </div>
+        <div>
+            <label for="imgPath">Imagem: </label>
+            <input type="file" name="imgPath">            
+        </div>
+    <br>
+        <div>
+            <button type="submit">Adicionar live</button>
+        </div>
+        <br>
+        <div>
+            <button><a href="/lives">Voltar</a></button>
+        </div>
     </form>
-        <button><a href="/lives">Voltar</a></button>
 </div>

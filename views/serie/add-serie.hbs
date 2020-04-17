@@ -1,22 +1,39 @@
 <div class="main-box">
     <h1>Adicione uma serie</h1>
     <form action="/add-serie" method="POST" enctype="multipart/form-data">
+    <div>
         <label for="name">Titulo: </label>
         <input type="text" name="name">
+    </div>
+    <div style="max-width: 80vw;">
         <label for="genre">Genero: </label>
-        {{#each genreArr}}
-        <input type="checkbox" value="{{this}}" name="genre">
-        <label for="{{this}}">{{this}}</label>
-        {{/each}}
+        {{!-- <div class="col-6 col-md-4"> --}}
+            {{#each genreArr}}
+            <input type="checkbox" value="{{this}}" name="genre">
+            <label for="{{this}}">{{this}}</label>
+            {{/each}}
+
+        {{!-- </div> --}}
+    </div>
+    <div>
         <label for="rating">Cotação: </label>
         <input type="number" name="rating">
+    </div>
+    <div>
         <label for="resume">Sinopse: </label>
         <input type="text" name="resume">
-
+    </div>
+    <div>
         <label for="imgPath">Imagem: </label>
         <input type="file" name="imgPath">
-
+    </div>
+    <br>
+    <div>
         <button type="submit">Adicionar</button>
+    </div>
+    <br>
+    <div>
+        <button> <a href="/series">Voltar</a></button>
+    </div>
     </form>
-    <button><a href="/series">Voltar</a></button>
 </div>
