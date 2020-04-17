@@ -4,7 +4,6 @@ const router = express.Router();
 
 const uploadCloud = require('../config/cloudinary.js');
 const multer = require('multer');
-// const upload = multer({ dest: "../public/uploads/" });
 const cloudinary = require('cloudinary');
 const cloudinaryStorage = require('multer-storage-cloudinary');
 

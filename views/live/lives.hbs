@@ -11,8 +11,16 @@
         <input type="text" name="name" placeholder="Coloque o nome do artista">
         {{/if}}
         <label for="data">Data: </label>
-        <input type="date" name="data">
+        <input type="date" name="data" value={{data}}>
         <label for="genre">Estilo musical: </label>
+        {{#with genreOne}}
+        <input type="checkbox" value="{{this}}" name="genre" checked>
+        <label for="{{this}}">{{this}}</label>
+        {{/with}}
+        {{#each genre}}
+        <input type="checkbox" value="{{this}}" name="genre" checked>
+        <label for="{{this}}">{{this}}</label>
+        {{/each}}
         {{#each genreArr}}
         <input type="checkbox" value="{{this}}" name="genre">
         <label for="{{this}}">{{this}}</label>
