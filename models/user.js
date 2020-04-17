@@ -22,7 +22,7 @@ const userSchema = new Schema({
     enum: ['GUEST', 'ADMIN'],
     default: 'GUEST'
   },
-  imgPath: String,
+  imgPath: {type: String },
   email: String
 }, {
   timestamps: true

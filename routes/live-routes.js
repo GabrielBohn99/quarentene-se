@@ -126,26 +126,15 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgPa
     link = "http://" + link;
   }
   
-  // if(req.file){
-    const imgPath = req.file.url;
-    const imgName = req.file.originalname;
+  const imgPath = req.file.url;
+  const imgName = req.file.originalname;
 
-    Live.create({ name, data, genre, link, time, owner: req.user._id, imgPath, imgName })
-    .then((response) => {
-      console.log('CRIADO COM IMG', response)
-      res.redirect("/lives");
-    })
-    .catch((error) => console.log(error));
-  // } else {
-      // Live.create({ name, data, genre, link, time, owner: req.user._id })
-      //   .then((response) => {
-      //     console.log(response)
-      //     res.redirect("/lives");
-      //   })
-      //   .catch((error) => console.log(error));
-        
-      // }
-    });
+  Live.create({ name, data, genre, link, time, owner: req.user._id, imgPath, imgName })
+  .then((response) => {
+    res.redirect("/lives");
+  })
+  .catch((error) => console.log(error));
+  });
       
 
 // EDIT LIVE ROUTES
