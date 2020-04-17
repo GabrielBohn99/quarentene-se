@@ -4,7 +4,7 @@
         {{#with receita}}
         <button><a href="/receita/{{_id}}">Voltar</a></button>
 
-        <form action="/editar-receita/{{_id}}" method="POST">
+        <form action="/editar-receita/{{_id}}" method="POST" enctype="multipart/form-data">
         <label for="name">Nome: </label>
         <input type="text" name="name" value="{{name}}">
         <label for="category">Categoria: </label>

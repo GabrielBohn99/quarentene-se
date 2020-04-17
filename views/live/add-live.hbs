@@ -2,16 +2,18 @@
 
     <h1>Adicione uma live</h1>
     <form action="/add-live" method="POST">
+
         <label for="name">Artista: </label>
         <input type="text" name="name">
+
         <label for="genre">Estilo musical: </label>
-        
         {{#each genreArr}}
         <input type="checkbox" value="{{this}}" name="genre">
         <label for="{{this}}">{{this}}</label>
         {{/each}}
+
         <label for="data">Data: </label>
-        <input type="date" name="data" min="2020-04-01">
+        <input type="date" name="data" min="2020-04-17">
 
         <label for="time">Horario: </label>
         <input type="time" name="time">
@@ -20,7 +22,7 @@
         <input type="text" name="link">
 
         <button type="submit">Adicionar live</button>
-        <button><a href="/lives">Voltar</a></button>
 
     </form>
+        <button><a href="/lives">Voltar</a></button>
 </div>

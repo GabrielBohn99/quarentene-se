@@ -5,7 +5,7 @@
     {{#with live}}
         <button><a href="/live/{{_id}}">Voltar</a></button>
 
-        <form action="/editar-live/{{_id}}" method="post">
+        <form action="/editar-live/{{_id}}" method="post" enctype="multipart/form-data">
 
         <label for="name">Artista: </label>
         <input type="text" name="name" value="{{name}}">

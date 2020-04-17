@@ -2,22 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Serie = require("../models/serie");
 const ensureLogin = require("connect-ensure-login");
+const multer = require('multer');
 
-// ROLES control
-
-const checkRoles = (role) => {
-  return (req, res, next) => {
-    if (req.isAuthenticated() && req.user.role === role) {
-      return next();
-    } else {
-      req.logout();
-      res.redirect("/login");
-    }
-  };
+String.prototype.capitalize = function () {
+  return this.replace(/(?:^|\s)\S/g, function (a) {
+    return a.toUpperCase();
+  });
 };
-
-const checkGuest = checkRoles("GUEST");
-const checkAdmin = checkRoles("ADMIN");
 
 // Series routes
 router.get("/series", (req, res, next) => {
@@ -121,7 +112,11 @@ router.get("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 router.post("/add-serie", (req, res, next) => {
   // ensureLogin.ensureLoggedIn(),
-  const { name, resume, rating, genre } = req.body;
+  const { rating, genre } = req.body;
+
+  let {name, resume} =req.body;
+  name = name.capitalize();
+  resume = resume.capitalize();
 
   Serie.create({ name, resume, rating, genre, owner: req.user._id })
     .then((response) => {
@@ -168,7 +163,11 @@ router.get("/editar-serie/:serieId", (req, res, next) => {
 });
 
 router.post("/editar-serie/:serieId", (req, res, next) => {
-  const { name, rating, resume, genre } = req.body;
+  const { rating, genre } = req.body;
+
+  let {name, resume} =req.body;
+  name = name.capitalize();
+  resume = resume.capitalize();
 
   const { serieId } = req.params;
 
