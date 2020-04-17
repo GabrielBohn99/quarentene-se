@@ -2,8 +2,15 @@ const express = require("express");
 const router = express.Router();
 const Serie = require("../models/serie");
 const ensureLogin = require("connect-ensure-login");
+const uploadCloud = require('../config/cloudinary.js');
 const multer = require('multer');
+const upload = multer({ dest: "../public/uploads/" });
+const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
 
+
+
+// capitalize words function
 String.prototype.capitalize = function () {
   return this.replace(/(?:^|\s)\S/g, function (a) {
     return a.toUpperCase();
@@ -110,7 +117,7 @@ router.get("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render("serie/add-serie", { user: req.user, genreArr });
 });
 
-router.post("/add-serie", (req, res, next) => {
+router.post("/add-serie", uploadCloud.single("imgPath"), (req, res, next) => {
   // ensureLogin.ensureLoggedIn(),
   const { rating, genre } = req.body;
 
@@ -118,7 +125,10 @@ router.post("/add-serie", (req, res, next) => {
   name = name.capitalize();
   resume = resume.capitalize();
 
-  Serie.create({ name, resume, rating, genre, owner: req.user._id })
+  const imgPath = req.file.url;
+  const imgName = req.file.originalname;
+
+  Serie.create({ name, resume, rating, genre, owner: req.user._id, imgPath, imgName })
     .then((response) => {
       console.log(response);
       res.redirect("/series");
@@ -162,15 +172,39 @@ router.get("/editar-serie/:serieId", (req, res, next) => {
     .catch((error) => console.log(error));
 });
 
-router.post("/editar-serie/:serieId", (req, res, next) => {
-  const { rating, genre } = req.body;
+router.post("/editar-serie/:serieId", uploadCloud.single("imgPath"), (req, res, next) => {
+  const { rating, genre, name, resume } = req.body;
 
-  let {name, resume} =req.body;
-  name = name.capitalize();
-  resume = resume.capitalize();
-
+  // let {name, resume} = req.body;
+  // name = name.capitalize();
+  // resume = resume.capitalize();
+  
   const { serieId } = req.params;
+  
+  if (req.file){
+    const imgPath = req.file.url;
+    const imgName = req.file.originalname;
 
+    Serie.findByIdAndUpdate(
+      serieId,
+      {
+        $set: {
+          name,
+          rating,
+          resume,
+          genre,
+          imgPath,
+          imgName
+        },
+      },
+      { new: true }
+    )
+      .then((response) => {
+        console.log(response);
+        res.redirect(`/serie/${serieId}`);
+      })
+      .catch((error) => console.log(error));
+  }
   Serie.findByIdAndUpdate(
     serieId,
     {
@@ -189,6 +223,9 @@ router.post("/editar-serie/:serieId", (req, res, next) => {
     })
     .catch((error) => console.log(error));
 });
+
+  // console.log(imgPath)
+  
 
 // DELETE ROUTES
 router.get("/delete-serie/:serieId", (req, res, next) => {
