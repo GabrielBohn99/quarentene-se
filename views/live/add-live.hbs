@@ -1,7 +1,7 @@
 <div class="main-box">
 
     <h1>Adicione uma live</h1>
-    <form action="/add-live" method="POST">
+    <form action="/add-live" method="POST" enctype="multipart/form-data">
 
         <label for="name">Artista: </label>
         <input type="text" name="name">
@@ -20,6 +20,9 @@
 
         <label for="link">Link para a live: </label>
         <input type="text" name="link">
+
+        <label for="imgPath">Imagem: </label>
+        <input type="file" name="imgPath">
 
         <button type="submit">Adicionar live</button>
 

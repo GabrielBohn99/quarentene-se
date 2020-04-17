@@ -24,9 +24,7 @@
     </form>
     {{#each lives}}
     <div>
-        {{#if imgPath}}
-        <img src="{{imgPath}}" alt="{{imgName}}">
-        {{/if}}
+        <img class="live-box" src="{{imgPath}}" alt="{{imgName}}">
         <h2>{{name}}</h2>
         <p>{{genre}}</p>
         <h3>{{data}}</h3>

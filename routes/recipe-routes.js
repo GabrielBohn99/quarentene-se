@@ -2,7 +2,11 @@ const express = require("express");
 const router = express.Router();
 const Recipe = require("../models/recipe");
 const ensureLogin = require("connect-ensure-login");
+
+const uploadCloud = require('../config/cloudinary.js');
 const multer = require('multer');
+const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
 
 String.prototype.capitalize = function () {
   return this.replace(/(?:^|\s)\S/g, function (a) {
@@ -72,14 +76,17 @@ router.get("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render("recipes/add-recipe", { user: req.user });
 });
 
-router.post("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.post("/add-receita", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgPath"), (req, res, next) => {
   const { duration, category, level } = req.body;
 
   let {name, prepare} = req.body;
   name = name.capitalize();
   prepare = prepare.capitalize();
 
-  Recipe.create({ name, duration, category, prepare, level, owner: req.user._id, })
+  const imgPath = req.file.url;
+  const imgName = req.file.originalname;
+
+  Recipe.create({ name, duration, category, prepare, level, owner: req.user._id, imgPath, imgName })
     .then((response) => {
       res.redirect("/receitas");
     })
@@ -106,7 +113,7 @@ router.get("/editar-receita/:receitaId", (req, res, next) => {
     .catch(error => console.log(error))
 });
 
-router.post('/editar-receita/:receitaId', (req, res, next) => {
+router.post('/editar-receita/:receitaId', uploadCloud.single("imgPath"), (req, res, next) => {
   const {
     duration,
     category,
@@ -121,6 +128,28 @@ router.post('/editar-receita/:receitaId', (req, res, next) => {
     receitaId
   } = req.params;
 
+  if (req.file){
+    const imgPath = req.file.url;
+    const imgName = req.file.originalname;
+
+    Recipe.findByIdAndUpdate(receitaId, {
+      $set: {
+        name,
+        duration,
+        category,
+        prepare,
+        level,
+        imgPath,
+        imgName
+      }
+    }, { new: true }
+    )
+    .then(response => {
+      console.log(response);
+      res.redirect(`/receita/${receitaId}`)
+    })
+    .catch(error => console.log(error))
+  }
   Recipe.findByIdAndUpdate(receitaId, {
     $set: {
       name,
