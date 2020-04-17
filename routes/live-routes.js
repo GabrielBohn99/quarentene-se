@@ -3,6 +3,12 @@ const router = express.Router();
 const Live = require("../models/live");
 const ensureLogin = require("connect-ensure-login");
 
+const uploadCloud = require('../config/cloudinary.js');
+const multer = require('multer');
+const cloudinary = require('cloudinary');
+// const cloudinaryStorage = require('multer-storage-cloudinary');
+
+// capitalize words function
 String.prototype.capitalize = function () {
   return this.replace(/(?:^|\s)\S/g, function (a) {
     return a.toUpperCase();
@@ -111,23 +117,36 @@ router.get("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render("live/add-live", { user: req.user, genreArr });
 });
 
-router.post("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.post("/add-live", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgPath"), (req, res, next) => {
   const { genre } = req.body;
   let { name, link, data, time } = req.body;
+  name = name.capitalize();
 
   if (link && !link.includes("http://")) {
     link = "http://" + link;
-    // return;
   }
+  
+  // if(req.file){
+    const imgPath = req.file.url;
+    const imgName = req.file.originalname;
 
-  name = name.capitalize();
-
-  Live.create({ name, data, genre, link, time, owner: req.user._id })
+    Live.create({ name, data, genre, link, time, owner: req.user._id, imgPath, imgName })
     .then((response) => {
+      console.log('CRIADO COM IMG', response)
       res.redirect("/lives");
     })
     .catch((error) => console.log(error));
-});
+  // } else {
+      // Live.create({ name, data, genre, link, time, owner: req.user._id })
+      //   .then((response) => {
+      //     console.log(response)
+      //     res.redirect("/lives");
+      //   })
+      //   .catch((error) => console.log(error));
+        
+      // }
+    });
+      
 
 // EDIT LIVE ROUTES
 router.get(
@@ -169,7 +188,7 @@ router.get(
   }
 );
 
-router.post("/editar-live/:liveId", (req, res, next) => {
+router.post("/editar-live/:liveId", uploadCloud.single("imgPath"), (req, res, next) => {
   const { data, time, link, genre } = req.body;
 
   let { name } = req.body;
@@ -177,6 +196,30 @@ router.post("/editar-live/:liveId", (req, res, next) => {
 
   const { liveId } = req.params;
 
+  if (req.file){
+    const imgPath = req.file.url;
+    const imgName = req.file.originalname;
+    Live.findByIdAndUpdate(
+      liveId,
+      {
+        $set: {
+          name,
+          data,
+          time,
+          link,
+          genre,
+          imgPath,
+          imgName
+        },
+      },
+      { new: true }
+    )
+      .then((response) => {
+        console.log(response);
+        res.redirect(`/live/${liveId}`);
+      })
+      .catch((error) => console.log(error));
+  }
   Live.findByIdAndUpdate(
     liveId,
     {

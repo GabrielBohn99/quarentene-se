@@ -23,7 +23,6 @@ const userSchema = new Schema({
     default: 'GUEST'
   },
   imgPath: String,
-  imgName: String,
   email: String
 }, {
   timestamps: true

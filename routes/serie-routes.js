@@ -5,11 +5,8 @@ const ensureLogin = require("connect-ensure-login");
 
 const uploadCloud = require('../config/cloudinary.js');
 const multer = require('multer');
-// const upload = multer({ dest: "../public/uploads/" });
 const cloudinary = require('cloudinary');
-const cloudinaryStorage = require('multer-storage-cloudinary');
-
-
+// const cloudinaryStorage = require('multer-storage-cloudinary');
 
 // capitalize words function
 String.prototype.capitalize = function () {
@@ -118,10 +115,8 @@ router.get("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render("serie/add-serie", { user: req.user, genreArr });
 });
 
-router.post("/add-serie", uploadCloud.single("imgPath"), (req, res, next) => {
-  // ensureLogin.ensureLoggedIn(),
+router.post("/add-serie", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgPath"), (req, res, next) => {
   const { rating, genre } = req.body;
-
   let {name, resume} =req.body;
   name = name.capitalize();
   resume = resume.capitalize();

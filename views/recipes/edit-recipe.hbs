@@ -9,33 +9,36 @@
         <input type="text" name="name" value="{{name}}">
         <label for="category">Categoria: </label>
         <select name="category">
-            <option value="{{category}}">{{category}}</option>
+        <option value="{{category}}">{{category}}</option>
         {{/with}}
-            {{#each categoryArr}}
-            <option value="{{this}}">{{this}}</option>
-            {{/each}}
+        {{#each categoryArr}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
         </select>
         {{#with receita}}
         <label for="level">Nível de dificuldade: </label>
         <select name="level">
-            <option value={{level}}>{{level}}</option>
+        <option value={{level}}>{{level}}</option>
         {{/with}}
-            {{#each levelArr}}
-            <option value={{this}}>{{this}}</option>
-            {{/each}}
-            </select>
+        {{#each levelArr}}
+        <option value={{this}}>{{this}}</option>
+        {{/each}}
+        </select>
         {{#with receita}}
         <label for="duration">Tempo de preparo: </label>
         <select name="duration">
-            <option value="{{duration}}">{{duration}}</option>
+        <option value="{{duration}}">{{duration}}</option>
         {{/with}}
-            {{#each durationArr}}
-            <option value="{{this}}">{{this}}</option>
-            {{/each}}
+        {{#each durationArr}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
         </select>
         {{#with receita}}
         <label for="prepare">Modo de preparo: </label>
         <input type="text" name="prepare" value="{{prepare}}">
+
+        <label for="imgPath">Imagem: </label>
+        <input type="file" name="imgPath" value="{{imgPath}}">
         {{/with}}
         <button type="submit">Salvar edição</button>
     </form>
