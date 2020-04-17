@@ -12,18 +12,15 @@
 
     <button><a href="/series">Voltar</a></button>
 
-<button><a href="/series">Voltar</a></button>
-
-<h3>Qual a sua opinião?</h3>
-<form action="/serie-review/{{_id}}" method="POST">
-    <label for="review"></label>
-    <input type="text" name='comment' required>
-    <button type="submit">Adicionar review</button>
-</form>
-{{#each review}}
-    <h3>{{user}}</h3>
-    <p>{{comment}}</p>
-{{/each}}
-{{/with}}
-
-
+    <h3>Qual a sua opinião?</h3>
+    <form action="/serie-review/{{_id}}" method="POST">
+        <label for="review"></label>
+        <input type="text" name='comment' required>
+        <button type="submit">Adicionar review</button>
+    </form>
+    {{#each review}}
+        <h3>{{user}}</h3>
+        <p>{{comment}}</p>
+    {{/each}}
+    {{/with}}
+</div>
