@@ -22,6 +22,8 @@ const userSchema = new Schema({
     enum: ['GUEST', 'ADMIN'],
     default: 'GUEST'
   },
+  imgPath: String,
+  imgName: String,
   email: String
 }, {
   timestamps: true

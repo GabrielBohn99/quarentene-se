@@ -4,7 +4,7 @@
 
     {{#with serie}}
         <button><a href="/serie/{{_id}}">Voltar</a></button>
-        <form action="/editar-serie/{{_id}}" method="post">
+        <form action="/editar-serie/{{_id}}" method="post" enctype="multipart/form-data">
 
         <label for="name">Título: </label>
         <input type="text" name="name" value="{{name}}">
