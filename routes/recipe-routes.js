@@ -4,22 +4,11 @@ const Recipe = require("../models/recipe");
 const ensureLogin = require("connect-ensure-login");
 const multer = require('multer');
 
-
-// ROLES control
-
-const checkRoles = (role) => {
-  return (req, res, next) => {
-    if (req.isAuthenticated() && req.user.role === role) {
-      return next();
-    } else {
-      req.logout();
-      res.redirect('/login')
-    }
-  }
-}
-
-const checkGuest = checkRoles('GUEST');
-const checkAdmin = checkRoles('ADMIN');
+String.prototype.capitalize = function () {
+  return this.replace(/(?:^|\s)\S/g, function (a) {
+    return a.toUpperCase();
+  });
+};
 
 // RECIPES ROUTES
 
@@ -84,7 +73,11 @@ router.get("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 router.post("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  const { name, duration, category, prepare, level } = req.body;
+  const { duration, category, level } = req.body;
+
+  let {name, prepare} = req.body;
+  name = name.capitalize();
+  prepare = prepare.capitalize();
 
   Recipe.create({ name, duration, category, prepare, level, owner: req.user._id, })
     .then((response) => {
@@ -115,12 +108,14 @@ router.get("/editar-receita/:receitaId", (req, res, next) => {
 
 router.post('/editar-receita/:receitaId', (req, res, next) => {
   const {
-    name,
     duration,
     category,
-    prepare,
     level
   } = req.body;
+
+  let {name, prepare} = req.body;
+  name = name.capitalize();
+  prepare = prepare.capitalize();
 
   const {
     receitaId
