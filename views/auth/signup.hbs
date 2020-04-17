@@ -10,5 +10,8 @@
         <label for="imgPath">Foto de perfil: </label>
         <input type="file" name="imgPath">
         <button type="submit">Sign Up</button>
+        {{#if message}}
+        <div>{{message}}</div>
+        {{/if}}
     </form>
 </div>
