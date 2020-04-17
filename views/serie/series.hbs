@@ -2,6 +2,7 @@
     <h1>Series</h1>
     <button><a href="/add-serie">Adicionar serie</a></button> <br><br>
 
+{{!-- SEARCH FORM --}}
     <form action="/series/search" method="post">
         {{#if search}}
         <label for="search">Pesquisar: </label>
@@ -24,17 +25,23 @@
         {{/if}}
     </form>
 
+{{!-- SERIES LIST --}}
+<div class="row">
     {{#each series}}
-    <div class="serie-box">
-        <div>
-            <img class="serie-img" src="{{imgPath}}" alt="{{imgName}}">
+    <div class="card m-2" style="width: 18rem; height: 28rem;">
+        <img class="card-img-top" style="max-height: 16rem;" src="{{imgPath}}" alt="Serie IMG">
+        <div class="card-body">
+            <h5 class="card-title">{{name}}</h5>
+            <p class="card-text">Gênero: {{genre}}</p>
+            <p class="card-text">Nota: {{rating}}</p>
+
+            <a href="/serie/{{_id}}" class="btn btn-primary">Saiba mais</a>
         </div>
-        <h2>{{name}}</h2>
-        <p>Gênero: {{genre}}</p>
-        <p>Nota: {{rating}}</p>
-        <a href="/serie/{{_id}}">Saiba mais</a>
-        <hr>
     </div>
     {{/each}}
 
 </div>
+
+</div>
+
+
