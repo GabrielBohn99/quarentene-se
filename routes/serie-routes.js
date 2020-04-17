@@ -173,11 +173,11 @@ router.get("/editar-serie/:serieId", (req, res, next) => {
 });
 
 router.post("/editar-serie/:serieId", uploadCloud.single("imgPath"), (req, res, next) => {
-  const { rating, genre, name, resume } = req.body;
+  const { rating, genre } = req.body;
 
-  // let {name, resume} = req.body;
-  // name = name.capitalize();
-  // resume = resume.capitalize();
+  let {name, resume} = req.body;
+  name = name.capitalize();
+  resume = resume.capitalize();
   
   const { serieId } = req.params;
   
