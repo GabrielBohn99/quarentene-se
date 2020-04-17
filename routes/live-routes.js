@@ -273,7 +273,7 @@ router.post("/lives/search", (req, res, next) => {
   ];
   console.log(genre);
   genreArr.sort();
-  if (genre) {
+  if (!genre) {
     Live.find({
       data: { $regex: data, $options: "i" },
       name: { $regex: name, $options: "i" },
