@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Serie = require("../models/serie");
 const ensureLogin = require("connect-ensure-login");
+
 const uploadCloud = require('../config/cloudinary.js');
 const multer = require('multer');
-const upload = multer({ dest: "../public/uploads/" });
+// const upload = multer({ dest: "../public/uploads/" });
 const cloudinary = require('cloudinary');
 const cloudinaryStorage = require('multer-storage-cloudinary');
 

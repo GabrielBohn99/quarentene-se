@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-const upload = multer({ dest: "../public/uploads/" });
+
+
+const uploadCloud = require('../config/cloudinary.js');
+const multer = require('multer');
+// const upload = multer({ dest: "../public/uploads/" });
+const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
 
 const User = require("../models/user");
 
@@ -17,7 +22,7 @@ router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-router.post("/signup", upload.single("imgPath"), (req, res, next) => {
+router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
   const { username, email, password } = req.body;
   const characters =
     "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -46,7 +51,7 @@ router.post("/signup", upload.single("imgPath"), (req, res, next) => {
         password: hashPass,
         email,
         confirmationCode,
-        imgPath: `uploads${req.file.url}`,
+        imgPath: req.file.url,
         imgName: req.file.originalname,
       });
     }
