@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Live = require("../models/live");
 const ensureLogin = require("connect-ensure-login");
+const multer = require('multer');
 
 // ROLES control
 
