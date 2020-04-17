@@ -4,10 +4,17 @@
 }
 body {
     height: 100vh;
-    width: 100vw;
+    max-width: 90vw;
     font-family: 'Cuprum', sans-serif;
     letter-spacing: .08rem;
+
+
 }
+/* .outer-box {
+    top: 0;
+    margin: 0;
+    background-color: rgba(253,97,76,0.6);
+} */
 
 .main-box {
     margin: 10vh 3vw;
