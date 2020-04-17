@@ -2,23 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Live = require("../models/live");
 const ensureLogin = require("connect-ensure-login");
-const multer = require('multer');
 
-// ROLES control
-
-const checkRoles = (role) => {
-  return (req, res, next) => {
-    if (req.isAuthenticated() && req.user.role === role) {
-      return next();
-    } else {
-      req.logout();
-      res.redirect("/login");
-    }
-  };
+String.prototype.capitalize = function () {
+  return this.replace(/(?:^|\s)\S/g, function (a) {
+    return a.toUpperCase();
+  });
 };
-
-const checkGuest = checkRoles("GUEST");
-const checkAdmin = checkRoles("ADMIN");
 
 // LIVE ROUTES
 router.get("/lives", (req, res, next) => {
@@ -62,10 +51,10 @@ router.get("/live/:id", (req, res, next) => {
     .populate("owner")
     .then((live) => {
       if (
-        live.owner &&
-        req.user &&
-        live.owner._id.toString() === req.user._id.toString() ||
-        req.isAuthenticated() && req.user.role === "ADMIN"
+        (live.owner &&
+          req.user &&
+          live.owner._id.toString() === req.user._id.toString()) ||
+        (req.isAuthenticated() && req.user.role === "ADMIN")
       ) {
         live.isOwner = true;
       }
@@ -123,12 +112,16 @@ router.get("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 router.post("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  const { name, genre } = req.body;
-  let { link, data, time } = req.body;
-  if (!link.includes("http://")) {
+  const { genre } = req.body;
+  let { name, link, data, time } = req.body;
+
+  if (link && !link.includes("http://")) {
     link = "http://" + link;
     // return;
   }
+
+  name = name.capitalize();
+
   Live.create({ name, data, genre, link, time, owner: req.user._id })
     .then((response) => {
       res.redirect("/lives");
@@ -137,45 +130,50 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 // EDIT LIVE ROUTES
-router.get("/editar-live/:liveId", (req, res, next) => {
-  // ensureLogin.ensureLoggedIn(), checkAdmin,
+router.get(
+  "/editar-live/:liveId",
+  ensureLogin.ensureLoggedIn(),
+  (req, res, next) => {
+    const { liveId } = req.params;
+    let genreArr = [
+      "Sertanejo",
+      "Blues",
+      "Axé",
+      "Rock",
+      "Country",
+      "MPB",
+      "Forró",
+      "Funk",
+      "Pop",
+      "Eletrônico",
+      "Hip Hop",
+      "Gospel",
+      "Indie",
+      "Folk",
+      "Pagode",
+      "Rap",
+      "Jazz",
+      "Música Clássica",
+      "Metal",
+      "Samba",
+      "Reggae",
+    ];
+    genreArr.sort();
 
-  const { liveId } = req.params;
-  let genreArr = [
-    "Sertanejo",
-    "Blues",
-    "Axé",
-    "Rock",
-    "Country",
-    "MPB",
-    "Forró",
-    "Funk",
-    "Pop",
-    "Eletrônico",
-    "Hip Hop",
-    "Gospel",
-    "Indie",
-    "Folk",
-    "Pagode",
-    "Rap",
-    "Jazz",
-    "Música Clássica",
-    "Metal",
-    "Samba",
-    "Reggae",
-  ];
-  genreArr.sort();
-
-  Live.findById(liveId)
-    .then((live) => {
-      genreArr = genreArr.filter((elem) => !live.genre.includes(elem));
-      res.render("live/edit-live", { live, user: req.user, genreArr });
-    })
-    .catch((error) => console.log(error));
-});
+    Live.findById(liveId)
+      .then((live) => {
+        genreArr = genreArr.filter((elem) => !live.genre.includes(elem));
+        res.render("live/edit-live", { live, user: req.user, genreArr });
+      })
+      .catch((error) => console.log(error));
+  }
+);
 
 router.post("/editar-live/:liveId", (req, res, next) => {
-  const { name, data, time, link, genre } = req.body;
+  const { data, time, link, genre } = req.body;
+
+  let { name } = req.body;
+  name = name.capitalize();
 
   const { liveId } = req.params;
 

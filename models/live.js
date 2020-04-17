@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const liveSchema = new Schema({
-  name: { type: String, required: true },
-  data: { type: String, required: true },
-  time: { type: String, required: true },
+  name: { type: String },
+  data: { type: String },
+  time: { type: String },
   genre: { type: [String] },
-  link: { type: String, required: true },
+  link: { type: String },
   imgPath: String,
   imgName: String,
   review: [
