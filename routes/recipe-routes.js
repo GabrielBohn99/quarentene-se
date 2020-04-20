@@ -15,7 +15,7 @@ String.prototype.capitalize = function () {
 
 
 String.prototype.breakLine = function() {
-  return this.replace(/\r?\n/g, '<br/>')
+  return this.replace(/\r?\n/g, '<br>')
 }
 
 // Checking role
@@ -130,8 +130,8 @@ router.post("/add-receita", ensureLogin.ensureLoggedIn(), uploadCloud.single("im
 );
 
 // EDIT RECIPE
-router.get("/editar-receita/:receitaId", (req, res, next) => {
-  // ensureLogin.ensureLoggedIn(), checkAdmin,
+router.get("/editar-receita/:receitaId", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+
   const { receitaId } = req.params;
   let levelArr = ["Fácil", "Médio", "Avançado"];
   let durationArr = ["10min - 30min", "30min - 60min", "mais de 60min"];
@@ -140,7 +140,7 @@ router.get("/editar-receita/:receitaId", (req, res, next) => {
   Recipe
     .findById(receitaId)
     .then(receita => {
-      receita.prepare = receita.prepare.breakLine();
+      console.log(receita.prepare)
       levelArr.splice(levelArr.indexOf(receita.level), 1);
       durationArr.splice(durationArr.indexOf(receita.duration), 1);
       categoryArr.splice(categoryArr.indexOf(receita.category), 1);
