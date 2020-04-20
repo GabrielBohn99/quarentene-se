@@ -7,6 +7,7 @@ const recipeSchema = new Schema({
   category: { type: String },
   duration: { type: String },
   level: { type: String },
+  imgPath: String,
 
   review: [
     {

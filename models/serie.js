@@ -6,6 +6,7 @@ const serieSchema = new Schema({
   rating: { type: [Number] },
   genre: { type: [String] },
   resume: { type: String },
+  imgPath: String,
 
   review: [
     {

@@ -129,7 +129,7 @@ router.post(
       imgPath = req.file.url;
     } else {
       imgPath =
-        "https://res.cloudinary.com/juliajforesti/image/upload/v1587155241/quarentene-se/smile_il469c.png";
+        "https://res.cloudinary.com/juliajforesti/image/upload/v1587393449/quarentene-se/popcorn_qvsl23.png";
     }
 
     Serie.create({

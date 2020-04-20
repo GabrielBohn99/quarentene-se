@@ -132,7 +132,7 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgPa
       imgPath = req.file.url;
     } else {
       imgPath =
-        "https://res.cloudinary.com/juliajforesti/image/upload/v1587155241/quarentene-se/smile_il469c.png";
+        "https://res.cloudinary.com/juliajforesti/image/upload/v1587393669/quarentene-se/music_wdkli2.png";
     }
 
   Live.create({ name, data, genre, link, time, owner: req.user._id, imgPath})
