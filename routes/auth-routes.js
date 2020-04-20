@@ -5,7 +5,6 @@ const router = express.Router();
 const uploadCloud = require('../config/cloudinary.js');
 const multer = require('multer');
 const cloudinary = require('cloudinary');
-const cloudinaryStorage = require('multer-storage-cloudinary');
 
 const User = require("../models/user");
 
@@ -37,7 +36,7 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
     return;
   }
 
-  User.findOne({ username }).then((user) => {
+  User.findOne({ $or: [{username}, {email}] }).then((user) => {
     if (user !== null) {
       res.render("auth/signup", { message: "The username already exists" });
       return;

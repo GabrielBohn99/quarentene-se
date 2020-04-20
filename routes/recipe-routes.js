@@ -6,7 +6,6 @@ const ensureLogin = require("connect-ensure-login");
 const uploadCloud = require('../config/cloudinary.js');
 const multer = require('multer');
 const cloudinary = require('cloudinary');
-const cloudinaryStorage = require('multer-storage-cloudinary');
 
 String.prototype.capitalize = function () {
   return this.replace(/(?:^|\s)\S/g, function (a) {
@@ -81,7 +80,6 @@ router.post("/add-receita", ensureLogin.ensureLoggedIn(), uploadCloud.single("im
 
   let {name, prepare} = req.body;
   name = name.capitalize();
-  prepare = prepare.capitalize();
 
   const imgPath = req.file.url;
   const imgName = req.file.originalname;

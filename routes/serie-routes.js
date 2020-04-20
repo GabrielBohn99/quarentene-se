@@ -6,7 +6,6 @@ const ensureLogin = require("connect-ensure-login");
 const uploadCloud = require('../config/cloudinary.js');
 const multer = require('multer');
 const cloudinary = require('cloudinary');
-// const cloudinaryStorage = require('multer-storage-cloudinary');
 
 // capitalize words function
 String.prototype.capitalize = function () {
@@ -119,7 +118,6 @@ router.post("/add-serie", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgP
   const { rating, genre } = req.body;
   let {name, resume} =req.body;
   name = name.capitalize();
-  resume = resume.capitalize();
 
   const imgPath = req.file.url;
   const imgName = req.file.originalname;
@@ -133,7 +131,7 @@ router.post("/add-serie", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgP
 });
 
 // EDIT SERIE ROUTES
-router.get("/editar-serie/:serieId", (req, res, next) => {
+router.get("/editar-serie/:serieId", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   // ensureLogin.ensureLoggedIn(), checkAdmin
   const { serieId } = req.params;
   let genreArr = [
@@ -173,7 +171,6 @@ router.post("/editar-serie/:serieId", uploadCloud.single("imgPath"), (req, res, 
 
   let {name, resume} = req.body;
   name = name.capitalize();
-  resume = resume.capitalize();
   
   const { serieId } = req.params;
   
