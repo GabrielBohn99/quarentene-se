@@ -87,7 +87,7 @@ router.post("/add-receita", ensureLogin.ensureLoggedIn(), uploadCloud.single("im
       imgPath = req.file.url;
     } else {
       imgPath =
-        "https://res.cloudinary.com/juliajforesti/image/upload/v1587155241/quarentene-se/smile_il469c.png";
+        "https://res.cloudinary.com/juliajforesti/image/upload/v1587393449/quarentene-se/cook-icon_siyirz.png";
     }
 
   Recipe.create({ name, duration, category, prepare, level, owner: req.user._id, imgPath})
