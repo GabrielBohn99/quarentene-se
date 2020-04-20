@@ -137,9 +137,16 @@ router.get("/editar-receita/:receitaId", (req, res, next) => {
   let durationArr = ["10min - 30min", "30min - 60min", "mais de 60min"];
   let categoryArr = ["Salgado", "Doce", "Bebida"];
 
+<<<<<<< HEAD
+  Recipe
+    .findById(receitaId)
+    .then(receita => {
+      receita.prepare = receita.prepare.breakLine();
+=======
   Recipe.findById(receitaId)
     .then((receita) => {
       console.log(levelArr, durationArr, categoryArr);
+>>>>>>> f5e5c2aac39a7e94c681d80392ed19447407c112
       levelArr.splice(levelArr.indexOf(receita.level), 1);
       durationArr.splice(durationArr.indexOf(receita.duration), 1);
       categoryArr.splice(categoryArr.indexOf(receita.category), 1);
