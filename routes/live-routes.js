@@ -308,6 +308,7 @@ router.post("/lives/search", (req, res, next) => {
       .sort({ data: 1 })
       .then((lives) => {
         let buscado = "Buscado";
+        lives = lives.filter((item) => item.post);
         res.render("live/lives", {
           lives,
           genreArr,
@@ -331,6 +332,7 @@ router.post("/lives/search", (req, res, next) => {
       if (!Array.isArray(genre)) {
         genreArr = genreArr.filter((elem) => !genre.includes(elem));
         let buscado = "Buscado";
+        lives = lives.filter((item) => item.post);
         res.render("live/lives", {
           data,
           genreOne: genre,
@@ -344,6 +346,7 @@ router.post("/lives/search", (req, res, next) => {
       } else {
         genreArr = genreArr.filter((elem) => !genre.includes(elem));
         let buscado = "Buscado";
+        lives = lives.filter((item) => item.post);
         res.render("live/lives", {
           data,
           genre,
