@@ -304,6 +304,7 @@ router.post("/series/search", (req, res, next) => {
     })
       .sort({ rating: -1 })
       .then((series) => {
+        series = series.filter((item) => item.post);
         let buscado = "Buscado";
         res.render("serie/series", {
           series,
@@ -327,6 +328,7 @@ router.post("/series/search", (req, res, next) => {
       if (!Array.isArray(genre)) {
         genreArr = genreArr.filter((elem) => !genre.includes(elem));
         let buscado = "Buscado";
+        series = series.filter((item) => item.post);
         res.render("serie/series", {
           genreOne: genre,
           series,
@@ -340,6 +342,7 @@ router.post("/series/search", (req, res, next) => {
         genreArr = genreArr.filter((elem) => !genre.includes(elem));
         let buscado = "Buscado";
         console.log(genre);
+        series = series.filter((item) => item.post);
         res.render("serie/series", {
           genre,
           series,

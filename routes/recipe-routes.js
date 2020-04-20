@@ -257,6 +257,7 @@ router.post("/receitas/search", (req, res, next) => {
   })
     .then((receitas) => {
       let buscado = "Buscado";
+      receitas = receitas.filter((item) => item.post);
       res.render("recipes/recipes", {
         receitas,
         levelArr,
