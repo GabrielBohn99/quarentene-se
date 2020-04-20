@@ -8,7 +8,6 @@ const liveSchema = new Schema({
   genre: { type: [String] },
   link: { type: String },
   imgPath: String,
-  imgName: String,
   review: [
     {
       user: String,

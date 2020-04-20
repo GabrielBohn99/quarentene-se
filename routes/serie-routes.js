@@ -3,9 +3,9 @@ const router = express.Router();
 const Serie = require("../models/serie");
 const ensureLogin = require("connect-ensure-login");
 
-const uploadCloud = require('../config/cloudinary.js');
-const multer = require('multer');
-const cloudinary = require('cloudinary');
+const uploadCloud = require("../config/cloudinary.js");
+const multer = require("multer");
+const cloudinary = require("cloudinary");
 
 // capitalize words function
 String.prototype.capitalize = function () {
@@ -114,70 +114,115 @@ router.get("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render("serie/add-serie", { user: req.user, genreArr });
 });
 
-router.post("/add-serie", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgPath"), (req, res, next) => {
-  const { rating, genre } = req.body;
-  let {name, resume} =req.body;
-  name = name.capitalize();
+router.post(
+  "/add-serie",
+  ensureLogin.ensureLoggedIn(),
+  uploadCloud.single("imgPath"),
+  (req, res, next) => {
+    const { rating, genre } = req.body;
+    let { name, resume } = req.body;
+    name = name.capitalize();
 
-  const imgPath = req.file.url;
-  const imgName = req.file.originalname;
+    let imgPath = "";
 
-  Serie.create({ name, resume, rating, genre, owner: req.user._id, imgPath, imgName })
-    .then((response) => {
-      console.log(response);
-      res.redirect("/series");
+    if (req.file) {
+      imgPath = req.file.url;
+    } else {
+      imgPath =
+        "https://res.cloudinary.com/juliajforesti/image/upload/v1587155241/quarentene-se/smile_il469c.png";
+    }
+
+    Serie.create({
+      name,
+      resume,
+      rating,
+      genre,
+      owner: req.user._id,
+      imgPath,
     })
-    .catch((error) => console.log(error));
-});
+      .then((response) => {
+        console.log(response);
+        res.redirect("/series");
+      })
+      .catch((error) => console.log(error));
+  }
+);
 
 // EDIT SERIE ROUTES
-router.get("/editar-serie/:serieId", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  // ensureLogin.ensureLoggedIn(), checkAdmin
-  const { serieId } = req.params;
-  let genreArr = [
-    "Ação",
-    "Animação",
-    "Aventura",
-    "Comédia",
-    "Comédia romantica",
-    "Cult",
-    "Documentário",
-    "Drama",
-    "Espionagem",
-    "Erótico",
-    "Fansatia",
-    "Faroeste",
-    "Ficção científica",
-    "Série",
-    "Guerra",
-    "Musical",
-    "Policial",
-    "Romance",
-    "Suspense",
-    "Terror",
-    "Trash",
-  ];
+router.get(
+  "/editar-serie/:serieId",
+  ensureLogin.ensureLoggedIn(),
+  (req, res, next) => {
+    // ensureLogin.ensureLoggedIn(), checkAdmin
+    const { serieId } = req.params;
+    let genreArr = [
+      "Ação",
+      "Animação",
+      "Aventura",
+      "Comédia",
+      "Comédia romantica",
+      "Cult",
+      "Documentário",
+      "Drama",
+      "Espionagem",
+      "Erótico",
+      "Fansatia",
+      "Faroeste",
+      "Ficção científica",
+      "Série",
+      "Guerra",
+      "Musical",
+      "Policial",
+      "Romance",
+      "Suspense",
+      "Terror",
+      "Trash",
+    ];
 
-  Serie.findById(serieId)
-    .then((serie) => {
-      genreArr = genreArr.filter((elem) => !serie.genre.includes(elem));
-      res.render("serie/edit-serie", { serie, user: req.user, genreArr });
-    })
-    .catch((error) => console.log(error));
-});
+    Serie.findById(serieId)
+      .then((serie) => {
+        genreArr = genreArr.filter((elem) => !serie.genre.includes(elem));
+        res.render("serie/edit-serie", { serie, user: req.user, genreArr });
+      })
+      .catch((error) => console.log(error));
+  }
+);
 
-router.post("/editar-serie/:serieId", uploadCloud.single("imgPath"), (req, res, next) => {
-  const { rating, genre } = req.body;
+router.post(
+  "/editar-serie/:serieId",
+  uploadCloud.single("imgPath"),
+  (req, res, next) => {
+    const { rating, genre } = req.body;
 
-  let {name, resume} = req.body;
-  name = name.capitalize();
-  
-  const { serieId } = req.params;
-  
-  if (req.file){
-    const imgPath = req.file.url;
-    const imgName = req.file.originalname;
+    let { name, resume } = req.body;
+    name = name.capitalize();
 
+    const { serieId } = req.params;
+
+    if (req.file) {
+      const imgPath = req.file.url;
+      const imgName = req.file.originalname;
+
+      Serie.findByIdAndUpdate(
+        serieId,
+        {
+          $set: {
+            name,
+            rating,
+            resume,
+            genre,
+            imgPath,
+            imgName,
+          },
+        },
+        { new: true }
+      )
+        .then((response) => {
+          console.log(response);
+          res.redirect(`/serie/${serieId}`);
+        })
+        .catch((error) => console.log(error));
+    }
     Serie.findByIdAndUpdate(
       serieId,
       {
@@ -186,8 +231,6 @@ router.post("/editar-serie/:serieId", uploadCloud.single("imgPath"), (req, res, 
           rating,
           resume,
           genre,
-          imgPath,
-          imgName
         },
       },
       { new: true }
@@ -198,27 +241,9 @@ router.post("/editar-serie/:serieId", uploadCloud.single("imgPath"), (req, res, 
       })
       .catch((error) => console.log(error));
   }
-  Serie.findByIdAndUpdate(
-    serieId,
-    {
-      $set: {
-        name,
-        rating,
-        resume,
-        genre,
-      },
-    },
-    { new: true }
-  )
-    .then((response) => {
-      console.log(response);
-      res.redirect(`/serie/${serieId}`);
-    })
-    .catch((error) => console.log(error));
-});
+);
 
-  // console.log(imgPath)
-  
+// console.log(imgPath)
 
 // DELETE ROUTES
 router.get("/delete-serie/:serieId", (req, res, next) => {
@@ -285,7 +310,7 @@ router.post("/series/search", (req, res, next) => {
   })
     .sort({ rating: -1 })
     .then((series) => {
-      console.log("foi removido:", genre)
+      console.log("foi removido:", genre);
       if (!Array.isArray(genre)) {
         genreArr = genreArr.filter((elem) => !genre.includes(elem));
         let buscado = "Buscado";
@@ -301,7 +326,7 @@ router.post("/series/search", (req, res, next) => {
       } else {
         genreArr = genreArr.filter((elem) => !genre.includes(elem));
         let buscado = "Buscado";
-        console.log(genre)
+        console.log(genre);
         res.render("serie/series", {
           genre,
           series,

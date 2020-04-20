@@ -8,7 +8,6 @@ const recipeSchema = new Schema({
   duration: { type: String },
   level: { type: String },
   imgPath: String,
-  imgName: String,
   review: [
     {
       user: String,
