@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const ensureLogin = require("connect-ensure-login");
+const Serie = require("../models/serie");
+const Live = require("../models/live");
+const Recipe = require("../models/recipe");
 
-
-const uploadCloud = require('../config/cloudinary.js');
-const multer = require('multer');
-const cloudinary = require('cloudinary');
+const uploadCloud = require("../config/cloudinary.js");
+const multer = require("multer");
+const cloudinary = require("cloudinary");
 
 const User = require("../models/user");
 
@@ -14,6 +17,18 @@ const passport = require("passport");
 
 // nodemailer
 const nodemailer = require("nodemailer");
+
+// Checking role
+const checkRoles = (role) => {
+  return (req, res, next) => {
+    if (req.isAuthenticated() && req.user.role === role) {
+      return next();
+    } else {
+      req.logout();
+      res.redirect("/");
+    }
+  };
+};
 
 // Sign up route
 router.get("/signup", (req, res, next) => {
@@ -36,7 +51,7 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
     return;
   }
 
-  User.findOne({ $or: [{username}, {email}] }).then((user) => {
+  User.findOne({ $or: [{ username }, { email }] }).then((user) => {
     if (user !== null) {
       res.render("auth/signup", { message: "The username already exists" });
       return;
@@ -44,23 +59,24 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
-    
-    let imgPath = ''
 
-    if(req.file){
+    let imgPath = "";
+
+    if (req.file) {
       imgPath = req.file.url;
     } else {
-      imgPath = 'https://res.cloudinary.com/juliajforesti/image/upload/v1587155241/quarentene-se/smile_il469c.png'
+      imgPath =
+        "https://res.cloudinary.com/juliajforesti/image/upload/v1587155241/quarentene-se/smile_il469c.png";
     }
 
-      const newUser = new User({
-        username,
-        password: hashPass,
-        email,
-        confirmationCode,
-        imgPath,
-      })
-      newUser
+    const newUser = new User({
+      username,
+      password: hashPass,
+      email,
+      confirmationCode,
+      imgPath,
+    });
+    newUser
       .save()
       .then((user) => {
         console.log(user, "criado");
@@ -73,12 +89,13 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
             pass: process.env.GOOGLE_SENHA,
           },
         });
-        transport.sendMail({
-          from: `"Quarentene-se " <${process.env.GOOGLE_EMAIL}>`,
-          to: user.email, 
-          subject: 'Obrigado por se cadastrar no Quarentene-se', 
-          text: `https://quarentene-se.herokuapp.com/confirm/${user.confirmationCode}`,
-          html: `<link
+        transport
+          .sendMail({
+            from: `"Quarentene-se " <${process.env.GOOGLE_EMAIL}>`,
+            to: user.email,
+            subject: "Obrigado por se cadastrar no Quarentene-se",
+            text: `https://quarentene-se.herokuapp.com/confirm/${user.confirmationCode}`,
+            html: `<link
           href="https://fonts.googleapis.com/css?family=Cuprum&display=swap"
           rel="stylesheet"
           type="text/css"
@@ -414,14 +431,13 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
               </tr>
             </table></td>
           </tr>
-      </body>`
-        })
-        .then(info => {
-          console.log(info);
-          res.redirect("/login");
-          })  
-        .catch(error => console.log(error))
-        
+      </body>`,
+          })
+          .then((info) => {
+            console.log(info);
+            res.redirect("/login");
+          })
+          .catch((error) => console.log(error));
       })
       .catch((err) => {
         console.log(err);
@@ -431,6 +447,7 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
   });
 });
 
+// Confirmation code
 router.get("/confirm/:confirmCode", (req, res, next) => {
   const { confirmCode } = req.params;
 
@@ -441,7 +458,7 @@ router.get("/confirm/:confirmCode", (req, res, next) => {
   )
     .then((user) => {
       console.log(user);
-      res.redirect("/perfil" );
+      res.redirect("/perfil");
     })
     .catch((error) => console.log(error));
 });
@@ -467,6 +484,7 @@ router.get("/logout", (req, res) => {
   res.redirect("/login");
 });
 
+// Forgot password
 router.get("/esqueci-minha-senha", (req, res, next) => {
   res.render("auth/forgot");
 });
@@ -749,11 +767,38 @@ router.post("/trocar-senha/:id", (req, res, next) => {
 
   User.findByIdAndUpdate(id, { $set: { password: hashPass } }, { new: true })
     .then((novo) => {
-      console.log(novo)
+      console.log(novo);
       console.log("senha mudada");
       res.redirect("/login");
     })
     .catch((err) => console.log(err));
 });
+
+router.get(
+  "/admin",
+  ensureLogin.ensureLoggedIn(),
+  checkRoles("ADMIN"),
+  (req, res, next) => {
+    Serie.find()
+      .then((series) => {
+        series = series.filter((item) => !item.post);
+        Live.find()
+          .then((lives) => {
+            lives = lives.filter((item) => !item.post);
+            Recipe.find().then((receitas) => {
+              receitas = receitas.filter((item) => !item.post);
+              res.render("auth/admin", {
+                series,
+                receitas,
+                lives,
+                user: req.user,
+              });
+            });
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((error) => console.log(error));
+  }
+);
 
 module.exports = router;

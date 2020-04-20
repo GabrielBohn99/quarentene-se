@@ -3,9 +3,9 @@ const router = express.Router();
 const Recipe = require("../models/recipe");
 const ensureLogin = require("connect-ensure-login");
 
-const uploadCloud = require('../config/cloudinary.js');
-const multer = require('multer');
-const cloudinary = require('cloudinary');
+const uploadCloud = require("../config/cloudinary.js");
+const multer = require("multer");
+const cloudinary = require("cloudinary");
 
 String.prototype.capitalize = function () {
   return this.replace(/(?:^|\s)\S/g, function (a) {
@@ -13,9 +13,23 @@ String.prototype.capitalize = function () {
   });
 };
 
+
 String.prototype.breakLine = function() {
   return this.replace(/\r?\n/g, '<br/>')
 }
+
+// Checking role
+const checkRoles = (role) => {
+  return (req, res, next) => {
+    if (req.isAuthenticated() && req.user.role === role) {
+      return next();
+    } else {
+      req.logout();
+      res.redirect("/");
+    }
+  };
+};
+
 
 // RECIPES ROUTES
 
@@ -25,6 +39,7 @@ router.get("/receitas", (req, res, next) => {
       let levelArr = ["Fácil", "Médio", "Avançado"];
       let durationArr = ["10min - 30min", "30min - 60min", "mais de 60min"];
       let categoryArr = ["Salgado", "Doce", "Bebida"];
+      receitas = receitas.filter((item) => item.post);
       res.render("recipes/recipes", {
         receitas,
         user: req.user,
@@ -41,17 +56,17 @@ router.get("/receita/:id", (req, res, next) => {
   const { id } = req.params;
 
   Recipe.findById(id)
-  .populate("owner")
-  .then((receita) => {
-    if (
-      receita.owner &&
-      req.user &&
-      receita.owner._id.toString() === req.user._id.toString() ||
-      req.isAuthenticated() && req.user.role === "ADMIN"
-    ) {
-      receita.isOwner = true;
-    }
-    res.render("recipes/recipe-detail", { receita, user: req.user });
+    .populate("owner")
+    .then((receita) => {
+      if (
+        (receita.owner &&
+          req.user &&
+          receita.owner._id.toString() === req.user._id.toString()) ||
+        (req.isAuthenticated() && req.user.role === "ADMIN")
+      ) {
+        receita.isOwner = true;
+      }
+      res.render("recipes/recipe-detail", { receita, user: req.user });
     })
     .catch((error) => console.log(error));
 });
@@ -88,7 +103,8 @@ router.post("/add-receita", ensureLogin.ensureLoggedIn(), uploadCloud.single("im
   name = name.capitalize();
   prepare = prepare.breakLine();
 
-  let imgPath = "";
+
+    let imgPath = "";
 
     if (req.file) {
       imgPath = req.file.url;
@@ -97,12 +113,21 @@ router.post("/add-receita", ensureLogin.ensureLoggedIn(), uploadCloud.single("im
         "https://res.cloudinary.com/juliajforesti/image/upload/v1587393449/quarentene-se/cook-icon_siyirz.png";
     }
 
-  Recipe.create({ name, duration, category, prepare, level, owner: req.user._id, imgPath})
-    .then((response) => {
-      res.redirect("/receitas");
+    Recipe.create({
+      name,
+      duration,
+      category,
+      prepare,
+      level,
+      owner: req.user._id,
+      imgPath,
     })
-    .catch((error) => console.log(error));
-});
+      .then((response) => {
+        res.redirect("/receitas");
+      })
+      .catch((error) => console.log(error));
+  }
+);
 
 // EDIT RECIPE
 router.get("/editar-receita/:receitaId", (req, res, next) => {
@@ -112,84 +137,92 @@ router.get("/editar-receita/:receitaId", (req, res, next) => {
   let durationArr = ["10min - 30min", "30min - 60min", "mais de 60min"];
   let categoryArr = ["Salgado", "Doce", "Bebida"];
 
-  Recipe
-    .findById(receitaId)
-    .then(receita => {
-      console.log(levelArr, durationArr, categoryArr)
+  Recipe.findById(receitaId)
+    .then((receita) => {
+      console.log(levelArr, durationArr, categoryArr);
       levelArr.splice(levelArr.indexOf(receita.level), 1);
       durationArr.splice(durationArr.indexOf(receita.duration), 1);
       categoryArr.splice(categoryArr.indexOf(receita.category), 1);
-      res.render("recipes/edit-recipe", { receita, user: req.user, durationArr, categoryArr, levelArr });
+      res.render("recipes/edit-recipe", {
+        receita,
+        user: req.user,
+        durationArr,
+        categoryArr,
+        levelArr,
+      });
     })
-    .catch(error => console.log(error))
+    .catch((error) => console.log(error));
 });
 
-router.post('/editar-receita/:receitaId', uploadCloud.single("imgPath"), (req, res, next) => {
-  const {
-    duration,
-    category,
-    level
-  } = req.body;
+router.post(
+  "/editar-receita/:receitaId",
+  uploadCloud.single("imgPath"),
+  (req, res, next) => {
+    const { duration, category, level } = req.body;
 
   let {name, prepare} = req.body;
   name = name.capitalize();
   prepare = prepare.breakLine();
 
-  const {
-    receitaId
-  } = req.params;
+    const { receitaId } = req.params;
 
-  if (req.file){
-    const imgPath = req.file.url;
-    const imgName = req.file.originalname;
+    if (req.file) {
+      const imgPath = req.file.url;
+      const imgName = req.file.originalname;
 
-    Recipe.findByIdAndUpdate(receitaId, {
-      $set: {
-        name,
-        duration,
-        category,
-        prepare,
-        level,
-        imgPath,
-        imgName
-      }
-    }, { new: true }
-    )
-    .then(response => {
-      console.log(response);
-      res.redirect(`/receita/${receitaId}`)
-    })
-    .catch(error => console.log(error))
-  }
-  Recipe.findByIdAndUpdate(receitaId, {
-    $set: {
-      name,
-      duration,
-      category,
-      prepare,
-      level
+      Recipe.findByIdAndUpdate(
+        receitaId,
+        {
+          $set: {
+            name,
+            duration,
+            category,
+            prepare,
+            level,
+            imgPath,
+            imgName,
+          },
+        },
+        { new: true }
+      )
+        .then((response) => {
+          console.log(response);
+          res.redirect(`/receita/${receitaId}`);
+        })
+        .catch((error) => console.log(error));
     }
-  }, { new: true }
-  )
-  .then(response => {
-    console.log(response);
-    res.redirect(`/receita/${receitaId}`)
-  })
-  .catch(error => console.log(error))
-});
+    Recipe.findByIdAndUpdate(
+      receitaId,
+      {
+        $set: {
+          name,
+          duration,
+          category,
+          prepare,
+          level,
+        },
+      },
+      { new: true }
+    )
+      .then((response) => {
+        console.log(response);
+        res.redirect(`/receita/${receitaId}`);
+      })
+      .catch((error) => console.log(error));
+  }
+);
 
 // DELETE ROUTES
-router.get('/delete-recipe/:receitaId', (req, res, next) => {
+router.get("/delete-recipe/:receitaId", (req, res, next) => {
   // ensureLogin.ensureLoggedIn(), checkAdmin,
 
   const { receitaId } = req.params;
   Recipe.findByIdAndDelete(receitaId)
-    .then(response => {
-      res.redirect('/receitas')
+    .then((response) => {
+      res.redirect("/receitas");
     })
-    .catch(error => console.log(error))
-})
-
+    .catch((error) => console.log(error));
+});
 
 // Filter routes
 
@@ -219,7 +252,7 @@ router.post("/receitas/search", (req, res, next) => {
     level: { $regex: level },
     duration: { $regex: duration },
     name: { $regex: search, $options: "i" },
-    category: { $regex: category }
+    category: { $regex: category },
   })
     .then((receitas) => {
       let buscado = "Buscado";
@@ -238,5 +271,19 @@ router.post("/receitas/search", (req, res, next) => {
     })
     .catch((error) => console.log(error));
 });
+
+router.get(
+  "/post-recipe/:id",
+  ensureLogin.ensureLoggedIn(),
+  checkRoles("ADMIN"),
+  (req, res, next) => {
+    const { id } = req.params;
+    Recipe.findByIdAndUpdate(id, { $set: { post: true } }, { new: true })
+      .then((response) => {
+        res.redirect("/admin");
+      })
+      .catch((err) => console.log(err));
+  }
+);
 
 module.exports = router;
