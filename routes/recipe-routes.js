@@ -81,10 +81,16 @@ router.post("/add-receita", ensureLogin.ensureLoggedIn(), uploadCloud.single("im
   let {name, prepare} = req.body;
   name = name.capitalize();
 
-  const imgPath = req.file.url;
-  const imgName = req.file.originalname;
+  let imgPath = "";
 
-  Recipe.create({ name, duration, category, prepare, level, owner: req.user._id, imgPath, imgName })
+    if (req.file) {
+      imgPath = req.file.url;
+    } else {
+      imgPath =
+        "https://res.cloudinary.com/juliajforesti/image/upload/v1587155241/quarentene-se/smile_il469c.png";
+    }
+
+  Recipe.create({ name, duration, category, prepare, level, owner: req.user._id, imgPath})
     .then((response) => {
       res.redirect("/receitas");
     })

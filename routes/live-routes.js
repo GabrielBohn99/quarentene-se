@@ -126,10 +126,16 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgPa
     link = "http://" + link;
   }
   
-  const imgPath = req.file.url;
-  const imgName = req.file.originalname;
+  let imgPath = "";
 
-  Live.create({ name, data, genre, link, time, owner: req.user._id, imgPath, imgName })
+    if (req.file) {
+      imgPath = req.file.url;
+    } else {
+      imgPath =
+        "https://res.cloudinary.com/juliajforesti/image/upload/v1587155241/quarentene-se/smile_il469c.png";
+    }
+
+  Live.create({ name, data, genre, link, time, owner: req.user._id, imgPath})
   .then((response) => {
     res.redirect("/lives");
   })
