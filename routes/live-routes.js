@@ -121,10 +121,6 @@ router.post("/add-live", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgPa
   const { genre } = req.body;
   let { name, link, data, time } = req.body;
   name = name.capitalize();
-
-  if (link && !link.includes("http://")) {
-    link = "http://" + link;
-  }
   
   let imgPath = "";
 

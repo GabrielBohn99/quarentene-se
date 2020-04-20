@@ -35,7 +35,9 @@
         </select>
         {{#with receita}}
         <label for="prepare">Modo de preparo: </label>
-        <input type="text" name="prepare" value="{{prepare}}">
+        <textarea name="prepare" id="form-text-area" cols="70" rows="10">{{{prepare}}}</textarea>
+
+        {{!-- <input type="text" name="prepare" id="form-text-area" cols="70" rows="10" value="{{prepare}}"> --}}
 
         <label for="imgPath">Imagem: </label>
         <input type="file" name="imgPath" value="{{imgPath}}">

@@ -13,6 +13,10 @@ String.prototype.capitalize = function () {
   });
 };
 
+String.prototype.breakLine = function() {
+  return this.replace(/\r?\n/g, '<br/>')
+}
+
 // RECIPES ROUTES
 
 router.get("/receitas", (req, res, next) => {
@@ -75,11 +79,14 @@ router.get("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render("recipes/add-recipe", { user: req.user });
 });
 
+
+
 router.post("/add-receita", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgPath"), (req, res, next) => {
   const { duration, category, level } = req.body;
 
   let {name, prepare} = req.body;
   name = name.capitalize();
+  prepare = prepare.breakLine();
 
   let imgPath = "";
 
@@ -126,7 +133,7 @@ router.post('/editar-receita/:receitaId', uploadCloud.single("imgPath"), (req, r
 
   let {name, prepare} = req.body;
   name = name.capitalize();
-  prepare = prepare.capitalize();
+  prepare = prepare.breakLine();
 
   const {
     receitaId
