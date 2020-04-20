@@ -5,44 +5,60 @@
         <button><a href="/receita/{{_id}}">Voltar</a></button>
 
         <form action="/editar-receita/{{_id}}" method="POST" enctype="multipart/form-data">
-        <label for="name">Nome: </label>
-        <input type="text" name="name" value="{{name}}">
-        <label for="category">Categoria: </label>
-        <select name="category">
-        <option value="{{category}}">{{category}}</option>
-        {{/with}}
-        {{#each categoryArr}}
-        <option value="{{this}}">{{this}}</option>
-        {{/each}}
-        </select>
-        {{#with receita}}
-        <label for="level">Nível de dificuldade: </label>
-        <select name="level">
-        <option value={{level}}>{{level}}</option>
-        {{/with}}
-        {{#each levelArr}}
-        <option value={{this}}>{{this}}</option>
-        {{/each}}
-        </select>
-        {{#with receita}}
-        <label for="duration">Tempo de preparo: </label>
-        <select name="duration">
-        <option value="{{duration}}">{{duration}}</option>
-        {{/with}}
-        {{#each durationArr}}
-        <option value="{{this}}">{{this}}</option>
-        {{/each}}
-        </select>
-        {{#with receita}}
-        <label for="prepare">Modo de preparo: </label>
-        <textarea name="prepare" id="form-text-area" cols="70" rows="10">{{{prepare}}}</textarea>
+        <div>
+            <label for="name">Nome: </label>
+            <input type="text" name="name" value="{{name}}">
+        </div>
+        <div>
+            <label for="category">Categoria: </label>
+            <select name="category">
+            <option value="{{category}}">{{category}}</option>
+            {{/with}}
+            {{#each categoryArr}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+            </select>
+        </div>
+        <div>
+            {{#with receita}}
+            <label for="level">Nível de dificuldade: </label>
+            <select name="level">
+            <option value={{level}}>{{level}}</option>
+            {{/with}}
+            {{#each levelArr}}
+            <option value={{this}}>{{this}}</option>
+            {{/each}}
+            </select>
+        </div>
+        <div>
+            {{#with receita}}
+            <label for="duration">Tempo de preparo: </label>
+            <select name="duration">
+            <option value="{{duration}}">{{duration}}</option>
+            {{/with}}
+            {{#each durationArr}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+            </select>
+            {{#with receita}}
+        </div>
+        <div>
+            <label for="prepare">Modo de preparo: </label>
+        </div>
+        <div>
+            <textarea name="prepare" id="form-text-area" cols="70" rows="10">{{{prepare}}}</textarea>
+        </div>
 
         {{!-- <input type="text" name="prepare" id="form-text-area" cols="70" rows="10" value="{{prepare}}"> --}}
-
-        <label for="imgPath">Imagem: </label>
-        <input type="file" name="imgPath" value="{{imgPath}}">
+        <div>
+            <label for="imgPath">Imagem: </label>
+            <input type="file" name="imgPath" value="{{imgPath}}">
+        </div>
         {{/with}}
+        <div>
+
         <button type="submit">Salvar edição</button>
+        </div>
     </form>
 
 </div>

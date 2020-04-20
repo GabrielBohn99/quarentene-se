@@ -18,6 +18,10 @@ String.prototype.breakLine = function() {
   return this.replace(/\r?\n/g, '<br>')
 }
 
+String.prototype.breakLineOpposite = function() {
+  return this.replace(/<br>/g, '\r\n')
+}
+
 // Checking role
 const checkRoles = (role) => {
   return (req, res, next) => {
@@ -140,6 +144,7 @@ router.get("/editar-receita/:receitaId", ensureLogin.ensureLoggedIn(), (req, res
   Recipe
     .findById(receitaId)
     .then(receita => {
+      receita.prepare = receita.prepare.breakLineOpposite();
       console.log(receita.prepare)
       levelArr.splice(levelArr.indexOf(receita.level), 1);
       durationArr.splice(durationArr.indexOf(receita.duration), 1);
