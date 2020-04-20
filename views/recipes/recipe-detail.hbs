@@ -3,11 +3,12 @@
 
     <img src="{{imgPath}}" alt="{{imgName}}">
 
-    <h1>{{name}}</h1>
-    <p>Categoria: {{category}}</p>
-    <p>Nível: {{level}}</p>
-    <p>Como fazer: {{prepare}}</p>
-    <p>Tempo de preparo: {{duration}}</p>
+<h1>{{name}}</h1>
+<p>Categoria: {{category}}</p>
+<p>Nível: {{level}}</p>
+<p>Como fazer: {{{prepare}}}</p>
+<p>Tempo de preparo: {{duration}}</p>
+
 
     {{#if isOwner}}
     <button><a href="/editar-receita/{{_id}}">Editar receita</a></button>

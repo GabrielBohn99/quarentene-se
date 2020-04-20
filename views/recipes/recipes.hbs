@@ -23,7 +23,7 @@
                     </div>
                     {{else}}
                     <div>
-                        <option value=""></option>
+                        <option value="category">Categoria</option>
                     </div>
                     {{/if}} 
                     {{#each categoryArr}}
@@ -38,7 +38,7 @@
                     {{#if level}}
                     <option value={{level}}>{{level}}</option>
                     {{else}}
-                    <option value=""></option>
+                    <option value="level">Nível de dificuldade</option>
                     {{/if}} 
                     {{#each levelArr}}
                     <option value={{this}}>{{this}}</option>
@@ -50,13 +50,14 @@
                     {{#if duration}}
                     <option value="{{duration}}">{{duration}}</option>
                     {{else}}
-                    <option value=""></option>
+                    <option value="duration">Tempo de preparo</option>
                     {{/if}} 
                     {{#each durationArr}}
                     <option value="{{this}}">{{this}}</option>
                     {{/each}}
                 </select>
             </div>
+            <br>
             <div>
                 <button type="submit">Buscar</button>
                 {{#if buscado}}
