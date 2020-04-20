@@ -3,27 +3,36 @@
     <button><a href="/add-serie">Adicionar serie</a></button> <br><br>
 
 {{!-- SEARCH FORM --}}
+<div class="form-box" style="max-width: 90vw;">
     <form action="/series/search" method="post">
-        {{#if search}}
-        <label for="search">Pesquisar: </label>
-        <input type="text" name="search" value="{{search}}">
-        {{else}}
-        <label for="search">Pesquisar: </label>
-        <input type="text" name="search" placeholder="Coloque o nome da Serie">
-        {{/if}}
-        {{#each genre}}
-        <input type="checkbox" value="{{this}}" name="genre" checked>
-        <label for="{{this}}">{{this}}</label>
-        {{/each}}
-        {{#each genreArr}}
-        <input type="checkbox" value="{{this}}" name="genre">
-        <label for="{{this}}">{{this}}</label>
-        {{/each}}
-        <button type="submit">Buscar</button>
-        {{#if buscado}}
-        <a href="/series">Limpar filtros</a>
-        {{/if}}
+        <div>
+            {{#if search}}
+            <label for="search">Pesquisar: </label>
+            <input type="text" name="search" value="{{search}}">
+            {{else}}
+            <label for="search">Pesquisar: </label>
+            <input type="text" name="search" placeholder="Coloque o nome da Serie">
+            {{/if}}
+        </div>
+        <div>
+            {{#each genre}}
+            <input type="checkbox" value="{{this}}" name="genre" checked>
+            <label for="{{this}}">{{this}}</label>
+            {{/each}}
+            {{#each genreArr}}
+            <input type="checkbox" value="{{this}}" name="genre">
+            <label for="{{this}}">{{this}}</label>
+            {{/each}}
+        </div>
+        <div>
+            <button type="submit">Buscar</button>
+            {{#if buscado}}
+            <a href="/series">Limpar filtros</a>
+            {{/if}}
+        </div>
     </form>
+
+</div>
 
 {{!-- SERIES LIST --}}
 <div class="row">

@@ -2,7 +2,9 @@
 
     <h1>Lives</h1>
     <button><a href="/add-live">Adicionar uma live</a></button> <br><br>
+    <div class="form-box">
     <form action="/lives/search" method="post">
+    <div>
         {{#if name}}
         <label for="name">Pesquisar: </label>
         <input type="text" name="name" value="{{name}}">
@@ -10,8 +12,12 @@
         <label for="name">Pesquisar: </label>
         <input type="text" name="name" placeholder="Coloque o nome do artista">
         {{/if}}
+    </div>
+    <div>
         <label for="data">Data: </label>
         <input type="date" name="data" value={{data}}>
+    </div>
+    <div>
         <label for="genre">Estilo musical: </label>
         {{#with genreOne}}
         <input type="checkbox" value="{{this}}" name="genre" checked>
@@ -25,19 +31,29 @@
         <input type="checkbox" value="{{this}}" name="genre">
         <label for="{{this}}">{{this}}</label>
         {{/each}}
+    </div>
+    <div>
         <button type="submit">Buscar</button>
         {{#if buscado}}
         <a href="/lives">Limpar filtros</a>
         {{/if}}
-    </form>
-    {{#each lives}}
-    <div>
-        <img class="live-box" src="{{imgPath}}" alt="{{imgName}}">
-        <h2>{{name}}</h2>
-        <p>{{genre}}</p>
-        <h3>{{data}}</h3>
-        <a href="/live/{{_id}}">Saiba mais</a>
-        <hr>
     </div>
-    {{/each}}
+    </form>
+    </div>
+
+{{!-- LIVES LIST --}}
+        <div class="row">
+            {{#each lives}}
+            <div class="card m-2 bg-light" style="width: 18rem; height: 28rem;">
+                <img class="card-img-top" style="max-height: 16rem;" src="{{imgPath}}" alt="Live IMG">
+                <div class="card-body">
+                    <h5 class="card-title">{{name}}</h5>
+                    <p class="card-text">Gênero: {{genre}}</p>
+                    <p class="card-text">Data: {{data}}</p>
+
+                    <a href="/live/{{_id}}" class="btn btn-primary">Saiba mais</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
 </div>
