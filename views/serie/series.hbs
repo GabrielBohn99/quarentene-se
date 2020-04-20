@@ -11,6 +11,10 @@
         <label for="search">Pesquisar: </label>
         <input type="text" name="search" placeholder="Coloque o nome da Serie">
         {{/if}}
+        {{#with genreOne}}
+        <input type="checkbox" value="{{this}}" name="genre" checked>
+        <label for="{{this}}">{{this}}</label>
+        {{/with}}
         {{#each genre}}
         <input type="checkbox" value="{{this}}" name="genre" checked>
         <label for="{{this}}">{{this}}</label>

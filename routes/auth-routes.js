@@ -77,7 +77,7 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
           from: `"Quarentene-se " <${process.env.GOOGLE_EMAIL}>`,
           to: user.email, 
           subject: 'Obrigado por se cadastrar no Quarentene-se', 
-          text: `http://localhost:3000/confirm/${user.confirmationCode}`,
+          text: `https://quarentene-se.herokuapp.com/confirm/${user.confirmationCode}`,
           html: `<link
           href="https://fonts.googleapis.com/css?family=Cuprum&display=swap"
           rel="stylesheet"
@@ -91,17 +91,6 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
             font-family: "Curpum", sans-serif;
             color: #f3f1ea;
             line-height: 1;
-          }
-          .ExternalClass {
-            width: 100%;
-          }
-          .ExternalClass,
-          .ExternalClass p,
-          .ExternalClass span,
-          .ExternalClass font,
-          .ExternalClass td,
-          .ExternalClass div {
-            line-height: 100%;
           }
     
           body {
@@ -284,7 +273,7 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
                         <tr>
                           <td height="45" style="border: 1px solid #fff;">
                             <a
-                              href="http://localhost:3000/confirm/${user.confirmationCode}"
+                              href="https://quarentene-se.herokuapp.com/confirm/${user.confirmationCode}"
                               style="
                                 font-family: 'Cuprum', serif;
                                 text-align: center;
@@ -504,7 +493,7 @@ router.post("/esqueci-minha-senha", (req, res, next) => {
           from: `"Quarentene-se" <${process.env.GOOGLE_EMAIL}>`,
           to: user.email,
           subject: "Quarentene-se - Troca de senha",
-          text: `http://localhost:3000/trocar-senha/${user.confirmationCode}`,
+          text: `https://quarentene-se.herokuapp.com/trocar-senha/${user.confirmationCode}`,
           html: `<link
           href="https://fonts.googleapis.com/css?family=Cuprum&display=swap"
           rel="stylesheet"
@@ -518,17 +507,6 @@ router.post("/esqueci-minha-senha", (req, res, next) => {
             font-family: "Cuprum", sans-serif;
             color: #f3f1ea;
             line-height: 1;
-          }
-          .ExternalClass {
-            width: 100%;
-          }
-          .ExternalClass,
-          .ExternalClass p,
-          .ExternalClass span,
-          .ExternalClass font,
-          .ExternalClass td,
-          .ExternalClass div {
-            line-height: 100%;
           }
     
           body {
@@ -711,7 +689,7 @@ router.post("/esqueci-minha-senha", (req, res, next) => {
                         <tr>
                           <td height="45" style="border: 1px solid #fff;">
                             <a
-                              href="http://localhost:3000/trocar-senha/${user._id}"
+                              href="https://quarentene-se.herokuapp.com/trocar-senha/${user._id}"
                               style="
                                 font-family: 'Cuprum';
                                 text-align: center;

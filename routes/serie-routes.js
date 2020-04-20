@@ -285,16 +285,32 @@ router.post("/series/search", (req, res, next) => {
   })
     .sort({ rating: -1 })
     .then((series) => {
-      genreArr = genreArr.filter((elem) => !genre.includes(elem));
-      let buscado = "Buscado";
-      res.render("serie/series", {
-        genre,
-        series,
-        genreArr,
-        user: req.user,
-        buscado,
-        search,
-      });
+      console.log("foi removido:", genre)
+      if (!Array.isArray(genre)) {
+        genreArr = genreArr.filter((elem) => !genre.includes(elem));
+        let buscado = "Buscado";
+        res.render("serie/series", {
+          genreOne: genre,
+          series,
+          genreArr,
+          user: req.user,
+          buscado,
+          search,
+        });
+        return;
+      } else {
+        genreArr = genreArr.filter((elem) => !genre.includes(elem));
+        let buscado = "Buscado";
+        console.log(genre)
+        res.render("serie/series", {
+          genre,
+          series,
+          genreArr,
+          user: req.user,
+          buscado,
+          search,
+        });
+      }
     })
     .catch((error) => console.log(error));
 });
