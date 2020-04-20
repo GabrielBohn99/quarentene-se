@@ -14,6 +14,18 @@ String.prototype.capitalize = function () {
   });
 };
 
+// Checking role
+const checkRoles = (role) => {
+  return (req, res, next) => {
+    if (req.isAuthenticated() && req.user.role === role) {
+      return next();
+    } else {
+      req.logout();
+      res.redirect("/");
+    }
+  };
+};
+
 // Series routes
 router.get("/series", (req, res, next) => {
   Serie.find()
@@ -42,6 +54,7 @@ router.get("/series", (req, res, next) => {
         "Terror",
         "Trash",
       ];
+      series = series.filter((item) => item.post);
       res.render("serie/series", { series, user: req.user, genreArr });
     })
     .catch((error) => console.log(error));
@@ -339,5 +352,19 @@ router.post("/series/search", (req, res, next) => {
     })
     .catch((error) => console.log(error));
 });
+
+router.get(
+  "/post-serie/:id",
+  ensureLogin.ensureLoggedIn(),
+  checkRoles("ADMIN"),
+  (req, res, next) => {
+    const { id } = req.params;
+    Serie.findByIdAndUpdate(id, { $set: { post: true } }, { new: true })
+      .then((response) => {
+        res.redirect("/admin");
+      })
+      .catch((err) => console.log(err));
+  }
+);
 
 module.exports = router;
