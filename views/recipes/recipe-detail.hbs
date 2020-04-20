@@ -1,7 +1,7 @@
 <div class="main-box">
-{{#with receita}}
+    {{#with receita}}
 
-<img src="{{imgPath}}" alt="{{imgName}}">
+    <img src="{{imgPath}}" alt="{{imgName}}">
 
 <h1>{{name}}</h1>
 <p>Categoria: {{category}}</p>
@@ -9,24 +9,26 @@
 <p>Como fazer: {{{prepare}}}</p>
 <p>Tempo de preparo: {{duration}}</p>
 
-{{#if isOwner}}
-<button><a href="/editar-receita/{{_id}}">Editar receita</a></button>
-<button><a href="/delete-recipe/{{_id}}">Deletar receita</a></button>
-{{/if}}
-<button><a href="/receitas">Voltar</a></button>
+
+    {{#if isOwner}}
+    <button><a href="/editar-receita/{{_id}}">Editar receita</a></button>
+    <button><a href="/delete-recipe/{{_id}}">Deletar receita</a></button>
+    <button><a href="/post-recipe/{{_id}}">Postar live</a></button>
+    {{/if}}
+    <button><a href="/receitas">Voltar</a></button>
 
 
 
-<h4>Deixe a sua opinião:</h4>
-<form action="/recipe-review/{{_id}}" method="POST">
-    <label for="review"></label>
-    <input type="text" name='comment' required>
-    <button type="submit">Adicionar um review</button>
-</form>
-{{#each review}}
-<h3>{{user}}</h3>
-<p>{{comment}}</p>
-{{/each}}
-{{/with}}
+    <h4>Deixe a sua opinião:</h4>
+    <form action="/recipe-review/{{_id}}" method="POST">
+        <label for="review"></label>
+        <input type="text" name='comment' required>
+        <button type="submit">Adicionar um review</button>
+    </form>
+    {{#each review}}
+    <h3>{{user}}</h3>
+    <p>{{comment}}</p>
+    {{/each}}
+    {{/with}}
 
 </div>

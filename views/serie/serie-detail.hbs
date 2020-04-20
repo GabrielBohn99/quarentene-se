@@ -1,29 +1,30 @@
 <div class="main-box">
     {{#with serie}}
-        <h1>{{name}}</h1>
-        <h4>Nota: {{rating}}</h4>
-        <p>Sinopse: {{resume}}</p>
-        <p>Gênero: {{genre}}</p>        
-        <div>
-            <img class="serie-img" src="{{imgPath}}" alt="{{imgName}}">
-        </div>
+    <h1>{{name}}</h1>
+    <h4>Nota: {{rating}}</h4>
+    <p>Sinopse: {{resume}}</p>
+    <p>Gênero: {{genre}}</p>
+    <div>
+        <img class="serie-img" src="{{imgPath}}" alt="{{imgName}}">
+    </div>
 
-        {{#if isOwner}}
-        <button><a href="/editar-serie/{{_id}}">Editar serie</a></button>
-        <button><a href="/delete-serie/{{_id}}">Deletar serie</a></button>
-        {{/if}}
+    {{#if isOwner}}
+    <button><a href="/editar-serie/{{_id}}">Editar serie</a></button>
+    <button><a href="/delete-serie/{{_id}}">Deletar serie</a></button>
+    <button><a href="/post-serie/{{_id}}">Postar live</a></button>
+    {{/if}}
 
-        <button><a href="/series">Voltar</a></button>
+    <button><a href="/series">Voltar</a></button>
 
-        <h3>Qual a sua opinião?</h3>
-        <form action="/serie-review/{{_id}}" method="POST">
-            <label for="review"></label>
-            <input type="text" name='comment' required>
-            <button type="submit">Adicionar review</button>
-        </form>
-        {{#each review}}
-            <h3>{{user}}</h3>
-            <p>{{comment}}</p>
-        {{/each}}
+    <h3>Qual a sua opinião?</h3>
+    <form action="/serie-review/{{_id}}" method="POST">
+        <label for="review"></label>
+        <input type="text" name='comment' required>
+        <button type="submit">Adicionar review</button>
+    </form>
+    {{#each review}}
+    <h3>{{user}}</h3>
+    <p>{{comment}}</p>
+    {{/each}}
     {{/with}}
 </div>

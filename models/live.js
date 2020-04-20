@@ -14,6 +14,7 @@ const liveSchema = new Schema({
       comment: String,
     },
   ],
+  post: {type: Boolean, default: false},
   owner: {
     type: Schema.Types.ObjectId,
     ref: 'User'
