@@ -9,14 +9,7 @@ body {
     letter-spacing: .08rem;
 }
 
-/* .outer-box-recipes {
-    background-color:rgb(248,249,250);
-    top: 0;
-    width: 100vw;
-    height: 100%;
-} */
 .main-box {
-    /* border: 1px solid red; */
     margin: 10vh 3vw;
     width: 100vw;
 }
@@ -37,7 +30,6 @@ body {
 }
 
 .search-by {
-    /* border: 1px solid blue; */
     width: 45vw;
     padding: 1%;
 }
@@ -59,14 +51,10 @@ body {
 
 .search-btn {
     padding: 2% 1%;
-    /* border: 3px solid; */
-
 }
 
 .add-your-recipe {
     width: 40vw;
-
-    /* border: 1px solid red; */
     font-size: 2rem;
     color: white;
     padding: 1%;
@@ -87,11 +75,6 @@ body {
 }
 
 /* ---------------------------------------- DETAILS PAGE ---------------------------------------- */
-/* .upper-box {
-    display: flex;
-    align-items: center;
-    width: 94vw;
-} */
 
 .details-img {
     max-height: 20vw;
@@ -105,8 +88,6 @@ body {
     margin-left: -1%;
     padding: 1% 1%;
     width: 94vw;
-
-
 }
 
 .details-btn-box {
@@ -115,15 +96,11 @@ body {
     border-radius: 5px;
     width: 94vw;
     margin-left: -1%;
-    /* display: flex;
-    justify-content: flex-start; */
-
 }
 
 .details-btn {
     font-weight: bolder;
     font-size: large;
-    /* width: 10vw; */
 }
 
 .reviews {
@@ -139,14 +116,14 @@ body {
     padding: 2% 0 ;
 }
 
-/* ADD PAGE */
+/* ---------------------------------------- ADD PAGE ---------------------------------------- */
+
 .add-form {
     width: 94vw;
     display: flex;
     justify-content: space-between;
     display: flex;
 }
-
 .add-form-items label {
     font-size: large;
     margin-top: 1.5%;
@@ -174,7 +151,6 @@ body {
     width: 94vw;
     display: flex;
     justify-content: space-between;
-    /* border: 1px solid red; */
     
 }
 .edit-form-items label {
@@ -183,9 +159,4 @@ body {
 }
 .edit-form-items input, select {
     width: 30vw;
-}
-.edit-form-prepare{
-    /* width: 60vw; */
-    /* border: 1px solid red; */
-
 }

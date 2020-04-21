@@ -1,11 +1,21 @@
-<div class="main-box">
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-        <label for="username">Nome de usuário: </label>
-        <input type="text" name="username">
-        <label for="password">Senha: </label>
-        <input type="password" name="password">
-        <button type="submit">Login</button>
-        <a class="nav-item nav-link" href="/esqueci-minha-senha">Esqueci minha senha</a>
-    </form>
-</div> 
+<div class="login-main-box">
+        <div class="login-box">
+            <h1>Login</h1>
+            <form action="/login" method="POST">
+            <div>
+                <label for="username">Nome de usuário: </label> <br>
+                <input type="text" name="username">
+            </div>
+            <div>
+                <label for="password">Senha: </label> <br>
+                <input type="password" name="password">
+            </div>
+            <div>
+                <button class="btn btn-secondary login-btn" type="submit">Login</button>
+            </div>
+                <a id="forgot-password" href="/esqueci-minha-senha">Esqueci minha senha</a>
+                <p> Ainda não é cadastrado? Faça sua inscrição para poder adicionar Séries, Lives, Receitas e Reviews! </p>
+                <a class="btn btn-secondary" style="width: 30%;" href="/Signup">Signup</a>
+            </form>
+        </div> 
+</div>
