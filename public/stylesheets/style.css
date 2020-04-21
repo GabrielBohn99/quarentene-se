@@ -8,6 +8,7 @@ body {
     font-family: 'Cuprum', sans-serif;
     letter-spacing: .08rem;
     background-color: rgba(253,160,147,0.4);
+    overflow-x: hidden;
 
 }
 
@@ -41,6 +42,7 @@ body {
     /* position: relative; */
     top: 9vh;
     text-align: center;
+    width: 96vw;
 }
 
 .search-by {
@@ -73,6 +75,8 @@ body {
     color: white;
     padding: 1%;
     font-weight: bolder;
+    display: flex column;
+
 }
 
 .add-your-recipe p {
