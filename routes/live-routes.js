@@ -149,7 +149,7 @@ router.post(
       imgPath = req.file.url;
     } else {
       imgPath =
-        "https://res.cloudinary.com/juliajforesti/image/upload/v1587393669/quarentene-se/music_wdkli2.png";
+        "https://res.cloudinary.com/juliajforesti/image/upload/v1587497667/quarentene-se/microfone_m9jyxn.png";
     }
 
     Live.create({ name, data, genre, link, time, owner: req.user._id, imgPath })
