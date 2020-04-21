@@ -1,17 +1,36 @@
-<div class="main-box">
-    <h1>Sign Up</h1>
-    <form action="/signup" method="POST" enctype="multipart/form-data">
-        <label for="username">Username: </label>
-        <input type="text" name="username" required>
-        <label for="email">Email: </label>
-        <input type="email" name="email" required>
-        <label for="password">Password: </label>
-        <input type="password" name="password" required>
-        <label for="imgPath">Foto de perfil: </label>
-        <input type="file" name="imgPath">
-        <button type="submit">Sign Up</button>
-        {{#if message}}
-        <div>{{message}}</div>
-        {{/if}}
-    </form>
+<div class="signup-main-box">
+    <div class="signup-box">
+        <h1>Sign Up</h1>
+        <form action="/signup" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="username">Username: </label>
+                <input type="text" name="username" required>
+            </div>
+            <div>
+                <label for="email">Email: </label>
+                <input type="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Password: </label>
+                <input type="password" name="password" required>
+            </div>
+            <div class="file-upload">
+                {{!-- <div class="custom-file" >
+                    <label class="custom-file-label" for="imgPath" >Foto de perfil</label>
+                    <input type="file" class="custom-file-input" name="imgPath">
+                </div> --}}
+
+                <label for="imgPath">Foto de perfil: </label>
+                <input type="file" name="imgPath">
+            </div>
+            <div>
+                <button class="btn btn-secondary login-btn" type="submit">Sign Up</button>
+            </div>
+            {{#if message}}
+            <div>{{message}}</div>
+            {{/if}}
+        </form>
+
+    </div>
+
 </div>

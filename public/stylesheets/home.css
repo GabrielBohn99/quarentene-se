@@ -33,6 +33,132 @@
     font-family: 'Cuprum', sans-serif;
     text-shadow: 5px 5px 4px rgb(117, 117, 117);
     position: relative;
-    top: 12vh;
+    top: 9vh;
     text-align: center;
 } 
+
+/* ----------------------------------------------------- LOGIN ----------------------------------------------------- */
+
+.login-main-box {
+    background-image: url('../images/home9.png');
+    background-color: rgb(253,97,76);
+    background-size: cover;
+    background-position: 50% 35%;
+    background-repeat: no-repeat;
+    
+    opacity: 0.6;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;  
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.login-box {
+    margin: 10vh 3vw;
+    border-radius: 5px;
+    background-color: rgba(248,249,250,0.8);
+    width: 450px;
+    padding: 1%;
+    border: 5px solid rgb(106,210,183);
+    box-shadow: 3px 3px rgba(117, 117, 117,0.5);
+}
+
+.login-box h1 {
+    color: rgb(85, 84, 84);
+}
+
+.login-box label {
+    color: rgb(85, 84, 84);
+    font-size: 1.3rem;
+}
+.login-box p {
+    color: rgb(85, 84, 84);
+    font-size: 1rem;
+    margin: 3% 0;
+}
+
+.login-box label {
+    width: 70%;
+    margin-top: 3%;
+}
+
+.login-box input {
+    width: 70%;
+}
+
+.login-btn {
+    width: 30%;
+    margin: 3% 0;
+}
+
+#forgot-password {
+    color: black;
+    text-decoration: underline;
+}
+
+/* ----------------------------------------------------- SIGNUP ----------------------------------------------------- */
+
+.signup-main-box {
+    background-image: url('../images/home9.png');
+    background-color: rgb(253,97,76);
+    background-size: cover;
+    background-position: 50% 35%;
+    background-repeat: no-repeat;
+    
+    opacity: 0.6;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;  
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.signup-box {
+    margin: 10vh 3vw;
+    border-radius: 5px;
+    background-color: rgba(248,249,250,0.8);
+    width: 450px;
+    padding: 1%;
+    border: 5px solid rgb(104,173,219);
+    box-shadow: 3px 3px rgba(117, 117, 117,0.5);
+}
+
+.signup-box h1 {
+    color: rgb(85, 84, 84);
+}
+
+.signup-box label {
+    color: rgb(85, 84, 84);
+    font-size: 1.3rem;
+}
+.signup-box p {
+    color: rgb(85, 84, 84);
+    font-size: 1rem;
+    margin: 3% 0;
+}
+
+.signup-box label {
+    width: 70%;
+    margin-top: 3%;
+}
+
+.signup-box input {
+    width: 70%;
+}
+
+.signup-btn {
+    width: 30%;
+    margin: 3% 0;
+}
+
+.file-upload {
+    /* border: 1px solid black; */
+}
+.file-upload>input {
+    width: 100%;
+    /* border: 1px solid red; */
+
+}
