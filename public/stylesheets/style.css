@@ -75,8 +75,6 @@ body {
     color: white;
     padding: 1%;
     font-weight: bolder;
-    display: flex column;
-
 }
 
 .add-your-recipe p {
@@ -87,6 +85,7 @@ body {
 .add-btn {
     padding: 2% 1%;
     border: 3px solid;
+
 }
 
 .card-list {
