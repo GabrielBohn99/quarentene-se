@@ -59,14 +59,17 @@
                 {{/if}}
             </div>
             </form>
-            <div class="add-your-recipe">
-                <p>Ou então</p>
-                <a class="btn btn-outline-light btn-lg add-btn" href="/add-receita">Adicione sua receita!</a>
+            <div class="add-your-recipe d-flex flex-column align-items-left ">
+                <div><p>Ou então</p></div>
+                <div class="d-flex flex-column align-items-left justify-content-center" style="max-width: 200px;">
+                    <a class="btn btn-outline-light btn-lg add-btn" href="/add-receita">Adicione sua receita!</a>
+                </div>
+                <div></div>
             </div>
         </div>
 
 {{!-- RECIPES LIST --}}
-        <div class="row card-list" style="justify-content:space-between">
+        <div class="row card-list" style="justify-content:flex-start">
             {{#each receitas}}
             <div class="card m-2 bg-light card-item" style="width: 16rem; height: 26rem;">
                 <img class="card-img-top" style="max-height: 14rem;" src="{{imgPath}}" alt="Receita IMG">
