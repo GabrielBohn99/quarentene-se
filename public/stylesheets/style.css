@@ -1,15 +1,191 @@
 * {
     padding: 0;
     margin: 0;
+    color: rgb(117,117,117);
 }
 
 body {
-    height: 100vh;
-    max-width: 90vw;
     font-family: 'Cuprum', sans-serif;
     letter-spacing: .08rem;
 }
 
+/* .outer-box-recipes {
+    background-color:rgb(248,249,250);
+    top: 0;
+    width: 100vw;
+    height: 100%;
+} */
 .main-box {
+    /* border: 1px solid red; */
     margin: 10vh 3vw;
+    width: 100vw;
+}
+
+.main-box p {
+    width: 93vw;
+}
+
+/* ---------------------------------------- LIST PAGE ---------------------------------------- */
+
+.recipe-search-box {
+    width: 94vw;
+    border-radius: 5px;
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(253,160,147);
+}
+
+.search-by {
+    /* border: 1px solid blue; */
+    width: 45vw;
+    padding: 1%;
+}
+
+.search-by select {
+    width: 100%;
+    height: 4vh;
+}
+
+.search-by label {
+    font-size: 2rem;
+    color: white;
+    font-weight: bolder;
+}
+
+.name-input {
+    width: 100%;
+}
+
+.search-btn {
+    padding: 2% 1%;
+    /* border: 3px solid; */
+
+}
+
+.add-your-recipe {
+    width: 40vw;
+
+    /* border: 1px solid red; */
+    font-size: 2rem;
+    color: white;
+    padding: 1%;
+    font-weight: bolder;
+}
+
+.add-your-recipe p {
+    color: white;
+}
+
+.add-btn {
+    padding: 2% 1%;
+    border: 3px solid;
+}
+
+.card-list {
+    padding: 0.5%;
+}
+
+/* ---------------------------------------- DETAILS PAGE ---------------------------------------- */
+/* .upper-box {
+    display: flex;
+    align-items: center;
+    width: 94vw;
+} */
+
+.details-img {
+    max-height: 20vw;
+    border-radius: 5px;
+    padding-bottom: 2%;
+}
+.prepare {
+    background-color: rgb(117,117,117);
+    border-radius: 5px;
+    color: white;
+    margin-left: -1%;
+    padding: 1% 1%;
+    width: 94vw;
+
+
+}
+
+.details-btn-box {
+    padding: 1.5% 1%;
+    background-color: rgb(253,160,147);
+    border-radius: 5px;
+    width: 94vw;
+    margin-left: -1%;
+    /* display: flex;
+    justify-content: flex-start; */
+
+}
+
+.details-btn {
+    font-weight: bolder;
+    font-size: large;
+    /* width: 10vw; */
+}
+
+.reviews {
+    padding-top: 2%;
+    width: 93vw;
+}
+
+.reviews input {
+    width: 40vw;
+}
+
+.review-btn {
+    padding: 2% 0 ;
+}
+
+/* ADD PAGE */
+.add-form {
+    width: 94vw;
+    display: flex;
+    justify-content: space-between;
+    display: flex;
+}
+
+.add-form-items label {
+    font-size: large;
+    margin-top: 1.5%;
+}
+.add-form-items input, select {
+    width: 30vw;
+}
+.add-form-prepare{
+    width: 60vw;
+}
+.add-btn-box {
+    margin-top: 2%;
+    padding: 1.5% 1%;
+    background-color: rgb(253,160,147);
+    border-radius: 5px;
+    width: 96vw;
+    margin-left: -1%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ---------------------------------------- EDIT PAGE ----------------------------------------*/
+
+.edit-form {
+    width: 94vw;
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid red; */
+    
+}
+.edit-form-items label {
+    font-size: large;
+    margin-top: 1.5%;
+}
+.edit-form-items input, select {
+    width: 30vw;
+}
+.edit-form-prepare{
+    /* width: 60vw; */
+    /* border: 1px solid red; */
+
 }

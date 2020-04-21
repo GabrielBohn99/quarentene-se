@@ -1,12 +1,12 @@
 <div class="main-box">
     {{#with serie}}
+    <div>
+        <img style="max-width: 40vw;" src="{{imgPath}}" alt="{{imgName}}">
+    </div>
     <h1>{{name}}</h1>
     <h4>Nota: {{rating}}</h4>
     <p>Gênero: {{genre}}</p>
     <p>Sinopse: {{resume}}</p>
-    <div>
-        <img style="max-width: 40vw;" src="{{imgPath}}" alt="{{imgName}}">
-    </div>
 
     {{#if isOwner}}
     <button><a href="/editar-serie/{{_id}}">Editar serie</a></button>

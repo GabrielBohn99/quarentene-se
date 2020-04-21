@@ -21,12 +21,18 @@
     z-index: 10;
 }
 
+.navbar {
+    padding-left: 3%;
+    padding-right: 3%;
+
+}
+
 #title {
     color: white;
     font-size: 8vw;
     font-family: 'Cuprum', sans-serif;
     text-shadow: 5px 5px 4px rgb(117, 117, 117);
     position: relative;
-    top: 10vh;
+    top: 12vh;
     text-align: center;
 } 
