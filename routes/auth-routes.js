@@ -66,7 +66,7 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
       imgPath = req.file.url;
     } else {
       imgPath =
-        "https://res.cloudinary.com/juliajforesti/image/upload/v1587493357/quarentene-se/emoticon-smile-png-2_mfjrmu.png";
+        "https://res.cloudinary.com/juliajforesti/image/upload/v1587155241/quarentene-se/smile_il469c.png";
     }
 
     const newUser = new User({

@@ -1,56 +1,54 @@
 <div class="main-box">
-    <h1>Series</h1>
-    <button><a href="/add-serie">Adicionar serie</a></button> <br><br>
+    <h1 class="series-title">Series</h1>
 
-{{!-- SEARCH FORM --}}
-<div class="form-box" style="max-width: 90vw;">
-    <form action="/series/search" method="post">
-        <div>
-            {{#if search}}
-            <label for="search">Pesquisar: </label>
-            <input type="text" name="search" value="{{search}}">
-            {{else}}
-            <label for="search">Pesquisar: </label>
-            <input type="text" name="search" placeholder="Coloque o nome da Serie">
-            {{/if}}
-        </div>
-        <div>
-            {{#each genre}}
-            <input type="checkbox" value="{{this}}" name="genre" checked>
-            <label for="{{this}}">{{this}}</label>
-            {{/each}}
-            {{#each genreArr}}
-            <input type="checkbox" value="{{this}}" name="genre">
-            <label for="{{this}}">{{this}}</label>
-            {{/each}}
-        </div>
-        <div>
-            <button type="submit">Buscar</button>
-            {{#if buscado}}
-            <a href="/series">Limpar filtros</a>
-            {{/if}}
-        </div>
-
-    </form>
-
-</div>
-
-{{!-- SERIES LIST --}}
-<div class="row">
-    {{#each series}}
-    <div class="card m-2 bg-light" style="width: 18rem; height: 28rem;">
-        <img class="card-img-top" style="max-height: 16rem;" src="{{imgPath}}" alt="Serie IMG">
-        <div class="card-body">
-            <h5 class="card-title">{{name}}</h5>
-            <p class="card-text">Gênero: {{genre}}</p>
-            <p class="card-text">Nota: {{rating}}</p>
-
-            <a href="/serie/{{_id}}" class="btn btn-primary">Saiba mais</a>
+    {{!-- SEARCH FORM --}}
+    <div class="serie-search-box">
+        <form action="/series/search" method="post">
+            <div class="search-by">
+                {{#if name}}
+                <label for="name">Pesquisar </label>
+                <input class="name-input" type="text" name="name" value="{{name}}">
+                {{else}}
+                <label for="name">Pesquisar </label>
+                <input class="name-input" type="text" name="name" placeholder="Busque pelo nome da Serie">
+                {{/if}}
+            </div>
+            <div>
+                {{#each genre}}
+                <input type="checkbox" value="{{this}}" name="genre" checked>
+                <label for="{{this}}">{{this}}</label>
+                {{/each}}
+                {{#each genreArr}}
+                <input type="checkbox" value="{{this}}" name="genre">
+                <label for="{{this}}">{{this}}</label>
+                {{/each}}
+            </div>
+            <div class="search-btn">
+                <button type="submit" class="btn btn-outline-light btn-lg">Buscar</button>
+                {{#if buscado}}
+                <a class="btn btn-outline-light btn-lg" href="/series">Limpar filtros</a>
+                {{/if}}
+            </div>
+        </form>
+        <div class="add-your-serie">
+            <p>Ou então</p>
+            <a class="btn btn-outline-light btn-lg add-btn" href="/add-serie">Adicione sua serie!</a>
         </div>
     </div>
-    {{/each}}
+
+    {{!-- SERIES LIST --}}
+    <div class="row card-list" style="justify-content:space-between">
+            {{#each series}}
+            <div class="card m-2 bg-light card-item" style="width: 16rem; height: 26rem;">
+                <img class="card-img-top" style="max-height: 14rem;" src="{{imgPath}}" alt="Receita IMG">
+                <div class="card-body">
+                    <h5 class="card-title">{{name}}</h5>
+                    <p class="card-text" style="width: 100%;">Gênero: {{genre}}</p>
+                    <p class="card-text" style="width: 100%;">Nota: {{rating}}</p>
+
+                    <a href="/serie/{{_id}}" class="btn btn-secondary">Saiba mais</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
 </div>
-
-</div>
-
-

@@ -2,6 +2,11 @@
     color: black;
 }
 
+.profile-pic {
+    width: 58vh;
+    height: 58vh;
+}
+
 .profile-main-box {
     background-image: url('../images/home9.png');
     background-color: rgb(253,97,76);
@@ -32,3 +37,37 @@
     color: black;
 }
 
+/* ---------------------------------------- SERIES PAGE ---------------------------------------- */
+
+.serie-search-box {
+    width: 94vw;
+    border-radius: 5px;
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(253,160,147);
+    border: 5px solid rgb(253,212,149);
+}
+
+.series-title {
+    color: white;
+    font-size: 10vh;
+    font-family: 'Cuprum', sans-serif;
+    text-shadow: 3px 3px 4px rgb(117, 117, 117);
+    /* position: relative; */
+    top: 9vh;
+    text-align: center;
+}
+
+.add-your-serie {
+    width: 40vw;
+    font-size: 2rem;
+    color: white;
+    padding: 1%;
+    font-weight: bolder;
+}
+
+.add-your-serie p {
+    color: white;
+    width: 100%;
+}
