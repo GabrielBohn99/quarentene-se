@@ -20,7 +20,7 @@ const userSchema = new Schema({
   role: {
     type: String,
     enum: ['GUEST', 'ADMIN'],
-    default: 'ADMIN'
+    default: 'GUEST'
   },
   imgPath: {type: String },
   email: String
