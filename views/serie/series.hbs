@@ -5,15 +5,19 @@
     <div class="serie-search-box">
         <form action="/series/search" method="post">
             <div class="search-by">
-                {{#if name}}
-                <label for="name">Pesquisar </label>
-                <input class="name-input" type="text" name="name" value="{{name}}">
+                {{#if search}}
+                <label for="search">Pesquisar </label>
+                <input class="name-input" type="text" name="search" value="{{name}}">
                 {{else}}
-                <label for="name">Pesquisar </label>
-                <input class="name-input" type="text" name="name" placeholder="Busque pelo nome da Serie">
+                <label for="search">Pesquisar </label>
+                <input class="name-input" type="text" name="search" placeholder="Busque pelo nome da Serie">
                 {{/if}}
             </div>
-            <div>
+            <div class="search-by">
+                {{#with genreOne}}
+                <input type="checkbox" value="{{this}}" name="genre" checked>
+                <label for="{{this}}">{{this}}</label>
+                {{/with}}
                 {{#each genre}}
                 <input type="checkbox" value="{{this}}" name="genre" checked>
                 <label for="{{this}}">{{this}}</label>
@@ -38,17 +42,17 @@
 
     {{!-- SERIES LIST --}}
     <div class="row card-list" style="justify-content:space-between">
-            {{#each series}}
-            <div class="card m-2 bg-light card-item" style="width: 16rem; height: 26rem;">
-                <img class="card-img-top" style="max-height: 14rem;" src="{{imgPath}}" alt="Receita IMG">
-                <div class="card-body">
-                    <h5 class="card-title">{{name}}</h5>
-                    <p class="card-text" style="width: 100%;">Gênero: {{genre}}</p>
-                    <p class="card-text" style="width: 100%;">Nota: {{rating}}</p>
+        {{#each series}}
+        <div class="card m-2 bg-light card-item" style="width: 16rem; height: 26rem;">
+            <img class="card-img-top" style="max-height: 14rem;" src="{{imgPath}}" alt="Receita IMG">
+            <div class="card-body">
+                <h5 class="card-title">{{name}}</h5>
+                <p class="card-text" style="width: 100%;">Gênero: {{genre}}</p>
+                <p class="card-text" style="width: 100%;">Nota: {{rating}}</p>
 
-                    <a href="/serie/{{_id}}" class="btn btn-secondary">Saiba mais</a>
-                </div>
+                <a href="/serie/{{_id}}" class="btn btn-secondary">Saiba mais</a>
             </div>
-            {{/each}}
         </div>
+        {{/each}}
+    </div>
 </div>
