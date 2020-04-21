@@ -7,6 +7,8 @@
 body {
     font-family: 'Cuprum', sans-serif;
     letter-spacing: .08rem;
+    background-color: rgba(253,160,147,0.4);
+
 }
 
 .main-box {
@@ -20,6 +22,7 @@ body {
 
 /* ---------------------------------------- LIST PAGE ---------------------------------------- */
 
+
 .recipe-search-box {
     width: 94vw;
     border-radius: 5px;
@@ -27,6 +30,17 @@ body {
     display: flex;
     justify-content: space-between;
     background-color: rgb(253,160,147);
+    border: 5px solid rgb(253,212,149);
+}
+
+.recipes-title {
+    color: white;
+    font-size: 10vh;
+    font-family: 'Cuprum', sans-serif;
+    text-shadow: 3px 3px 4px rgb(117, 117, 117);
+    /* position: relative; */
+    top: 9vh;
+    text-align: center;
 }
 
 .search-by {
@@ -63,6 +77,7 @@ body {
 
 .add-your-recipe p {
     color: white;
+    width: 100%;
 }
 
 .add-btn {
@@ -72,6 +87,10 @@ body {
 
 .card-list {
     padding: 0.5%;
+    width: 96vw;
+}
+.card-item {
+    border: 5px solid rgb(253,212,149);
 }
 
 /* ---------------------------------------- DETAILS PAGE ---------------------------------------- */

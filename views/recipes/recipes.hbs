@@ -1,7 +1,7 @@
 <div class="outer-box-recipes">
     <div class="main-box">
 
-        <h1>Receitas</h1>
+        <h1 class="recipes-title">Receitas</h1>
 
         <div class="recipe-search-box">
             <form action="/receitas/search" method="post">
@@ -66,14 +66,14 @@
         </div>
 
 {{!-- RECIPES LIST --}}
-        <div class="row card-list">
+        <div class="row card-list" style="justify-content:space-between">
             {{#each receitas}}
-            <div class="card m-2 bg-light" style="width: 18rem; height: 28rem;">
-                <img class="card-img-top" style="max-height: 16rem;" src="{{imgPath}}" alt="Receita IMG">
+            <div class="card m-2 bg-light card-item" style="width: 16rem; height: 26rem;">
+                <img class="card-img-top" style="max-height: 14rem;" src="{{imgPath}}" alt="Receita IMG">
                 <div class="card-body">
                     <h5 class="card-title">{{name}}</h5>
-                    <p class="card-text">Nível de dificuldade: {{level}}</p>
-                    <p class="card-text">Categoria: {{category}}</p>
+                    <p class="card-text" style="width: 100%;">Nível de dificuldade: {{level}}</p>
+                    <p class="card-text" style="width: 100%;">Categoria: {{category}}</p>
 
                     <a href="/receita/{{_id}}" class="btn btn-secondary">Saiba mais</a>
                 </div>
