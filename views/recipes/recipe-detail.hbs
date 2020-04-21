@@ -1,34 +1,47 @@
+<div class="outer-box-recipes">
 <div class="main-box">
+
     {{#with receita}}
+    <div class="upper-box">
+        <div>
+            <img class="details-img" src="{{imgPath}}" alt="{{imgName}}">
+        </div>
+        <div>
+            <h1>{{name}}</h1>
+            <p>Categoria: {{category}}</p>
+            <p>Nível: {{level}}</p>
+            <p>Tempo de preparo: {{duration}}</p>
 
-    <img style="max-width: 40vw;" src="{{imgPath}}" alt="{{imgName}}">
+        </div>
+    </div>
+    <h4 class="prepare">Como fazer: </h4>
+    <p>{{{prepare}}}</p>
 
-<h1>{{name}}</h1>
-<p>Categoria: {{category}}</p>
-<p>Nível: {{level}}</p>
-<p>Tempo de preparo: {{duration}}</p>
-<p>Como fazer: <br> {{{prepare}}}</p>
-
-
-    {{#if isOwner}}
-    <button><a href="/editar-receita/{{_id}}">Editar receita</a></button>
-    <button><a href="/delete-recipe/{{_id}}">Deletar receita</a></button>
-    <button><a href="/post-recipe/{{_id}}">Postar receita</a></button>
-    {{/if}}
-    <button><a href="/receitas">Voltar</a></button>
+    <div class="details-btn-box">
+        {{#if isOwner}}
+        <a class="btn btn-outline-light details-btn " href="/editar-receita/{{_id}}">Editar receita</a>
+        <a class="btn btn-outline-light details-btn " href="/delete-recipe/{{_id}}">Deletar receita</a>
+        <a class="btn btn-outline-light details-btn " href="/post-recipe/{{_id}}">Postar receita</a>
+        {{/if}}
+        <a class="btn btn-outline-light details-btn " href="/receitas">Voltar</a>
+    </div>
 
 
+    <div class="reviews">
+        <h4>Gostou? Deixe a sua opinião!</h4>
+        <form action="/recipe-review/{{_id}}" method="POST">
+            <label for="review"></label>
+            <textarea autocomplete="off" rows="4" cols="8" class="form-control" name="comment" style="height:100px" required></textarea>
+            <div class="review-btn">
+                <button class="btn btn-secondary" type="submit">Adicionar comentário</button>
+            </div>
+        </form>
+        {{#each review}}
+        <h3>{{user}}</h3>
+        <p>{{comment}}</p>
+        {{/each}}
+        {{/with}}
+    </div>
 
-    <h4>Deixe a sua opinião:</h4>
-    <form action="/recipe-review/{{_id}}" method="POST">
-        <label for="review"></label>
-        <input type="text" name='comment' required>
-        <button type="submit">Adicionar um review</button>
-    </form>
-    {{#each review}}
-    <h3>{{user}}</h3>
-    <p>{{comment}}</p>
-    {{/each}}
-    {{/with}}
-
+</div>
 </div>

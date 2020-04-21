@@ -1,57 +1,65 @@
-<div class="main-box">
 
+<div class="main-box">
     <h1>Adicione uma receita</h1>
     <form action="/add-receita" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="name">Nome: </label>
-            <input type="text" name="name">
+        <div class="add-form">
+            <div>
+                <div class="add-form-items">
+                    <label for="name">Nome: </label>
+                </div>
+                <div class="add-form-items">
+                    <input type="text" name="name">
+                </div>
+                <div class="add-form-items">
+                    <label for="category">Categoria: </label>
+                </div>
+                <div class="add-form-items">
+                    <select name="category">
+                        <option value="Salgado">Salgado</option>
+                        <option value="Doce">Doce</option>
+                        <option value="Bebida">Bebida</option>
+                    </select>
+                </div>
+                <div class="add-form-items">
+                    <label for="level">Dificuldade: </label>
+                </div>
+                <div class="add-form-items">
+                    <select name="level">
+                        <option value="Fácil">Fácil</option>
+                        <option value="Médio">Médio</option>
+                        <option value="Avançado">Avançado</option>
+                    </select>
+                </div>
+                <div class="add-form-items">
+                    <label for="duration">Duração: </label>
+                </div>
+                <div class="add-form-items">
+                    <select name="duration">
+                        <option value="10min - 30min">10min - 30min</option>
+                        <option value="30min - 60min">30min - 60min</option>
+                        <option value="mais de 60min">mais de 60min</option>
+                    </select>
+                </div>
+                <div class="add-form-items">
+                    <label for="imgPath">Imagem: </label>
+                </div>
+                <div class="add-form-items">
+                    <input type="file" name="imgPath"> 
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div class="add-form-prepare">
+                        <div><label for="prepare">Modo de preparo: </label></div>
+                        <textarea autocomplete="off" rows="4" cols="8" class="form-control" id="myTextArea" name="prepare" style="height:45vh"></textarea>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div>
-            <label for="category">Categoria: </label>
-            <select name="category">
-                <option value="Salgado">Salgado</option>
-                <option value="Doce">Doce</option>
-                <option value="Bebida">Bebida</option>
-            </select>
+        <div class="add-btn-box ">
+            <button class="btn btn-outline-light btn-lg" style="min-width: 30vw;" type="submit">Adicionar receita</button>    
+            <a class="btn btn-outline-light btn-lg" href="/receitas">Voltar</a>
         </div>
-        <div>
-            <label for="level">Dificuldade: </label>
-            <select name="level">
-                <option value="Fácil">Fácil</option>
-                <option value="Médio">Médio</option>
-                <option value="Avançado">Avançado</option>
-            </select>
-        </div>
-<br>
-        <div>
-            <div><label for="prepare">Modo de preparo: </label></div>
-            {{!-- <textarea name="prepare" id="form-text-area" cols="70" rows="10"></textarea> --}}
-
-            <textarea autocomplete="off" rows="4" cols="8" class="form-control" id="myTextArea" name="prepare" style="height:200px"></textarea>
-        </div>
-<br>
-        <div>
-            <label for="duration">Duração: </label>
-            <select name="duration">
-                <option value="10min - 30min">10min - 30min</option>
-                <option value="30min - 60min">30min - 60min</option>
-                <option value="mais de 60min">mais de 60min</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="imgPath">Imagem: </label>
-            <input type="file" name="imgPath"> 
-        </div>
-<br>
-        <div>
-            <button type="submit">Adicionar receita</button>    
-        </div>
-<br>
-        <div>
-            <button> <a href="/receitas">Voltar</a></button>
-        </div>
-
     </form>
+
 </div>
