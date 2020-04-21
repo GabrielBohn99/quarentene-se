@@ -55,6 +55,7 @@ router.get("/series", (req, res, next) => {
         "Trash",
       ];
       series = series.filter((item) => item.post);
+      console.log(series)
       res.render("serie/series", { series, user: req.user, genreArr });
     })
     .catch((error) => console.log(error));

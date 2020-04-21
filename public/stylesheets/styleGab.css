@@ -2,6 +2,11 @@
     color: black;
 }
 
+.profile-pic {
+    width: 58vh;
+    height: 58vh;
+}
+
 .profile-main-box {
     background-image: url('../images/home9.png');
     background-color: rgb(253,97,76);
