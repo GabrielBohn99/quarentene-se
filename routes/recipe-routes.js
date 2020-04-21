@@ -114,7 +114,7 @@ router.post("/add-receita", ensureLogin.ensureLoggedIn(), uploadCloud.single("im
       imgPath = req.file.url;
     } else {
       imgPath =
-        "https://res.cloudinary.com/juliajforesti/image/upload/v1587393449/quarentene-se/cook-icon_siyirz.png";
+        "https://res.cloudinary.com/juliajforesti/image/upload/v1587499147/quarentene-se/cooking-pngrepo-com_1_-_co%CC%81pia_u1xakf.png";
     }
 
     Recipe.create({

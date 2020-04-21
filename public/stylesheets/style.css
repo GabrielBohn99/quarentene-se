@@ -99,10 +99,24 @@ body {
 
 /* ---------------------------------------- DETAILS PAGE ---------------------------------------- */
 
+.upper-box {
+    display: flex;
+    align-items: center;
+    width: 92vw;
+}
+.info-box {
+    width: 50vw;
+    height: 40vh;
+    margin-left: 2%;
+}
+.info-box>p{
+    width: 50vw;
+}
 .details-img {
-    max-height: 20vw;
+    margin: 4% 0;
+    max-height: 60vh;
     border-radius: 5px;
-    padding-bottom: 2%;
+
 }
 .prepare {
     background-color: rgb(117,117,117);
@@ -129,6 +143,10 @@ body {
 .reviews {
     padding-top: 2%;
     width: 93vw;
+}
+.reviews>h4{
+    color: rgb(117,117,117);
+    
 }
 
 .reviews input {
