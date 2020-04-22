@@ -5,18 +5,16 @@
     <div class="search-box">
         <div class="search-form-left">
             <form action="/receitas/search" method="post">
-                <div class="search-by-name">
+                <div class="search-by-select">
+                    <label style="color: white;" for="search">Pesquisar </label>
                     {{#if search}}
-                    <label for="search">Pesquisar </label>
-                    <input class="name-input" type="text" name="search" value="{{search}}">
+                    <input class="form-control" class="name-input" type="text" name="search" value="{{search}}">
                     {{else}}
-                    <label for="search">Pesquisar </label>
-                    <input class="name-input" type="text" name="search" placeholder="Busque pelo nome da receita">
+                    <input class="form-control" class="name-input" type="text" name="search" placeholder="Busque pelo nome da receita">
                     {{/if}}
                 </div>
-
                 <div class="search-by-select">
-                    <select name="category">
+                    <select class="form-control" name="category">
                         {{#if category}}
                         {{!-- <div> --}}
                         <option value="{{category}}">{{category}}</option>
@@ -30,7 +28,7 @@
                     </select>
                 </div>
                 <div class="search-by-select">
-                    <select name="level">
+                    <select class="form-control" name="level">
                         {{#if level}}
                         <option value={{level}}>{{level}}</option>
                         {{else}}
@@ -42,7 +40,7 @@
                     </select>
                 </div>
                 <div class="search-by-select">
-                    <select name="duration">
+                    <select class="form-control" name="duration">
                         {{#if duration}}
                         <option value="{{duration}}">{{duration}}</option>
                         {{else}}
