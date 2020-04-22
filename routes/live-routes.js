@@ -27,6 +27,29 @@ const checkRoles = (role) => {
   };
 };
 
+const dateFormater = (s) => {
+  const newArr = s.split("-");
+
+  let month = newArr[1];
+  let day = newArr[2];
+
+  s = `${day}/${month}`;
+
+  return s;
+};
+
+const dateFormaterYear = (s) => {
+  const newArr = s.split("-");
+
+  let year = newArr[0];
+  let month = newArr[1];
+  let day = newArr[2];
+
+  s = `${day}/${month}/${year}`;
+
+  return s;
+};
+
 // LIVE ROUTES
 router.get("/lives", (req, res, next) => {
   Live.find()
@@ -57,6 +80,9 @@ router.get("/lives", (req, res, next) => {
       ];
       genreArr.sort();
       lives = lives.filter((item) => item.post);
+      lives.forEach((item) => {
+        item.data = dateFormater(item.data);
+      });
       res.render("live/lives", { lives, user: req.user, genreArr });
     })
     .catch((error) => console.log(error));
@@ -77,6 +103,7 @@ router.get("/live/:id", (req, res, next) => {
       ) {
         live.isOwner = true;
       }
+      live.data = dateFormaterYear(live.data);
       res.render("live/live-detail", { live, user: req.user });
     })
     .catch((error) => console.log(error));
@@ -309,6 +336,9 @@ router.post("/lives/search", (req, res, next) => {
       .then((lives) => {
         let buscado = "Buscado";
         lives = lives.filter((item) => item.post);
+        lives.forEach((item) => {
+          item.data = dateFormater(item.data);
+        });
         res.render("live/lives", {
           lives,
           data,
@@ -334,6 +364,9 @@ router.post("/lives/search", (req, res, next) => {
         genreArr = genreArr.filter((elem) => !genre.includes(elem));
         let buscado = "Buscado";
         lives = lives.filter((item) => item.post);
+        lives.forEach((item) => {
+          item.data = dateFormater(item.data);
+        });
         res.render("live/lives", {
           data,
           genreOne: genre,
@@ -348,6 +381,9 @@ router.post("/lives/search", (req, res, next) => {
         genreArr = genreArr.filter((elem) => !genre.includes(elem));
         let buscado = "Buscado";
         lives = lives.filter((item) => item.post);
+        lives.forEach((item) => {
+          item.data = dateFormater(item.data);
+        });
         res.render("live/lives", {
           data,
           genre,
