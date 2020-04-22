@@ -1,39 +1,51 @@
 <div class="main-box">
     <h1>Adicione uma serie</h1>
     <form action="/add-serie" method="POST" enctype="multipart/form-data">
-    <div>
-        <label for="name">Titulo: </label>
-        <input type="text" name="name">
+    <div class="add-form">
+        <div>
+            <div class="add-form-items">
+                <label for="name">Titulo: </label>
+            </div>
+            <div class="add-form-items">
+                <input class="form-control" type="text" name="name">
+            </div>
+            <div class="add-form-items">
+                <label for="rating">Cotação: </label>
+            </div>
+            <div class="add-form-items">
+                <input class="form-control" type="number" name="rating">
+            </div>
+            <div class="add-form-items">
+                <label for="resume">Sinopse: </label>
+            </div>
+            <div class="add-form-items">
+                <input class="form-control" type="text" name="resume">
+            </div>
+            <div class="add-form-items">
+                <label for="imgPath">Imagem: </label>
+            </div>
+            <div class="add-form-items">
+                <input type="file" name="imgPath">
+            </div>
+        </div>
+        <div class="add-form-checkbox">
+            <div class="add-form-checkbox-title" >
+                <label for="genre">Genero: </label>
+            </div>
+            <div class="add-form-checkbox-items-container">
+                {{#each genreArr}}
+                <div class="add-form-checkbox-items">
+                    <input type="checkbox" value="{{this}}" name="genre">
+                    <label for="{{this}}">{{this}}</label>
+                </div>
+                {{/each}}
+            </div>
+        </div>
     </div>
-    <div style="max-width: 80vw;">
-        <label for="genre">Genero: </label>
-        {{!-- <div class="col-6 col-md-4"> --}}
-            {{#each genreArr}}
-            <input type="checkbox" value="{{this}}" name="genre">
-            <label for="{{this}}">{{this}}</label>
-            {{/each}}
-
-        {{!-- </div> --}}
-    </div>
-    <div>
-        <label for="rating">Cotação: </label>
-        <input type="number" name="rating">
-    </div>
-    <div>
-        <label for="resume">Sinopse: </label>
-        <input type="text" name="resume">
-    </div>
-    <div>
-        <label for="imgPath">Imagem: </label>
-        <input type="file" name="imgPath">
-    </div>
-    <br>
-    <div>
-        <button type="submit">Adicionar</button>
-    </div>
-    <br>
-    <div>
-        <button> <a href="/series">Voltar</a></button>
+    
+    <div class="add-btn-box ">
+        <button class="btn btn-outline-light btn-lg" style="min-width: 30vw;" type="submit">Adicionar</button>
+        <a class="btn btn-outline-light btn-lg" href="/series">Voltar</a>
     </div>
     </form>
 </div>

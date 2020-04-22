@@ -1,41 +1,58 @@
 <div class="main-box">
-
     <h1>Adicione uma live</h1>
     <form action="/add-live" method="POST" enctype="multipart/form-data">
+    <div class="add-form">
         <div>
-            <label for="name">Artista: </label>
-            <input class="form-control" type="text" name="name">
+            <div class="add-form-items">
+                <label for="name">Artista: </label>
+            </div>
+            <div class="add-form-items">
+                <input class="form-control" type="text" name="name">
+            </div>
+            <div class="add-form-items">
+                <label for="data">Data: </label>
+            </div>
+            <div class="add-form-items">
+                <input class="form-control" type="date" name="data" id="addData">            
+            </div>
+            <div class="add-form-items">
+                <label for="time">Horario: </label>
+            </div>
+            <div >
+                <input class="form-control" type="time" name="time">
+            </div>
+            <div class="add-form-items">
+                <label for="link">Link para a live: </label>
+            </div>
+            <div class="add-form-items">
+                <input class="form-control" type="text" name="link">
+            </div>
+            <div class="add-form-items">
+                <label for="imgPath">Imagem: </label>
+            </div>
+            <div class="add-form-items">
+                <input type="file" name="imgPath">            
+            </div>
+
         </div>
-        <div>
-            <label for="genre">Estilo musical: </label>
+        <div class="add-form-checkbox">
+            <div class="add-form-checkbox-title" >
+                <label for="genre">Estilo musical: </label>
+            </div>
+            <div class="add-form-checkbox-items-container">
             {{#each genreArr}}
-            <input type="checkbox" value="{{this}}" name="genre">
-            <label for="{{this}}">{{this}}</label>
+                <div class="add-form-checkbox-items">
+                    <input type="checkbox" value="{{this}}" name="genre">
+                    <label for="{{this}}">{{this}}</label>
+                </div>
             {{/each}}
+            </div>
         </div>
-        <div>
-            <label for="data">Data: </label>
-            <input type="date" name="data" id="addData">            
-        </div>
-        <div>
-            <label for="time">Horario: </label>
-            <input type="time" name="time">
-        </div>
-        <div>
-            <label for="link">Link para a live: </label>
-            <input class="form-control" type="text" name="link">
-        </div>
-        <div>
-            <label for="imgPath">Imagem: </label>
-            <input type="file" name="imgPath">            
-        </div>
-    <br>
-        <div>
-            <button type="submit">Adicionar live</button>
-        </div>
-        <br>
-        <div>
-            <button><a href="/lives">Voltar</a></button>
-        </div>
+    </div>
+
+    <div class="add-btn-box ">
+        <button class="btn btn-outline-light btn-lg" style="min-width: 30vw;" type="submit">Adicionar live</button>
+        <a class="btn btn-outline-light btn-lg" href="/lives">Voltar</a>
+    </div>
     </form>
 </div>
