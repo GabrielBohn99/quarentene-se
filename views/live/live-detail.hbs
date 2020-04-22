@@ -1,31 +1,44 @@
 <div class="main-box">
 
     {{#with live}}
-    <div>
-        <img style="max-width: 40vw;" src="{{imgPath}}" alt="{{imgName}}">
-    </div>
-    <h1>{{name}}</h1>
-    <h2>{{genre}}</h2>
-    <p>{{data}}</p>
-    <p>{{time}}</p>
-    <a href="{{link}}" target="_blank">Link para live</a> <br>
-    <hr>
-    {{#if isOwner}}
-    <button><a href="/editar-live/{{_id}}">Editar live</a></button>
-    <button><a href="/delete-live/{{_id}}">Deletar live</a></button>
-    <button><a href="/post-live/{{_id}}">Postar live</a></button>
-    {{/if}}
-    <button><a href="/lives">Voltar</a></button>
+    <div class="upper-box">
+        <div>
+            <img class="details-img" src="{{imgPath}}" alt="{{imgName}}">
+        </div>
+        <div class="info-box d-flex justify-content-around flex-column">
 
-    <h3>Está animado?</h3>
-    <form action="/live-review/{{_id}}" method="POST">
-        <label for="review"></label>
-        <input type="text" name='comment'>
-        <button type="submit">Adicionar comentário</button>
-    </form>
-    {{#each review}}
+            <h1>{{name}}</h1>
+            <p>Gênero musical: {{genre}}</p>
+            <p>Dia: {{data}}</p>
+            <p>Horário: {{time}}</p>
+            <a style="width: 10rem;" class="btn btn-secondary" href="{{link}}" target="_blank" role="button">Link para live</a>
+        </div>
+    </div>
+    <div class="details-btn-box">
+        {{#if isOwner}}
+        <button><a href="/editar-live/{{_id}}">Editar live</a></button>
+        <button><a href="/delete-live/{{_id}}">Deletar live</a></button>
+        <button><a href="/post-live/{{_id}}">Postar live</a></button>
+        {{/if}}
+        <a class="btn btn-outline-light details-btn " href="/lives">Voltar</a>
+    </div>
+
+
+    <div class="reviews">
+        <h4>Você está ansioso? Conta pra gente o que você está esperando!</h4>
+        <form action="/live-review/{{_id}}" method="POST">
+            <label for="review"></label>
+            <textarea autocomplete="off" rows="4" cols="8" class="form-control" name="comment" style="height:100px"
+                required></textarea>
+            <div class="review-btn">
+                <button class="btn btn-secondary" type="submit">Adicionar comentário</button>
+            </div>
+        </form>
+        {{#each review}}
         <h3>{{user}}</h3>
         <p>{{comment}}</p>
-    {{/each}}
-    {{/with}}
+        {{/each}}
+        {{/with}}
+    </div>
+
 </div>

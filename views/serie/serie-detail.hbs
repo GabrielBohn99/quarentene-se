@@ -1,30 +1,47 @@
 <div class="main-box">
+
     {{#with serie}}
-    <div>
-        <img style="max-width: 40vw;" src="{{imgPath}}" alt="{{imgName}}">
+    <div class="upper-box">
+        <div>
+            <img class="details-img" src="{{imgPath}}" alt="{{imgName}}">
+        </div>
+        <div class="info-box d-flex justify-content-around flex-column">
+            <h1>{{name}}</h1>
+            <div class="d-flex flex-column justify-content-around flex-start">
+                <h3>Nota: {{rating}}</h3>
+                <h4 style="color: gray;">Gênero: {{genre}}</h4>
+            </div>
+
+        </div>
     </div>
-    <h1>{{name}}</h1>
-    <h4>Nota: {{rating}}</h4>
-    <p>Gênero: {{genre}}</p>
-    <p>Sinopse: {{resume}}</p>
+    <h4 class="prepare">Sinopse: </h4>
+    <p>{{resume}}</p>
 
-    {{#if isOwner}}
-    <button><a href="/editar-serie/{{_id}}">Editar serie</a></button>
-    <button><a href="/delete-serie/{{_id}}">Deletar serie</a></button>
-    <button><a href="/post-serie/{{_id}}">Postar serie</a></button>
-    {{/if}}
+    <div class="details-btn-box">
+        {{#if isOwner}}
+        <button><a href="/editar-serie/{{_id}}">Editar serie</a></button>
+        <button><a href="/delete-serie/{{_id}}">Deletar serie</a></button>
+        <button><a href="/post-serie/{{_id}}">Postar serie</a></button>
+        {{/if}}
+        <a class="btn btn-outline-light details-btn " href="/series">Voltar</a>
+    </div>
 
-    <button><a href="/series">Voltar</a></button>
 
-    <h3>Qual a sua opinião?</h3>
-    <form action="/serie-review/{{_id}}" method="POST">
-        <label for="review"></label>
-        <input type="text" name='comment' required>
-        <button type="submit">Adicionar review</button>
-    </form>
-    {{#each review}}
-    <h3>{{user}}</h3>
-    <p>{{comment}}</p>
-    {{/each}}
-    {{/with}}
+    <div class="reviews">
+        <h4>O que você achou dessa serie?</h4>
+        <form action="/recipe-review/{{_id}}" method="POST">
+            <label for="review"></label>
+            <textarea autocomplete="off" rows="4" cols="8" class="form-control" name="comment" style="height:100px"
+                required></textarea>
+            <div class="review-btn">
+                <button class="btn btn-secondary" type="submit">Adicionar comentário</button>
+            </div>
+        </form>
+        {{#each review}}
+        <h3>{{user}}</h3>
+        <p>{{comment}}</p>
+        {{/each}}
+        {{/with}}
+    </div>
+
 </div>

@@ -6,21 +6,25 @@
         <div class="search-form-left">
             <form action="/lives/search" method="post">
                 <div class="search-by-name">
+                    <label for="name">Pesquisar </label>
                     {{#if name}}
-                    <label for="name">Pesquisar </label>
-                    <input class="name-input" type="text" name="name" value="{{name}}">
+                    <input class="name-input form-control" type="text" name="name" value="{{name}}">
                     {{else}}
-                    <label for="name">Pesquisar </label>
-                    <input class="name-input" type="text" name="name" placeholder="Coloque o nome do artista">
+                    <input class="name-input form-control" type="text" name="name"
+                        placeholder="Coloque o nome do artista">
                     {{/if}}
                 </div>
                 <div class="search-by-date">
                     <label for="data">Data: </label>
                     {{#if data}}
-                    <input type="date" name="data" id="dataSearch" value="{{data}}">
+                    <input class="form-control" style="width: 200px;" type="date" name="data" id="dataSearch"
+                        value="{{data}}">
                     {{else}}
-                    <input type="date" name="data" id="dataSearch">
+                    <input class="form-control" style="width: 200px;" type="date" name="data" id="dataSearch">
                     {{/if}}
+                </div>
+                <div class="search-by-date">
+                    <label for="data">Gênero musical: </label>
                 </div>
                 <div class="search-checkbox row" style="margin-left:3%">
                     {{#with genreOne}}
