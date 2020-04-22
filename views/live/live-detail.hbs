@@ -11,16 +11,17 @@
             <p>Gênero musical: {{genre}}</p>
             <p>Dia: {{data}}</p>
             <p>Horário: {{time}}</p>
-            <a style="width: 10rem;" class="btn btn-secondary" href="{{link}}" target="_blank" role="button">Link para live</a>
+            <a style="width: 10rem;" class="btn btn-secondary" href="{{link}}" target="_blank" role="button">Link para
+                live</a>
         </div>
     </div>
     <div class="details-btn-box">
         {{#if isOwner}}
-        <button><a href="/editar-live/{{_id}}">Editar live</a></button>
-        <button><a href="/delete-live/{{_id}}">Deletar live</a></button>
-        <button><a href="/post-live/{{_id}}">Postar live</a></button>
+        <a class="btn btn-outline-light details-btn" href="/editar-live/{{_id}}">Editar live</a>
+        <a class="btn btn-outline-light details-btn" href="/delete-live/{{_id}}">Deletar live</a>
+        <a class="btn btn-outline-light details-btn" href="/post-live/{{_id}}">Postar live</a>
         {{/if}}
-        <a class="btn btn-outline-light details-btn " href="/lives">Voltar</a>
+        <a class="btn btn-outline-light details-btn" href="/lives">Voltar</a>
     </div>
 
 

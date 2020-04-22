@@ -19,9 +19,9 @@
 
     <div class="details-btn-box">
         {{#if isOwner}}
-        <button><a href="/editar-serie/{{_id}}">Editar serie</a></button>
-        <button><a href="/delete-serie/{{_id}}">Deletar serie</a></button>
-        <button><a href="/post-serie/{{_id}}">Postar serie</a></button>
+        <a class="btn btn-outline-light details-btn" href="/editar-serie/{{_id}}">Editar serie</a>
+        <a class="btn btn-outline-light details-btn" href="/delete-serie/{{_id}}">Deletar serie</a>
+        <a class="btn btn-outline-light details-btn" href="/post-serie/{{_id}}">Postar serie</a>
         {{/if}}
         <a class="btn btn-outline-light details-btn " href="/series">Voltar</a>
     </div>
