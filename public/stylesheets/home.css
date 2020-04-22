@@ -1,5 +1,22 @@
+/* 
+CORES
+amarelo
+rgb(253,212,149)
+azul
+rgb(104,173,219) 
+rosa
+rgb(253,160,147)
+tomate
+rgb(237,86,75)
+verde
+rgb(106,210,183)
+cinza
+rgb(117,117,117)
+
+*/
+
 .home-main-box {
-  background-image: url("../images/home9.png");
+  background-image: url("../images/home.png");
   background-color: rgb(253, 97, 76);
   background-size: cover;
   background-position: 50% 35%;
@@ -13,16 +30,12 @@
   align-items: center;
   justify-content: center;
 }
-
-.bg-img {
-  position: center;
-  width: 300px;
-  z-index: 10;
-}
-
 .navbar {
   padding-left: 3%;
   padding-right: 3%;
+}
+.title-box {
+  height: 100vh;
 }
 
 .title {
@@ -35,11 +48,45 @@
   text-align: center;
   z-index: 1000;
 }
+/* ----------------------------------------------------- ABOUT US ----------------------------------------------------- */
+
+.about-us {
+  /* height: 100vh; */
+  /* padding: 5% 0; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  /* border: 1px solid black; */
+
+}
+
+.about-us-items {
+  width: 50%;
+  margin: 3% 0;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.about-us-title {
+  color: white;
+  font-size: 10vh;
+  font-family: 'Cuprum', sans-serif;
+  text-shadow: 3px 3px 4px rgb(117, 117, 117);
+  /* top: 9vh; */
+  text-align: center;
+  /* width: 96vw; */
+}
+
+.about-us-items>p {
+  font-size: 5vh;
+
+}
 
 /* ----------------------------------------------------- LOGIN ----------------------------------------------------- */
 
 .login-main-box {
-  background-image: url("../images/home9.png");
+  background-image: url("../images/home.png");
   background-color: rgb(253, 97, 76);
   background-size: cover;
   background-position: 50% 35%;
@@ -112,7 +159,7 @@
 /* ----------------------------------------------------- SIGNUP ----------------------------------------------------- */
 
 .signup-main-box {
-  background-image: url("../images/home9.png");
+  background-image: url("../images/home.png");
   background-color: rgb(253, 97, 76);
   background-size: cover;
   background-position: 50% 35%;
