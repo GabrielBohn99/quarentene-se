@@ -16,7 +16,11 @@
                 </div>
                 <div class="search-by-date">
                     <label for="data">Data: </label>
-                    <input type="date" name="data" value={{data}}>
+                    {{#if data}}
+                    <input type="date" name="data" id="dataSearch" value="{{data}}">
+                    {{else}}
+                    <input type="date" name="data" id="dataSearch">
+                    {{/if}}
                 </div>
                 <div class="search-checkbox row" style="margin-left:3%">
                     {{#with genreOne}}
@@ -38,7 +42,6 @@
                     </div>
                     {{/each}}
                 </div>
-            </form>
         </div>
         <div class="search-form-right">
             <button type="submit" class="btn btn-outline-light btn-lg">Buscar</button>
@@ -48,6 +51,7 @@
             <p>Ou então</p>
             <a class="btn btn-outline-light btn-lg add-btn" href="/add-live">Adicione uma live!</a>
         </div>
+        </form>
     </div>
 
     {{!-- LIVES LIST --}}
