@@ -19,12 +19,12 @@
                     <select name="category">
                         {{#if category}}
                         {{!-- <div> --}}
-                            <option value="{{category}}">{{category}}</option>
-                            {{else}}
-                            <option value="">Categoria</option>
-                            {{/if}} 
-                            {{#each categoryArr}}
-                            <option value="{{this}}">{{this}}</option>
+                        <option value="{{category}}">{{category}}</option>
+                        {{else}}
+                        <option value="">Categoria</option>
+                        {{/if}}
+                        {{#each categoryArr}}
+                        <option value="{{this}}">{{this}}</option>
                         {{!-- </div> --}}
                         {{/each}}
                     </select>
@@ -35,7 +35,7 @@
                         <option value={{level}}>{{level}}</option>
                         {{else}}
                         <option value="">Nível de dificuldade</option>
-                        {{/if}} 
+                        {{/if}}
                         {{#each levelArr}}
                         <option value={{this}}>{{this}}</option>
                         {{/each}}
@@ -47,17 +47,17 @@
                         <option value="{{duration}}">{{duration}}</option>
                         {{else}}
                         <option value="">Tempo de preparo</option>
-                        {{/if}} 
+                        {{/if}}
                         {{#each durationArr}}
                         <option value="{{this}}">{{this}}</option>
                         {{/each}}
                     </select>
                 </div>
 
-            </form>
         </div>
         <div class="search-form-right">
             <button type="submit" class="btn btn-outline-light btn-lg">Buscar</button>
+            </form>
             {{#if buscado}}
             <a class="btn btn-outline-light btn-lg" href="/receitas">Limpar filtros</a>
             {{/if}}
@@ -67,7 +67,7 @@
     </div>
 
 
-{{!-- RECIPES LIST --}}
+    {{!-- RECIPES LIST --}}
     <div class="row card-list" style="justify-content:start">
         {{#each receitas}}
         <div class="card m-2 bg-light card-item" style="width: 16rem; height: 26rem;">
@@ -83,6 +83,3 @@
         {{/each}}
     </div>
 </div>
-
-
-

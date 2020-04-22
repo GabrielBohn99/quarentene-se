@@ -311,6 +311,7 @@ router.post("/lives/search", (req, res, next) => {
         lives = lives.filter((item) => item.post);
         res.render("live/lives", {
           lives,
+          data,
           genreArr,
           user: req.user,
           buscado,
