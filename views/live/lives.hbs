@@ -28,21 +28,21 @@
                 </div>
                 <div class="search-checkbox row" style="margin-left:3%">
                     {{#with genreOne}}
-                    <div class="search-checkbox row" style="width: 12rem;">
+                    <div class="search-checkbox d-flex justify-content-start align-items-center" style="width: 12rem;">
                         <input type="checkbox" value="{{this}}" name="genre" checked>
-                        <label for="{{this}}">{{this}}</label>
+                        <label class="pt-2" for="{{this}}">{{this}}</label>
                     </div>
                     {{/with}}
                     {{#each genre}}
-                    <div class="search-checkbox row" style="width: 12rem;">
+                    <div class="search-checkbox d-flex justify-content-start align-items-center" style="width: 12rem;">
                         <input type="checkbox" value="{{this}}" name="genre" checked>
-                        <label for="{{this}}">{{this}}</label>
+                        <label class="pt-2" for="{{this}}">{{this}}</label>
                     </div>
                     {{/each}}
                     {{#each genreArr}}
-                    <div class="search-checkbox row" style="width: 12rem;">
+                    <div class="search-checkbox d-flex justify-content-start align-items-center" style="width: 12rem;">
                         <input type="checkbox" value="{{this}}" name="genre">
-                        <label for="{{this}}">{{this}}</label>
+                        <label class="pt-2" for="{{this}}">{{this}}</label>
                     </div>
                     {{/each}}
                 </div>

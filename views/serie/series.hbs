@@ -13,23 +13,26 @@
                     <input class="name-input form-control" type="text" name="search" placeholder="Busque pelo nome da Serie">
                     {{/if}}
                 </div>
-                <div class="search-by-checkbox row" style="margin:3%">
+                <div class="search-by-date">
+                    <label for="data">Gênero: </label>
+                </div>
+                <div class="search-by-checkbox row" style="margin:0 3%">
                     {{#with genreOne}}
-                    <div class="search-checkbox row" style="width: 12rem;">
+                    <div class="search-checkbox d-flex justify-content-start align-items-center" style="width: 12rem;">
                         <input type="checkbox" value="{{this}}" name="genre" checked>
-                        <label for="{{this}}">{{this}}</label>
+                        <label class="pt-2" for="{{this}}">{{this}}</label>
                     </div>
                     {{/with}}
                     {{#each genre}}
-                    <div class="search-checkbox row" style="width: 12rem;">
+                    <div class="search-checkbox d-flex justify-content-start align-items-center" style="width: 12rem;">
                         <input type="checkbox" value="{{this}}" name="genre" checked>
-                        <label for="{{this}}">{{this}}</label>
+                        <label class="pt-2" for="{{this}}">{{this}}</label>
                     </div>
                     {{/each}}
                     {{#each genreArr}}
-                    <div class="search-checkbox row" style="width: 12rem;">
+                    <div class="search-checkbox d-flex justify-content-start align-items-center" style="width: 12rem;">
                         <input type="checkbox" value="{{this}}" name="genre">
-                        <label for="{{this}}">{{this}}</label>
+                        <label class="pt-2" for="{{this}}">{{this}}</label>
                     </div>
                     {{/each}}
                 </div>
