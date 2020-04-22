@@ -108,3 +108,13 @@
     color: white;
     width: 100%;
 }
+
+.error-message {
+    background: #99d3c1;
+    box-sizing: border-box;
+    color: black;
+    margin: 20px auto;
+    padding: 20px;
+    width: 100%;
+    opacity: 100%;
+}

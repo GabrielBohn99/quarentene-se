@@ -19,12 +19,12 @@
                 <label for="imgPath">Foto de perfil: </label>
                 <input type="file" name="imgPath">
             </div>
+            {{#if message}}
+            <div class="error-message">{{message}}</div>
+            {{/if}}
             <div>
                 <button class="btn btn-secondary login-btn" type="submit">Sign Up</button>
             </div>
-            {{#if message}}
-            <div>{{message}}</div>
-            {{/if}}
         </form>
     </div>
 </div>
