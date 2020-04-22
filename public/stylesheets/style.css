@@ -21,71 +21,86 @@ body {
     width: 93vw;
 }
 
-/* ---------------------------------------- LIST PAGE ---------------------------------------- */
+/* ---------------------------------------- SEARCH-BOX and LIST PAGE ---------------------------------------- */
 
-
-.recipe-search-box {
+.search-box {
     width: 94vw;
     border-radius: 5px;
     padding: 1%;
     display: flex;
-    justify-content: space-between;
     background-color: rgb(253,160,147);
     border: 5px solid rgb(253,212,149);
 }
 
-.recipes-title {
+.page-title {
     color: white;
     font-size: 10vh;
     font-family: 'Cuprum', sans-serif;
     text-shadow: 3px 3px 4px rgb(117, 117, 117);
-    /* position: relative; */
     top: 9vh;
     text-align: center;
     width: 96vw;
 }
 
-.search-by {
-    width: 45vw;
+.search-form-left {
+    width: 90vw;
+}
+
+.search-by-name {
+    width: 100%;
+    padding: 0 1%;
+}
+.search-by-name>label {
+    color: white;
+    font-size: 2rem;
+}
+.search-by-date {
+    width: 100%;
+    padding: 1%;
+}
+.search-by-select {
+    width: 100%;
     padding: 1%;
 }
 
-.search-by select {
-    width: 100%;
-    height: 4vh;
-}
-
-.search-by label {
-    font-size: 2rem;
+.search-by-date>label {
     color: white;
-    font-weight: bolder;
+}
+.search-checkbox>label{
+    font-size: 1rem;
+    color: white;
+    margin-left: 2%;
 }
 
 .name-input {
-    width: 100%;
+    width: 90%;
 }
 
 .search-btn {
-    padding: 2% 1%;
+    padding: 1% 1%;
 }
 
-.add-your-recipe {
-    width: 40vw;
+.search-form-right {
+    width: 20vw;
     font-size: 2rem;
     color: white;
     padding: 1%;
     font-weight: bolder;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
 }
 
-.add-your-recipe p {
+.search-form-right>p {
     color: white;
     width: 100%;
+    font-size: 1.3rem;
+    margin-bottom: 0;
 }
 
 .add-btn {
     padding: 2% 1%;
-    border: 3px solid;
-
 }
 
 .card-list {
