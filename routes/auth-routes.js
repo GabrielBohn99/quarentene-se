@@ -46,14 +46,9 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
   }
   const confirmationCode = token;
 
-  if (username === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate username and password" });
-    return;
-  }
-
   User.findOne({ $or: [{ username }, { email }] }).then((user) => {
     if (user !== null) {
-      res.render("auth/signup", { message: "The username already exists" });
+      res.render("auth/signup", { message: "Nome de usuário ou email já cadastrado" });
       return;
     }
 
@@ -465,7 +460,7 @@ router.get("/confirm/:confirmCode", (req, res, next) => {
 
 // Login routes
 router.get("/login", (req, res, next) => {
-  res.render("auth/login");
+  res.render("auth/login", {message: req.flash('message')});
 });
 
 router.post(

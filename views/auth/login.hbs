@@ -1,7 +1,7 @@
 <div class="login-main-box">
-        <div class="login-box">
-            <h1>Login</h1>
-            <form action="/login" method="POST">
+    <div class="login-box">
+        <h1>Login</h1>
+        <form action="/login" method="POST">
             <div>
                 <label for="username">Nome de usuário: </label> <br>
                 <input type="text" name="username">
@@ -10,14 +10,17 @@
                 <label for="password">Senha: </label> <br>
                 <input type="password" name="password">
             </div>
+            {{#if message}}
+            <div class="error-message">{{ message }}</div>
+            {{/if}}
             <div>
                 <button class="btn btn-secondary login-btn" type="submit">Login</button>
             </div>
-                <a id="forgot-password" href="/esqueci-minha-senha">Esqueci minha senha</a>
-                <p> Ainda não é cadastrado? Faça sua inscrição para poder adicionar Séries, Lives, Receitas e Reviews! </p>
-                <a class="btn btn-secondary" style="width: 30%;" href="/Signup">Signup</a>
-            </form>
-        </div> 
+            <a id="forgot-password" href="/esqueci-minha-senha">Esqueci minha senha</a>
+            <p> Ainda não é cadastrado? Faça sua inscrição para poder adicionar Séries, Lives, Receitas e Reviews! </p>
+            <a class="btn btn-secondary" style="width: 30%;" href="/Signup">Signup</a>
+        </form>
+    </div>
 </div>
 <h1 class="login-title">
     QUARENTENE-SE!

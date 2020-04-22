@@ -94,13 +94,13 @@ passport.use(
           return next(err);
         }
         if (!user) {
-          return next(null, false, { message: "Incorrect username" });
+          return next(null, false, req.flash('message', "Nome de usuário ou senha incorreto"));
         }
         if (!bcrypt.compareSync(password, user.password)) {
-          return next(null, false, { message: "Incorrect password" });
+          return next(null, false, req.flash('message', "Nome de usuário ou senha incorreto"));
         }
 
-        return next(null, user);
+        return next(null, user, req.flash('pass', "Você está logado."));
       });
     }
   )

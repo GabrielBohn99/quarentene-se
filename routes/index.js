@@ -4,7 +4,7 @@ const ensureLogin = require("connect-ensure-login");
 const multer = require("multer");
 
 router.get("/", (req, res, next) => {
-  res.render("index", { user: req.user });
+  res.render("index", { user: req.user});
 });
 
 router.get("/perfil", ensureLogin.ensureLoggedIn(), (req, res, next) => {
