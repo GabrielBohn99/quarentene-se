@@ -1,89 +1,88 @@
-<div class="outer-box-recipes">
-    <div class="main-box">
+<div class="main-box">
+    <h1 class="page-title">Receitas</h1>
 
-        <h1 class="recipes-title">Receitas</h1>
-
-        <div class="recipe-search-box">
+    {{!-- SEARCH FORM --}}
+    <div class="search-box">
+        <div class="search-form-left">
             <form action="/receitas/search" method="post">
-            <div class="search-by">
-                {{#if search}}
-                <label for="search">Pesquisar </label>
-                <input class="name-input" type="text" name="search" value="{{search}}">
-                {{else}}
-                <label for="search">Pesquisar </label>
-                <input class="name-input" type="text" name="search" placeholder="Busque pelo nome da receita">
-                {{/if}}
-            </div>
-            <div class="search-by">
-                <select name="category">
-                    {{#if category}}
-                    {{!-- <div> --}}
-                        <option value="{{category}}">{{category}}</option>
+                <div class="search-by-name">
+                    {{#if search}}
+                    <label for="search">Pesquisar </label>
+                    <input class="name-input" type="text" name="search" value="{{search}}">
+                    {{else}}
+                    <label for="search">Pesquisar </label>
+                    <input class="name-input" type="text" name="search" placeholder="Busque pelo nome da receita">
+                    {{/if}}
+                </div>
+
+                <div class="search-by-select">
+                    <select name="category">
+                        {{#if category}}
+                        {{!-- <div> --}}
+                            <option value="{{category}}">{{category}}</option>
+                            {{else}}
+                            <option value="">Categoria</option>
+                            {{/if}} 
+                            {{#each categoryArr}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{!-- </div> --}}
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="search-by-select">
+                    <select name="level">
+                        {{#if level}}
+                        <option value={{level}}>{{level}}</option>
                         {{else}}
-                        <option value="">Categoria</option>
+                        <option value="">Nível de dificuldade</option>
                         {{/if}} 
-                        {{#each categoryArr}}
+                        {{#each levelArr}}
+                        <option value={{this}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="search-by-select">
+                    <select name="duration">
+                        {{#if duration}}
+                        <option value="{{duration}}">{{duration}}</option>
+                        {{else}}
+                        <option value="">Tempo de preparo</option>
+                        {{/if}} 
+                        {{#each durationArr}}
                         <option value="{{this}}">{{this}}</option>
-                    {{!-- </div> --}}
-                    {{/each}}
-                </select>
-            </div>
-            <div class="search-by">
-                <select name="level">
-                    {{#if level}}
-                    <option value={{level}}>{{level}}</option>
-                    {{else}}
-                    <option value="">Nível de dificuldade</option>
-                    {{/if}} 
-                    {{#each levelArr}}
-                    <option value={{this}}>{{this}}</option>
-                    {{/each}}
-                </select>
-            </div>
-            <div class="search-by">
-                <select name="duration">
-                    {{#if duration}}
-                    <option value="{{duration}}">{{duration}}</option>
-                    {{else}}
-                    <option value="">Tempo de preparo</option>
-                    {{/if}} 
-                    {{#each durationArr}}
-                    <option value="{{this}}">{{this}}</option>
-                    {{/each}}
-                </select>
-            </div>
-            <div class="search-btn">
-                <button type="submit" class="btn btn-outline-light btn-lg">Buscar</button>
-                {{#if buscado}}
-                <a class="btn btn-outline-light btn-lg" href="/receitas">Limpar filtros</a>
-                {{/if}}
-            </div>
+                        {{/each}}
+                    </select>
+                </div>
+
             </form>
-            <div class="add-your-recipe d-flex flex-column align-items-left ">
-                <div><p>Ou então</p></div>
-                <div class="d-flex flex-column align-items-left justify-content-center" style="max-width: 200px;">
-                    <a class="btn btn-outline-light btn-lg add-btn" href="/add-receita">Adicione sua receita!</a>
-                </div>
-                <div></div>
-            </div>
         </div>
-
-{{!-- RECIPES LIST --}}
-        <div class="row card-list" style="justify-content:flex-start">
-            {{#each receitas}}
-            <div class="card m-2 bg-light card-item" style="width: 16rem; height: 26rem;">
-                <img class="card-img-top" style="max-height: 14rem;" src="{{imgPath}}" alt="Receita IMG">
-                <div class="card-body">
-                    <h5 class="card-title">{{name}}</h5>
-                    <p class="card-text" style="width: 100%;">Nível de dificuldade: {{level}}</p>
-                    <p class="card-text" style="width: 100%;">Categoria: {{category}}</p>
-
-                    <a href="/receita/{{_id}}" class="btn btn-secondary">Saiba mais</a>
-                </div>
-            </div>
-            {{/each}}
+        <div class="search-form-right">
+            <button type="submit" class="btn btn-outline-light btn-lg">Buscar</button>
+            {{#if buscado}}
+            <a class="btn btn-outline-light btn-lg" href="/receitas">Limpar filtros</a>
+            {{/if}}
+            <p>Ou então</p>
+            <a class="btn btn-outline-light btn-lg add-btn" href="/add-receita">Adicione sua receita!</a>
         </div>
     </div>
+
+
+{{!-- RECIPES LIST --}}
+    <div class="row card-list" style="justify-content:start">
+        {{#each receitas}}
+        <div class="card m-2 bg-light card-item" style="width: 16rem; height: 26rem;">
+            <img class="card-img-top" style="max-height: 14rem;" src="{{imgPath}}" alt="Receita IMG">
+            <div class="card-body">
+                <h5 class="card-title">{{name}}</h5>
+                <p class="card-text" style="width: 100%;">Nível de dificuldade: {{level}}</p>
+                <p class="card-text" style="width: 100%;">Categoria: {{category}}</p>
+
+                <a href="/receita/{{_id}}" class="btn btn-secondary">Saiba mais</a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
 </div>
+
 
 

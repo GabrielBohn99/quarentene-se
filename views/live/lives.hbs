@@ -1,44 +1,50 @@
 <div class="main-box">
-    <h1 class="lives-title">Lives</h1>
+    <h1 class="page-title">Lives</h1>
 
     {{!-- SEARCH FORM --}}
-    <div class="lives-search-box">
-        <form action="/lives/search" method="post">
-            <div class="search-by">
-                {{#if name}}
-                <label for="name">Pesquisar </label>
-                <input class="name-input" type="text" name="name" value="{{name}}">
-                {{else}}
-                <label for="name">Pesquisar </label>
-                <input class="name-input" type="text" name="name" placeholder="Coloque o nome do artista">
-                {{/if}}
-            </div>
-            <div class="search-by">
-                {{#with genreOne}}
-                <input type="checkbox" value="{{this}}" name="genre" checked>
-                <label for="{{this}}">{{this}}</label>
-                {{/with}}
-                {{#each genre}}
-                <input type="checkbox" value="{{this}}" name="genre" checked>
-                <label for="{{this}}">{{this}}</label>
-                {{/each}}
-                {{#each genreArr}}
-                <input type="checkbox" value="{{this}}" name="genre">
-                <label for="{{this}}">{{this}}</label>
-                {{/each}}
-            </div>
-            <div class="search-by">
-                <label for="data">Data: </label>
-                <input type="date" name="data" value={{data}}>
-            </div>
-            <div class="search-btn">
-                <button type="submit" class="btn btn-outline-light btn-lg">Buscar</button>
-                {{#if buscado}}
-                <a class="btn btn-outline-light btn-lg" href="/lives">Limpar filtros</a>
-                {{/if}}
-            </div>
-        </form>
-        <div class="add-your-live">
+    <div class="search-box">
+        <div class="search-form-left">
+            <form action="/lives/search" method="post">
+                <div class="search-by-name">
+                    {{#if name}}
+                    <label for="name">Pesquisar </label>
+                    <input class="name-input" type="text" name="name" value="{{name}}">
+                    {{else}}
+                    <label for="name">Pesquisar </label>
+                    <input class="name-input" type="text" name="name" placeholder="Coloque o nome do artista">
+                    {{/if}}
+                </div>
+                <div class="search-by-date">
+                    <label for="data">Data: </label>
+                    <input type="date" name="data" value={{data}}>
+                </div>
+                <div class="search-checkbox row" style="margin-left:3%">
+                    {{#with genreOne}}
+                    <div class="search-checkbox row" style="width: 12rem;">
+                        <input type="checkbox" value="{{this}}" name="genre" checked>
+                        <label for="{{this}}">{{this}}</label>
+                    </div>
+                    {{/with}}
+                    {{#each genre}}
+                    <div class="search-checkbox row" style="width: 12rem;">
+                        <input type="checkbox" value="{{this}}" name="genre" checked>
+                        <label for="{{this}}">{{this}}</label>
+                    </div>
+                    {{/each}}
+                    {{#each genreArr}}
+                    <div class="search-checkbox row" style="width: 12rem;">
+                        <input type="checkbox" value="{{this}}" name="genre">
+                        <label for="{{this}}">{{this}}</label>
+                    </div>
+                    {{/each}}
+                </div>
+            </form>
+        </div>
+        <div class="search-form-right">
+            <button type="submit" class="btn btn-outline-light btn-lg">Buscar</button>
+            {{#if buscado}}
+            <a class="btn btn-outline-light btn-lg" href="/lives">Limpar filtros</a>
+            {{/if}}
             <p>Ou então</p>
             <a class="btn btn-outline-light btn-lg add-btn" href="/add-live">Adicione uma live!</a>
         </div>
