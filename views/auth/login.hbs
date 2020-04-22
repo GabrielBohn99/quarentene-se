@@ -4,11 +4,11 @@
         <form action="/login" method="POST">
             <div>
                 <label for="username">Nome de usuário: </label> <br>
-                <input type="text" name="username">
+                <input class="form-control" type="text" name="username">
             </div>
             <div>
                 <label for="password">Senha: </label> <br>
-                <input type="password" name="password">
+                <input class="form-control" type="password" name="password">
             </div>
             {{#if message}}
             <div class="error-message">{{ message }}</div>

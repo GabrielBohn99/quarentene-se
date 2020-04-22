@@ -5,19 +5,19 @@
         <form action="/signup" method="POST" enctype="multipart/form-data">
             <div>
                 <label for="username">Username: </label>
-                <input type="text" name="username" required>
+                <input class="form-control" type="text" name="username" required>
             </div>
             <div>
                 <label for="email">Email: </label>
-                <input type="email" name="email" required>
+                <input class="form-control" type="email" name="email" required>
             </div>
             <div>
                 <label for="password">Password: </label>
-                <input type="password" name="password" required>
+                <input class="form-control" type="password" name="password" required>
             </div>
             <div class="file-upload">
                 <label for="imgPath">Foto de perfil: </label>
-                <input type="file" name="imgPath">
+                <input class="form-control-file" type="file" name="imgPath">
             </div>
             {{#if message}}
             <div class="error-message">{{message}}</div>
