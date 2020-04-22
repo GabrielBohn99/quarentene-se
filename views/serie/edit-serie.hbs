@@ -1,37 +1,54 @@
 <div class="main-box">
-
     <h1>Editar Serie</h1>
 
-    {{#with serie}}
-        <button><a href="/serie/{{_id}}">Voltar</a></button>
+        {{#with serie}}
         <form action="/editar-serie/{{_id}}" method="post" enctype="multipart/form-data">
-
-        <label for="name">Título: </label>
-        <input type="text" name="name" value="{{name}}">
-
-        <label for="resume">Sinopse: </label>
-        <input type="text" name="resume" value="{{resume}}">
-
-        <label for="rating">Cotação: </label>
-        <input type="number" name="rating" value="{{rating}}">
-
-        <label for="imgPath">Imagem: </label>
-        <input type="file" name="imgPath" value="{{imgPath}}">
-    {{/with}}
-
-        <label for="genre">Gênero: </label>
-
-        {{#each serie.genre}}
-        <input type="checkbox" value="{{this}}" name="genre" checked>
-        <label for="{{this}}">{{this}}</label>
-        {{/each}}
-
-        {{#each genreArr}}
-        <input type="checkbox" value="{{this}}" name="genre">
-        <label for="{{this}}">{{this}}</label>
-        {{/each}}
-
-        <button type="submit">Salvar edição</button>
+        <div class="edit-form">
+            <div>
+                <div class="edit-form-items">
+                    <label for="name">Título: </label>
+                    <input class="form-control" type="text" name="name" value="{{name}}">
+                </div>
+                <div class="edit-form-items">
+                    <label for="resume">Sinopse: </label>
+                    <input class="form-control" type="text" name="resume" value="{{resume}}">
+                </div>
+                <div class="edit-form-items">
+                    <label for="rating">Cotação: </label>
+                    <input class="form-control" type="number" name="rating" value="{{rating}}">
+                </div>
+                <div class="edit-form-items">
+                    <label for="imgPath">Imagem: </label>
+                    <input type="file" name="imgPath" value="{{imgPath}}">
+                </div>
+            {{/with}}
+            </div>
+            <div class="edit-form-checkbox">
+                <div class="edit-form-checkbox-title" >
+                    <label for="genre">Gênero: </label>
+                </div>
+                <div class="edit-form-checkbox-items-container">
+                    {{#each serie.genre}}
+                    <div class="edit-form-checkbox-items">
+                        <input type="checkbox" value="{{this}}" name="genre" checked>
+                        <label for="{{this}}">{{this}}</label>
+                    </div>
+                    {{/each}}
+                    {{#each genreArr}}
+                    <div class="edit-form-checkbox-items">
+                        <input type="checkbox" value="{{this}}" name="genre">
+                        <label for="{{this}}">{{this}}</label>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="edit-btn-box ">
+            <button class="btn btn-outline-light btn-lg" style="min-width: 30vw;" type="submit">Salvar edição</button>
+            {{#with serie}}
+            <a class="btn btn-outline-light btn-lg" href="/serie/{{_id}}">Voltar</a>
+            {{/with}}
+        </div>
     </form>
 </div>
 
