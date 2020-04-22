@@ -1,41 +1,57 @@
 <div class="main-box">
-
     <h1>Editar Live</h1>
 
-    {{#with live}}
-        <button><a href="/live/{{_id}}">Voltar</a></button>
-
+        {{#with live}}
         <form action="/editar-live/{{_id}}" method="post" enctype="multipart/form-data">
-
-        <label for="name">Artista: </label>
-        <input type="text" name="name" value="{{name}}">
-
-
-        <label for="imgPath">Imagem: </label>
-        <input type="file" name="imgPath" value="{{imgPath}}">
-
-        <label for="data">Data: </label>
-        <input type="date" name="data" min="2020-04-01" value="{{data}}">
-
-        <label for="time">Horario: </label>
-        <input type="time" name="time" value="{{time}}">
-
-        <label for="link">Link para a live: </label>
-        <input type="text" name="link" value="{{link}}">
-    {{/with}}
-
-        <label for="genre">Estilo musical: </label>
-
-        {{#each live.genre}}
-        <input type="checkbox" value="{{this}}" name="genre" checked>
-        <label for="{{this}}">{{this}}</label>
-        {{/each}}
-
-        {{#each genreArr}}
-        <input type="checkbox" value="{{this}}" name="genre">
-        <label for="{{this}}">{{this}}</label>
-        {{/each}}
-
-        <button type="submit">Salvar edição</button>
+        <div class="edit-form">
+            <div>
+                <div class="edit-form-items">
+                    <label for="name">Artista: </label>
+                    <input class="form-control" type="text" name="name" value="{{name}}">
+                </div>
+                <div class="edit-form-items">
+                    <label for="data">Data: </label>
+                    <input class="form-control" type="date" name="data" min="2020-04-01" value="{{data}}">
+                </div>
+                <div class="edit-form-items">
+                    <label for="time">Horario: </label>
+                    <input class="form-control" type="time" name="time" value="{{time}}">
+                </div>
+                <div class="edit-form-items">
+                    <label for="link">Link para a live: </label>
+                    <input class="form-control" type="text" name="link" value="{{link}}">
+                </div>
+                <div class="edit-form-items">
+                    <label for="imgPath">Imagem: </label>
+                    <input type="file" name="imgPath" value="{{imgPath}}">
+                </div>
+            {{/with}}
+            </div>
+            <div class="edit-form-checkbox">
+                <div class="edit-form-checkbox-title" >
+                    <label for="genre">Estilo musical: </label>
+                </div>
+                <div class="edit-form-checkbox-items-container">
+                    {{#each live.genre}}
+                    <div class="edit-form-checkbox-items">
+                        <input type="checkbox" value="{{this}}" name="genre" checked>
+                        <label for="{{this}}">{{this}}</label>
+                    </div>
+                    {{/each}}
+                    {{#each genreArr}}
+                    <div class="edit-form-checkbox-items">
+                        <input type="checkbox" value="{{this}}" name="genre">
+                        <label for="{{this}}">{{this}}</label>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="edit-btn-box ">
+            <button class="btn btn-outline-light btn-lg" style="min-width: 30vw;" type="submit">Salvar edição</button>
+            {{#with live}}
+            <a class="btn btn-outline-light btn-lg" href="/live/{{_id}}">Voltar</a>
+            {{/with}}
+        </div>
     </form>
 </div>

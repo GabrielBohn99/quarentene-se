@@ -84,7 +84,8 @@ body {
     width: 20vw;
     font-size: 2rem;
     color: white;
-    padding: 1%;
+    padding: 1% 1% 0 1%;
+    margin-top: 2%;
     font-weight: bolder;
     display: flex;
     flex-direction: column;
@@ -228,10 +229,42 @@ body {
     justify-content: space-between;
     
 }
-.edit-form-items label {
+.edit-form-checkbox-title{
+    width: 100%;
+    padding: 1% 1% 0 1%;
+    font-size: large;
+}
+.edit-form-prepare-title{
+    width: 100%;
+    padding: 1% 1% 0 1%;
+    font-size: large;
+}
+.edit-form-items>label {
     font-size: large;
     margin-top: 1.5%;
 }
-.edit-form-items input, select {
+.edit-form-items>input, select {
     width: 30vw;
+}
+.edit-form-checkbox{
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+}
+.edit-form-checkbox-items-container{
+    padding: 0 1%;
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.edit-btn-box {
+    margin-top: 2%;
+    padding: 1.5% 1%;
+    background-color: rgb(253,160,147);
+    border-radius: 5px;
+    width: 96vw;
+    margin-left: -1%;
+    display: flex;
+    justify-content: space-between;
 }
