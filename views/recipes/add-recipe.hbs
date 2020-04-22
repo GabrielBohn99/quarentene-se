@@ -8,13 +8,13 @@
                     <label for="name">Nome: </label>
                 </div>
                 <div class="add-form-items">
-                    <input type="text" name="name">
+                    <input class="form-control" type="text" name="name">
                 </div>
                 <div class="add-form-items">
                     <label for="category">Categoria: </label>
                 </div>
-                <div class="add-form-items">
-                    <select name="category">
+                <div class="add-form-items" style="width: 30vw;">
+                    <select class="form-control" name="category">
                         <option value="Salgado">Salgado</option>
                         <option value="Doce">Doce</option>
                         <option value="Bebida">Bebida</option>
@@ -23,8 +23,8 @@
                 <div class="add-form-items">
                     <label for="level">Dificuldade: </label>
                 </div>
-                <div class="add-form-items">
-                    <select name="level">
+                <div class="add-form-items" style="width: 30vw;">
+                    <select class="form-control" name="level">
                         <option value="Fácil">Fácil</option>
                         <option value="Médio">Médio</option>
                         <option value="Avançado">Avançado</option>
@@ -33,27 +33,25 @@
                 <div class="add-form-items">
                     <label for="duration">Duração: </label>
                 </div>
-                <div class="add-form-items">
-                    <select name="duration">
+                <div class="add-form-items" style="width: 30vw;">
+                    <select class="form-control" name="duration">
                         <option value="10min - 30min">10min - 30min</option>
                         <option value="30min - 60min">30min - 60min</option>
                         <option value="mais de 60min">mais de 60min</option>
                     </select>
                 </div>
-                <div class="add-form-items">
+                <div class="add-form-items" style="width: 30vw;">
                     <label for="imgPath">Imagem: </label>
-                </div>
-                <div class="add-form-items">
                     <input type="file" name="imgPath"> 
                 </div>
+                {{!-- <div class="add-form-items custom-file">
+                    <label class="custom-file-label" for="imgPath">Imagem: </label>
+                    <input class="custom-file-input" type="file" name="imgPath"> 
+                </div> --}}
             </div>
-            <div>
-                <div>
-                    <div class="add-form-prepare">
-                        <div><label for="prepare">Modo de preparo: </label></div>
-                        <textarea autocomplete="off" rows="4" cols="8" class="form-control" id="myTextArea" name="prepare" style="height:45vh"></textarea>
-                    </div>
-                </div>
+            <div class="add-form-prepare">
+                <div><label for="prepare">Modo de preparo: </label></div>
+                <textarea autocomplete="off" rows="4" cols="8" class="form-control" id="myTextArea" name="prepare" style="height:45vh"></textarea>
             </div>
         </div>
         <div class="add-btn-box ">

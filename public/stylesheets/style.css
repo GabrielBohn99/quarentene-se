@@ -189,6 +189,26 @@ body {
 .add-form-prepare{
     width: 60vw;
 }
+.add-form-checkbox{
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+}
+.add-form-checkbox-title{
+    width: 100%;
+    padding: 1%;
+}
+
+.add-form-checkbox-items-container{
+    padding: 1%;
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.add-form-checkbox-items{
+    width: 30%;
+}
 .add-btn-box {
     margin-top: 2%;
     padding: 1.5% 1%;
