@@ -66,6 +66,7 @@ body {
 
 .search-by-date>label {
     color: white;
+    font-size: 1.3rem;
 }
 .search-checkbox>label{
     font-size: 1rem;
@@ -168,6 +169,22 @@ body {
 
 .review-btn {
     padding: 2% 0 ;
+}
+
+.add-message {
+    background: rgb(253,212,149);
+    border: 5px solid  rgb(253,160,147);
+    border-radius: 5px;
+    box-sizing: border-box;
+    
+    margin: 10% 3%;
+    padding: 20px;
+    width: 94vw;
+    text-align: center;
+}
+
+.add-message>h4{
+    color: rgb(117,117,117);
 }
 
 /* ---------------------------------------- ADD PAGE ---------------------------------------- */

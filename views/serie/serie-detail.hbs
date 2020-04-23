@@ -8,7 +8,7 @@
         <div class="info-box d-flex justify-content-around flex-column">
             <h1>{{name}}</h1>
             <div class="d-flex flex-column justify-content-around flex-start">
-                <h3>Nota: {{rating}}</h3>
+                <h3>Avaliação: {{rating}}</h3>
                 <h4 style="color: gray;">Gênero: {{genre}}</h4>
             </div>
 
@@ -29,7 +29,7 @@
 
     <div class="reviews">
         <h4>O que você achou dessa serie?</h4>
-        <form action="/recipe-review/{{_id}}" method="POST">
+        <form action="/serie-review/{{_id}}" method="POST">
             <label for="review"></label>
             <textarea autocomplete="off" rows="4" cols="8" class="form-control" name="comment" style="height:100px"
                 required></textarea>

@@ -55,7 +55,7 @@ router.get("/lives", (req, res, next) => {
   Live.find()
     .sort({ data: 1 })
     .then((lives) => {
-      let genreArr = [
+        let genreArr = [
         "Sertanejo",
         "Blues",
         "Axé",
@@ -83,6 +83,7 @@ router.get("/lives", (req, res, next) => {
       lives.forEach((item) => {
         item.data = dateFormater(item.data);
       });
+      // let added = req.session.message
       res.render("live/lives", { lives, user: req.user, genreArr });
     })
     .catch((error) => console.log(error));
@@ -126,6 +127,11 @@ router.post(
       .catch((error) => console.log(error));
   }
 );
+
+// ADDED LIVE
+router.get("/live-adicionada", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  res.render("live/added-live")
+})
 
 // ADD LIVE
 router.get("/add-live", ensureLogin.ensureLoggedIn(), (req, res, next) => {
@@ -178,10 +184,12 @@ router.post(
       imgPath =
         "https://res.cloudinary.com/juliajforesti/image/upload/v1587497667/quarentene-se/microfone_m9jyxn.png";
     }
+    
+
 
     Live.create({ name, data, genre, link, time, owner: req.user._id, imgPath })
       .then((response) => {
-        res.redirect("/lives");
+        res.redirect( "/live-adicionada" );
       })
       .catch((error) => console.log(error));
   }
