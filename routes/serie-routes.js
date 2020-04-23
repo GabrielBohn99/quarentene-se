@@ -100,6 +100,11 @@ router.post(
   }
 );
 
+// ADDED SERIE
+router.get("/serie-adicionada", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  res.render("serie/added-serie")
+})
+
 // ADD SERIE
 router.get("/add-serie", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let genreArr = [
@@ -156,7 +161,7 @@ router.post(
     })
       .then((response) => {
         console.log(response);
-        res.redirect("/series");
+        res.redirect("/serie-adicionada");
       })
       .catch((error) => console.log(error));
   }

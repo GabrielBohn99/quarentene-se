@@ -93,12 +93,15 @@ router.post(
   }
 );
 
+// ADDED RECIPE
+router.get("/receita-adicionada", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  res.render("recipes/added-recipe")
+})
+
 // ADD RECIPE
 router.get("/add-receita", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render("recipes/add-recipe", { user: req.user });
 });
-
-
 
 router.post("/add-receita", ensureLogin.ensureLoggedIn(), uploadCloud.single("imgPath"), (req, res, next) => {
   const { duration, category, level } = req.body;
@@ -127,7 +130,7 @@ router.post("/add-receita", ensureLogin.ensureLoggedIn(), uploadCloud.single("im
       imgPath,
     })
       .then((response) => {
-        res.redirect("/receitas");
+        res.redirect("/receita-adicionada");
       })
       .catch((error) => console.log(error));
   }
