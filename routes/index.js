@@ -8,7 +8,6 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/perfil", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  console.log(req.user);
   let admin = false;
   if (req.user.role === "ADMIN") {
     admin = true;

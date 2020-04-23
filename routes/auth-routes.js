@@ -74,8 +74,6 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
     newUser
       .save()
       .then((user) => {
-        console.log(user, "criado");
-
         let transport = nodemailer.createTransport({
           service: "Gmail",
           secure: true,
@@ -429,7 +427,6 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
       </body>`,
           })
           .then((info) => {
-            console.log(info);
             res.redirect("/login");
           })
           .catch((error) => console.log(error));
@@ -452,7 +449,6 @@ router.get("/confirm/:confirmCode", (req, res, next) => {
     { new: true }
   )
     .then((user) => {
-      console.log(user);
       res.redirect("/perfil");
     })
     .catch((error) => console.log(error));
@@ -487,11 +483,8 @@ router.get("/esqueci-minha-senha", (req, res, next) => {
 router.post("/esqueci-minha-senha", (req, res, next) => {
   const { email } = req.body;
 
-  console.log(email);
-
   User.findOne({ email })
     .then((user) => {
-      console.log(user);
       let transport = nodemailer.createTransport({
         service: "Gmail",
         secure: true,
@@ -738,7 +731,6 @@ router.post("/esqueci-minha-senha", (req, res, next) => {
       </body>`,
         })
         .then((info) => {
-          console.log(info);
           res.redirect("/login");
         })
         .catch((error) => console.log(error));
@@ -748,7 +740,6 @@ router.post("/esqueci-minha-senha", (req, res, next) => {
 
 router.get("/trocar-senha/:id", (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
   res.render("auth/password", { id });
 });
 
@@ -762,8 +753,6 @@ router.post("/trocar-senha/:id", (req, res, next) => {
 
   User.findByIdAndUpdate(id, { $set: { password: hashPass } }, { new: true })
     .then((novo) => {
-      console.log(novo);
-      console.log("senha mudada");
       res.redirect("/login");
     })
     .catch((err) => console.log(err));
