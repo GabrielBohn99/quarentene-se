@@ -39,6 +39,7 @@ const checkRoles = (role) => {
 
 router.get("/receitas", (req, res, next) => {
   Recipe.find()
+    .sort({name: 1})
     .then((receitas) => {
       let levelArr = ["Fácil", "Médio", "Avançado"];
       let durationArr = ["10min - 30min", "30min - 60min", "mais de 60min"];

@@ -229,8 +229,8 @@ rgb(117,117,117)
 }
 
 .profile-pic {
-  width: 58vh;
-  height: 58vh;
+  width: 50%;
+  /* height: 58vh; */
 }
 
 .profile-main-box {
@@ -242,6 +242,7 @@ rgb(117,117,117)
   
   opacity: 0.6;
   width: 100%;
+  height: 100%;
   position: absolute;
   display: flex;  
   align-items: center;

@@ -56,9 +56,9 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
     const hashPass = bcrypt.hashSync(password, salt);
 
     let imgPath = "";
-
     if (req.file) {
-      imgPath = req.file.url;
+      let customURL = req.file.url.split("upload/").join('upload/c_thumb,g_faces,h_371,w_371/');
+      imgPath = customURL;
     } else {
       imgPath =
         "https://res.cloudinary.com/juliajforesti/image/upload/v1587493357/quarentene-se/emoticon-smile-png-2_mfjrmu.png";
@@ -427,7 +427,12 @@ router.post("/signup", uploadCloud.single("imgPath"), (req, res, next) => {
       </body>`,
           })
           .then((info) => {
-            res.redirect("/login");
+            req.login(user, (err) => {
+              if (err) {
+                res.render("auth/signup", { message: "Erro. Tente fazer o login." });
+              }
+              res.redirect("/perfil");
+            })
           })
           .catch((error) => console.log(error));
       })
