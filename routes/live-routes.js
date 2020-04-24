@@ -265,7 +265,6 @@ router.post(
         { new: true }
       )
         .then((response) => {
-          console.log(response);
           res.redirect(`/live/${liveId}`);
         })
         .catch((error) => console.log(error));
@@ -284,7 +283,6 @@ router.post(
       { new: true }
     )
       .then((response) => {
-        console.log(response);
         res.redirect(`/live/${liveId}`);
       })
       .catch((error) => console.log(error));
@@ -333,7 +331,6 @@ router.post("/lives/search", (req, res, next) => {
     "Samba",
     "Reggae",
   ];
-  console.log(genre);
   genreArr.sort();
   if (!genre) {
     Live.find({
@@ -367,7 +364,6 @@ router.post("/lives/search", (req, res, next) => {
   })
     .sort({ data: 1 })
     .then((lives) => {
-      console.log("foi removido:", genre);
       if (!Array.isArray(genre)) {
         genreArr = genreArr.filter((elem) => !genre.includes(elem));
         let buscado = "Buscado";

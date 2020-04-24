@@ -39,6 +39,7 @@ const checkRoles = (role) => {
 
 router.get("/receitas", (req, res, next) => {
   Recipe.find()
+    .sort({name: 1})
     .then((receitas) => {
       let levelArr = ["Fácil", "Médio", "Avançado"];
       let durationArr = ["10min - 30min", "30min - 60min", "mais de 60min"];
@@ -148,7 +149,6 @@ router.get("/editar-receita/:receitaId", ensureLogin.ensureLoggedIn(), (req, res
     .findById(receitaId)
     .then(receita => {
       receita.prepare = receita.prepare.breakLineOpposite();
-      console.log(receita.prepare)
       levelArr.splice(levelArr.indexOf(receita.level), 1);
       durationArr.splice(durationArr.indexOf(receita.duration), 1);
       categoryArr.splice(categoryArr.indexOf(receita.category), 1);
@@ -195,7 +195,6 @@ router.post(
         { new: true }
       )
         .then((response) => {
-          console.log(response);
           res.redirect(`/receita/${receitaId}`);
         })
         .catch((error) => console.log(error));
@@ -214,7 +213,6 @@ router.post(
       { new: true }
     )
       .then((response) => {
-        console.log(response);
         res.redirect(`/receita/${receitaId}`);
       })
       .catch((error) => console.log(error));
@@ -241,22 +239,18 @@ router.post("/receitas/search", (req, res, next) => {
   let levelArr = ["Fácil", "Médio", "Avançado"];
   if (level != "") {
     levelArr.splice(levelArr.indexOf(level), 1);
-    // return;
   }
 
   let durationArr = ["10min - 30min", "30min - 60min", "mais de 60min"];
   if (duration != "") {
     durationArr.splice(durationArr.indexOf(duration), 1);
-    // return;
   }
 
   let categoryArr = ["Salgado", "Doce", "Bebida"];
   if (category != "") {
     categoryArr.splice(categoryArr.indexOf(category), 1);
-    // return;
   }
 
-  // console.log(level, search, duration);
   Recipe.find({
     level: { $regex: level },
     duration: { $regex: duration },

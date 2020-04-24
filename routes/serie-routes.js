@@ -55,7 +55,6 @@ router.get("/series", (req, res, next) => {
         "Trash",
       ];
       series = series.filter((item) => item.post);
-      console.log(series)
       res.render("serie/series", { series, user: req.user, genreArr });
     })
     .catch((error) => console.log(error));
@@ -93,7 +92,6 @@ router.post(
       { new: true }
     )
       .then((response) => {
-        console.log(response);
         res.redirect(`/serie/${id}`);
       })
       .catch((error) => console.log(error));
@@ -160,7 +158,6 @@ router.post(
       imgPath,
     })
       .then((response) => {
-        console.log(response);
         res.redirect("/serie-adicionada");
       })
       .catch((error) => console.log(error));
@@ -237,7 +234,6 @@ router.post(
         { new: true }
       )
         .then((response) => {
-          console.log(response);
           res.redirect(`/serie/${serieId}`);
         })
         .catch((error) => console.log(error));
@@ -255,14 +251,11 @@ router.post(
       { new: true }
     )
       .then((response) => {
-        console.log(response);
         res.redirect(`/serie/${serieId}`);
       })
       .catch((error) => console.log(error));
   }
 );
-
-// console.log(imgPath)
 
 // DELETE ROUTES
 router.get("/delete-serie/:serieId", (req, res, next) => {
@@ -330,7 +323,6 @@ router.post("/series/search", (req, res, next) => {
   })
     .sort({ rating: -1 })
     .then((series) => {
-      console.log("foi removido:", genre);
       if (!Array.isArray(genre)) {
         genreArr = genreArr.filter((elem) => !genre.includes(elem));
         let buscado = "Buscado";
@@ -347,7 +339,6 @@ router.post("/series/search", (req, res, next) => {
       } else {
         genreArr = genreArr.filter((elem) => !genre.includes(elem));
         let buscado = "Buscado";
-        console.log(genre);
         series = series.filter((item) => item.post);
         res.render("serie/series", {
           genre,
